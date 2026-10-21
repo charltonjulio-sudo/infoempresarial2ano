@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agência Pixel · Estude e jogue</title>
+<meta name="description" content="Guia de estudo, aula no celular e jogo de Informática Empresarial (2º ADM, IEEL): design visual, slides institucionais e direitos autorais.">
+<style>
+:root{--ink:#1d2433;--mut:#5d6678;--pap:#fbfaf7;--line:#e4e0d6;--navy:#14213d;--blue:#2a5d8f;--yel:#ffd43b;--grn:#2f9e5a;--red:#c0392b;--vio:#6d3fc0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--pap);color:var(--ink);font:17px/1.6 "Segoe UI",Roboto,"Noto Sans",Ubuntu,Arial,sans-serif}
+a{color:var(--blue)}
+.hero{background:radial-gradient(circle at 85% 0,#3a2d6b 0,transparent 55%),var(--navy);color:#fff;padding:36px 20px 70px}
+.in{max-width:900px;margin:0 auto}
+.kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--yel)}
+h1{font-size:clamp(34px,7vw,54px);line-height:1.05;margin:10px 0 12px}
+h1 span{color:var(--yel)}
+.hero p{color:#d6dcea;max-width:620px;margin:0}
+main{max-width:900px;margin:-44px auto 0;padding:0 16px 50px}
+.prog{display:none;align-items:center;gap:14px;flex-wrap:wrap;background:#fff;border:2px solid var(--yel);border-radius:18px;padding:14px 16px;margin-bottom:16px;box-shadow:0 6px 0 #e7d27a}
+.prog .e{font-size:36px}.prog .t{flex:1;min-width:200px}.prog b{display:block}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{position:relative;background:#fff;border:2px solid var(--line);border-radius:20px;padding:18px;display:flex;flex-direction:column;box-shadow:0 6px 0 var(--line)}
+.card .n{position:absolute;top:-14px;left:16px;background:var(--navy);color:var(--yel);font-weight:900;border-radius:999px;padding:2px 12px;font-size:14px}
+.card .ic{font-size:44px;line-height:1;margin:8px 0 6px}
+.card h2{font-size:22px;margin:0 0 6px}
+.card p{color:var(--mut);margin:0 0 14px;flex:1}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:800;border-radius:14px;padding:12px 16px;background:var(--yel);color:var(--navy);box-shadow:0 4px 0 #b38f10}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #b38f10}
+.btn.sec{background:#e8eef6;box-shadow:0 4px 0 #c5d0de}
+section{margin-top:34px}
+section>h2{font-size:26px;margin:0 0 10px}
+.regras{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;align-items:start}
+.regras ul{margin:0;padding-left:20px}.regras li{margin:6px 0}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;border:2px solid var(--line)}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+th{background:var(--navy);color:#fff;font-size:15px}
+td.st{color:#c99a00;letter-spacing:2px}
+tfoot td{font-weight:800;background:#fff6cc}
+.avisos{display:grid;gap:10px}
+.av{display:flex;gap:12px;background:#fff;border:2px solid var(--line);border-left:8px solid var(--blue);border-radius:14px;padding:12px 14px}
+.av .k{font-size:26px;flex:none;line-height:1.2}
+.av.forte{border-left-color:var(--red)}
+.av b{color:var(--navy)}
+.prof{margin-top:40px;text-align:center;color:var(--mut);font-size:14px}
+.prof a{color:var(--mut)}
+@media (max-width:760px){.cards{grid-template-columns:1fr}.regras{grid-template-columns:1fr}}
+</style>
+<script src="config.js"></script>
+</head><body>
+<header class="hero"><div class="in">
+  <div class="kick">Informática Empresarial · 2º ADM · IEEL</div>
+  <h1>Agência <span>Pixel</span></h1>
+  <p>Design visual, slides institucionais e direitos autorais num lugar só: o guia para estudar, a aula no celular, o jogo para treinar e a entrega da nota.</p>
+</div></header>
+<main>
+  <div class="prog" id="prog"><span class="e" id="pE">🎨</span><div class="t"><b id="pN"></b><span id="pT"></span></div><a class="btn" href="jogo.html" id="pB">▶ Continuar o jogo</a></div>
+
+  <p style="background:#fff;border:1px solid #e3e0d8;border-radius:14px;padding:12px 16px;margin:0 0 16px">📱 <b>Na aula:</b> <a href="aula-aluno.html">acompanhe a aula no celular</a> (o professor passa o código de cada aula no quadro).</p>
+  <div class="cards">
+    <div class="card"><span class="n">1º PASSO</span><div class="ic">📖</div><h2>Estude o guia</h2>
+      <p>Três fases, uma por aula: design visual, slides institucionais e direitos autorais. Tem exemplos, casos reais, armadilhas e testes rápidos.</p>
+      <a class="btn sec" href="guia.html">Abrir o Guia do Estagiário</a></div>
+    <div class="card"><span class="n">2º PASSO</span><div class="ic">🏢</div><h2>Jogue a Agência Pixel</h2>
+      <p>Quatro andares do prédio com perguntas sorteadas sobre o que está no guia. Cada andar vencido vale nota.</p>
+      <a class="btn" href="jogo.html">Entrar na agência</a></div>
+    <div class="card"><span class="n">3º PASSO</span><div class="ic">📨</div><h2>Entregue a nota</h2>
+      <p id="entrega">No final do jogo, baixe a imagem do placar e entregue no Google Classroom.</p>
+      <a class="btn sec" href="#avisos">Ler os avisos</a></div>
+  </div>
+
+  <section id="regras">
+    <h2>Regras do jogo</h2>
+    <div class="regras">
+      <ul>
+        <li>São <b>4 andares</b>. Cada um sorteia <b>10 perguntas</b> de um banco de 20, e as alternativas mudam de lugar a cada tentativa.</li>
+        <li>Você começa cada andar com <b>3 ❤️</b>. Errou, perde 1 e a pergunta volta para o fim da fila.</li>
+        <li>Perdeu os 3? Tenta o andar de novo, com perguntas novas.</li>
+        <li>As <b>estrelas</b> do andar são os corações que sobraram.</li>
+        <li>Pode rejogar um andar para melhorar: vale a melhor tentativa.</li>
+        <li>Recarregar a página não devolve corações.</li>
+      </ul>
+      <table>
+        <thead><tr><th>Andar vencido com</th><th>Vale</th></tr></thead>
+        <tbody><tr><td class="st">★★★</td><td>2,5 pontos</td></tr><tr><td class="st">★★☆</td><td>2,0 pontos</td></tr><tr><td class="st">★☆☆</td><td>1,5 ponto</td></tr><tr><td>Não concluído</td><td>0</td></tr></tbody>
+        <tfoot><tr><td>4 andares com ★★★</td><td>10,0</td></tr></tfoot>
+      </table>
+    </div>
+  </section>
+
+  <section id="avisos">
+    <h2>Avisos importantes</h2>
+    <div class="avisos">
+      <div class="av"><span class="k">📱</span><div><b>O guia e o jogo funcionam no celular.</b> Use Google Chrome ou Firefox. Para montar slides nas atividades, prefira um computador.</div></div>
+      <div class="av forte"><span class="k">🪪</span><div><b>Nome completo e número iguais aos da chamada.</b> O código do seu placar é calculado com eles. Se escrever diferente, a nota pode não ser aceita.</div></div>
+      <div class="av forte"><span class="k">👀</span><div><b>Fique na tela do jogo enquanto joga.</b> O jogo percebe quando você troca de aba ou de janela, e isso aparece no seu placar. Estude o guia <b>antes</b> de jogar.</div></div>
+      <div class="av"><span class="k">💾</span><div><b>O progresso fica salvo no navegador deste computador.</b> No computador da escola, confira se o nome que aparece no jogo é o seu. Se não for, toque em <b>Não sou eu</b>. Aba anônima apaga tudo ao fechar.</div></div>
+      <div class="av"><span class="k">💻</span><div><b>Vai continuar em outro computador?</b> Antes de sair, baixe a imagem do placar (no mapa: <b>Baixar placar parcial</b>). No outro computador, toque em <b>Já joguei em outro computador</b> e envie a imagem.</div></div>
+      <div class="av" id="avEntrega"><span class="k">📨</span><div id="avEntregaT"><b>Entrega:</b> no final, baixe a imagem do placar e entregue no Google Classroom.</div></div>
+    </div>
+  </section>
+
+  <p class="prof"><a href="professor.html">🔒 Área do professor</a></p>
+</main>
+<script>
+/* ---------- placar: nota, código de conferência (usado no jogo e no conferidor) ---------- */
+/* colégio vai junto na turma ("IEEL · 1º Ano ADM - Turma A"): o formulário não muda e o código de conferência já inclui o colégio */
+const COLEGIOS = [
+  { curto: 'IEEL', nome: 'Instituto de Educação Estadual de Londrina', turmas: ['2º Ano ADM - Turma A', '2º Ano ADM - Turma B', '2º Ano ADM - Turma C'] },
+];
+const SEP_COL = ' · ';
+const TURMAS = COLEGIOS.flatMap(c => c.turmas.map(t => c.curto + SEP_COL + t));
+const escT = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+function separarTurma(v) {
+  v = String(v || ''); const c = COLEGIOS.find(x => v.startsWith(x.curto + SEP_COL));
+  return c ? { col: c.curto, turma: v.slice((c.curto + SEP_COL).length) } : { col: '', turma: v };
+}
+function opcoesTurma(c, sel) {
+  if (!c) return '<option value="">Escolha o colégio primeiro</option>';
+  return '<option value="">Escolha…</option>' + c.turmas.map(t => '<option' + (t === sel ? ' selected' : '') + '>' + escT(t) + '</option>').join('') + '<option value="outra"' + (sel === 'outra' ? ' selected' : '') + '>Outra turma</option>';
+}
+/* seletores de colégio e turma; p = prefixo dos ids; atual = turma já salva */
+function turmaHtml(p, atual) {
+  const s = separarTurma(atual), c = COLEGIOS.length === 1 ? COLEGIOS[0] : COLEGIOS.find(x => x.curto === s.col), padrao = !!c && c.turmas.includes(s.turma), outra = !!c && !!s.turma && !padrao;
+  const um = COLEGIOS.length === 1;
+  return '<label class="f" for="' + p + 'col"' + (um ? ' hidden style="display:none"' : '') + '>Colégio</label><select class="t" id="' + p + 'col"' + (um ? ' hidden style="display:none"' : '') + '><option value="">Escolha…</option>' +
+    COLEGIOS.map(x => '<option value="' + escT(x.curto) + '"' + (x === c ? ' selected' : '') + '>' + escT(x.curto + ' – ' + x.nome) + '</option>').join('') + '</select>' +
+    '<label class="f" for="' + p + 'tur">Turma</label><select class="t" id="' + p + 'tur"' + (c ? '' : ' disabled') + '>' + opcoesTurma(c, padrao ? s.turma : outra ? 'outra' : '') + '</select>' +
+    '<input class="t" id="' + p + 'out" placeholder="Digite sua turma" maxlength="40" value="' + (outra ? escT(s.turma) : '') + '" style="display:' + (outra ? 'block' : 'none') + ';margin-top:8px">';
+}
+/* liga os seletores e devolve uma função que lê a turma completa ('' se faltar algo) */
+function ligarTurma(p) {
+  const g = id => document.getElementById(p + id), col = g('col'), tur = g('tur'), out = g('out');
+  col.onchange = () => { const c = COLEGIOS.find(x => x.curto === col.value); tur.innerHTML = opcoesTurma(c, ''); tur.disabled = !c; out.style.display = 'none'; };
+  tur.onchange = () => { out.style.display = tur.value === 'outra' ? 'block' : 'none'; };
+  return () => { const v = tur.value === 'outra' ? out.value.trim() : tur.value; return col.value && v ? col.value + SEP_COL + v : ''; };
+}
+const NOTA_POR_ESTRELAS = [0, 1.5, 2.0, 2.5];   /* andar concluído com 1, 2 ou 3 estrelas; 4 andares = 10 */
+const SALT = 'agencia-pixel-2adm-rocco-2026';
+const EPOCA = Date.UTC(2026, 0, 1);
+const NOMES_ANDAR = ['Estúdio de Design', 'Sala de Reunião', 'Departamento Jurídico', 'Diretoria'];
+
+function cyrb53(str) {
+  let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+  for (let i = 0; i < str.length; i++) {
+    const ch = str.charCodeAt(i);
+    h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677);
+  }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+}
+function normTxt(s) {
+  return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\s+/g, ' ').trim();
+}
+function calcNota(stars) { return stars.reduce((a, s) => a + NOTA_POR_ESTRELAS[s || 0], 0); }
+function fmtNota(n) { return n.toFixed(1).replace('.', ','); }
+
+/* empacota nota, estrelas, saídas, partida e minuto em um número; o checksum amarra ao aluno */
+function gerarCodigo(id, stars, saidas, partida, minuto, restaurado) {
+  const nota10 = Math.round(calcNota(stars) * 10) + (restaurado ? 200 : 0);
+  const sb = (stars[0] || 0) + 4 * (stars[1] || 0) + 16 * (stars[2] || 0) + 64 * (stars[3] || 0);
+  const p = (((nota10 * 256 + sb) * 64 + Math.min(saidas, 63)) * 64 + Math.min(partida, 63)) * 16777216 + minuto;
+  const chk = cyrb53(normTxt(id.nome) + '|' + String(id.numero).trim() + '|' + normTxt(id.turma) + '|' + p + '|' + SALT) % 60466176;
+  return p.toString(36).toUpperCase() + '-' + chk.toString(36).toUpperCase().padStart(5, '0');
+}
+function lerCodigo(code) {
+  const m = String(code).trim().toUpperCase().replace(/\s/g, '').match(/^([0-9A-Z]+)-([0-9A-Z]{5})$/);
+  if (!m) return null;
+  let p = parseInt(m[1], 36);
+  if (!Number.isSafeInteger(p)) return null;
+  const minuto = p % 16777216; p = Math.floor(p / 16777216);
+  const partida = p % 64; p = Math.floor(p / 64);
+  const saidas = p % 64; p = Math.floor(p / 64);
+  const sb = p % 256; let nota10 = Math.floor(p / 256); const restaurado = nota10 >= 200; if (restaurado) nota10 -= 200;
+  const stars = [sb % 4, Math.floor(sb / 4) % 4, Math.floor(sb / 16) % 4, Math.floor(sb / 64) % 4];
+  return { nota: nota10 / 10, restaurado, stars, saidas, partida, minuto, data: new Date(EPOCA + minuto * 60000), chk: m[2], payload: m[1] };
+}
+function validarCodigo(code, id) {
+  const d = lerCodigo(code);
+  if (!d) return false;
+  return gerarCodigo(id, d.stars, d.saidas, d.partida, d.minuto, d.restaurado) === String(code).trim().toUpperCase().replace(/\s/g, '');
+}
+function minutoAgora() { return Math.max(0, Math.min(16777215, Math.floor((Date.now() - EPOCA) / 60000))); }
+function fmtData(d) {
+  const z = n => String(n).padStart(2, '0');
+  return z(d.getDate()) + '/' + z(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + z(d.getHours()) + ':' + z(d.getMinutes());
+}
+
+/* aceita o código com espaços, sem hífen ou com O/0 e I/1 trocados na digitação */
+function normCodigo(code) {
+  let c = String(code).toUpperCase().replace(/[\s\u2010-\u2015]/g, '').replace(/-+/g, '-');
+  if (!c.includes('-') && c.length > 5) c = c.slice(0, -5) + '-' + c.slice(-5);
+  return c;
+}
+function acharCodigo(code, id) {
+  const c = normCodigo(code);
+  if (validarCodigo(c, id)) return c;
+  const pos = []; for (let i = 0; i < c.length; i++) if ('O0I1'.includes(c[i])) pos.push(i);
+  if (!pos.length || pos.length > 12) return null;
+  const tr = { O: '0', '0': 'O', I: '1', '1': 'I' };
+  for (let m = 1; m < (1 << pos.length); m++) {
+    const a = c.split(''); pos.forEach((p, k) => { if ((m >> k) & 1) a[p] = tr[a[p]]; });
+    const v = a.join(''); if (validarCodigo(v, id)) return v;
+  }
+  return null;
+}
+
+/* ---------- Google Forms: link pré-preenchido com marcadores (NOME, NUMERO, TURMA, NOTA, CODIGO...) ---------- */
+const CAMPOS_FORM = ['NOME', 'NUMERO', 'TURMA', 'NOTA', 'CODIGO', 'ESTRELAS', 'SAIDAS', 'SITUACAO'];
+const CAMPOS_OBRIG = ['NOME', 'NUMERO', 'TURMA', 'CODIGO'];
+function analisarFormulario(base) {
+  base = String(base || '').trim();
+  if (!base) return { ok: false, vazio: true, motivo: 'Nenhum link configurado.', campos: [] };
+  let u; try { u = new URL(base); } catch (e) { return { ok: false, motivo: 'O link não é um endereço válido.', campos: [] }; }
+  if (u.hostname !== 'docs.google.com' || u.pathname.indexOf('/forms/') !== 0) return { ok: false, motivo: 'O link precisa ser do Google Forms (começa com https://docs.google.com/forms/). O link curto forms.gle não serve.', campos: [] };
+  const mapa = {};
+  u.searchParams.forEach((v, k) => { if (k.indexOf('entry.') === 0) { const c = normTxt(v).toUpperCase(); if (CAMPOS_FORM.includes(c)) mapa[c] = k; } });
+  const faltam = CAMPOS_OBRIG.filter(c => !mapa[c]);
+  return { ok: !faltam.length, motivo: faltam.length ? 'Faltam marcadores no link: ' + faltam.join(', ') + '.' : '', campos: Object.keys(mapa), mapa, url: u.toString() };
+}
+function montarLinkFormulario(base, vals) {
+  const a = analisarFormulario(base); if (!a.ok) return null;
+  const u = new URL(a.url);
+  Object.keys(a.mapa).forEach(c => { if (vals[c] !== undefined) u.searchParams.set(a.mapa[c], String(vals[c])); });
+  return u.toString();
+}
+
+(function () {
+  const ok = analisarFormulario((window.DUNGEON_CONFIG || {}).formulario).ok;
+  if (ok) {
+    document.getElementById('entrega').textContent = 'No final do jogo, toque em Enviar minha nota. Abre um formulário já preenchido: é só clicar em Enviar.';
+    document.getElementById('avEntregaT').innerHTML = '<b>Entrega:</b> na tela de placar, toque em <b>Enviar minha nota</b> e clique em <b>Enviar</b> no formulário. Pode enviar de novo se melhorar: vale a maior nota. Baixe também a imagem do placar como comprovante.';
+  }
+  /* progresso salvo neste navegador */
+  try {
+    const meta = JSON.parse(localStorage.getItem('agencia_pixel_2adm_meta_v1') || 'null');
+    const save = JSON.parse(localStorage.getItem('agencia_pixel_2adm_v1') || 'null');
+    if (meta && meta.id && save) {
+      const notas = [0, 1.5, 2, 2.5], and = save.andares || {};
+      const st = [1, 2, 3, 4].map(i => (and[i] || {}).stars || 0);
+      const feitos = st.filter(Boolean).length, nota = st.reduce((a, s) => a + notas[s], 0);
+      document.getElementById('pE').textContent = ['🎨', '📋', '📣'][meta.hero || 0] || '🎨';
+      document.getElementById('pN').textContent = 'Olá, ' + String(meta.id.nome).split(' ')[0] + '!';
+      document.getElementById('pT').textContent = 'Andares vencidos: ' + feitos + ' de 4 · nota até agora: ' + nota.toFixed(1).replace('.', ',');
+      if (feitos === 4 && !save.run) document.getElementById('pB').textContent = '🏆 Ver meu placar';
+      document.getElementById('prog').style.display = 'flex';
+    }
+  } catch (e) {}
+})();
+</script>
+</body></html>

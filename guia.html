@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guia do Estagiário · Agência Pixel</title>
+<style>
+:root{--ink:#1d2433;--mut:#5d6678;--pap:#fbfaf7;--line:#e4e0d6;--blue:#2a5d8f;--yel:#ffd43b;--grn:#2f9e5a;--red:#c0392b;--vio:#6d3fc0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#efece5;color:var(--ink);font:18px/1.6 "Segoe UI",Roboto,"Noto Sans",Ubuntu,Arial,sans-serif}
+.page{max-width:780px;margin:0 auto;background:var(--pap);min-height:100vh;padding:0 20px 60px}
+nav.top{position:sticky;top:0;z-index:5;background:#14213d;margin:0 -20px;padding:8px 14px;display:flex;gap:6px;overflow-x:auto}
+nav.top a{flex:none;color:#fff;text-decoration:none;font-size:14px;font-weight:700;background:#ffffff1c;border-radius:999px;padding:6px 12px}
+nav.top a:hover{background:var(--yel);color:#14213d}
+header.capa{padding:34px 0 10px}
+.kick{font-size:14px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.07em}
+h1{font-size:clamp(34px,8vw,50px);line-height:1.05;margin:8px 0 10px}
+h1 span{background:linear-gradient(transparent 60%,var(--yel) 60%)}
+h2{font-size:30px;line-height:1.15;margin:0 0 6px}
+h3{font-size:21px;margin:28px 0 8px}
+p{margin:0 0 14px}
+.fase{border-top:6px solid var(--blue);margin-top:40px;padding-top:24px;scroll-margin-top:50px}
+.fase-tag{display:inline-block;background:#14213d;color:var(--yel);font-weight:900;font-size:14px;letter-spacing:.06em;border-radius:8px;padding:4px 10px;margin-bottom:8px}
+.meta{color:var(--mut);font-size:15px;margin-bottom:18px}
+.box{border-radius:14px;padding:14px 16px;margin:16px 0;border:2px solid}
+.box b:first-child{display:block;margin-bottom:4px}
+.dica{background:#eef6ff;border-color:#b9d4f0}
+.alerta{background:#fff6cc;border-color:#f1d36b}
+.erro{background:#fff1f1;border-color:#f2c4c4}
+.balao{position:relative;background:#fff;border:2px solid var(--line);border-radius:18px;padding:12px 16px;margin:16px 0 16px 64px}
+.balao::before{content:attr(data-who);position:absolute;left:-62px;top:0;font-size:40px;line-height:1}
+.balao::after{content:"";position:absolute;left:-12px;top:16px;border:10px solid transparent;border-right-color:var(--line);border-left:0}
+.ex{margin:14px 0}
+.ex pre{margin:0;font:15.5px/1.55 "Cascadia Mono",Consolas,"DejaVu Sans Mono",monospace;white-space:pre-wrap;word-break:break-word}
+.py{background:#1e1f24;color:#e6e6e6;border-radius:12px 12px 0 0;padding:12px 14px;position:relative}
+.py::before{content:"▶ Python";display:block;font:12px "Segoe UI",Arial,sans-serif;color:#9aa;margin-bottom:4px}
+.out{background:#2f3138;color:#f1f1f1;border-radius:0 0 12px 12px;padding:10px 14px;border-top:1px dashed #555}
+.out::before{content:"Na tela:";display:block;font:12px "Segoe UI",Arial,sans-serif;color:#9fd3a6;margin-bottom:2px}
+.out.err{background:#3a2326;color:#ffd0d0}.out.err::before{content:"Erro:";color:#ffb3b3}
+.ex.solo .py{border-radius:12px}
+.t-kw{color:#569cd6}.t-fn{color:#dcdcaa}.t-str{color:#ce9178}.t-num{color:#b5cea8}.t-com{color:#6a9955}.t-id{color:#9cdcfe}.t-op{color:#d4d4d4}.t-brace{color:#da70d6;font-weight:700}.t-var{color:#9cdcfe}
+code.ic{font-family:"Cascadia Mono",Consolas,"DejaVu Sans Mono",monospace;background:#e9edf3;color:#173a5e;padding:1px 6px;border-radius:6px;font-size:.88em}
+table{width:100%;border-collapse:collapse;margin:12px 0 16px;font-size:16px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#14213d;color:#fff}
+tr:nth-child(even) td{background:#f4f1ea}
+.passo{display:flex;gap:12px;align-items:flex-start;margin:10px 0}
+.passo .n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--grn);color:#fff;font-weight:800;display:grid;place-items:center}
+.flow{display:grid;gap:8px;margin:16px 0}
+.flow .st{display:flex;gap:12px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px}
+.flow .st .k{flex:none;font-size:26px}
+.flow .arr{text-align:center;color:var(--blue);font-size:22px;line-height:1}
+.shot{margin:12px 0 18px;border-radius:12px;overflow:hidden;border:2px solid var(--line);background:#1e1f24}
+.shot img{display:block;width:100%;height:auto}
+.shot figcaption{background:#fff;padding:8px 12px;font-size:15px;color:var(--mut)}
+.btn-colab{display:inline-flex;align-items:center;gap:10px;background:#f9ab00;color:#1d2433;font-weight:800;text-decoration:none;border-radius:14px;padding:14px 22px;font-size:19px;box-shadow:0 4px 0 #b37800;margin:4px 0}
+.btn-colab:hover{filter:brightness(1.05)}.btn-colab:active{transform:translateY(2px);box-shadow:0 2px 0 #b37800}
+.btn-colab.mini{font-size:15px;padding:7px 14px;box-shadow:0 3px 0 #b37800;margin-left:6px}
+.nova-aba{font-size:14px;color:var(--mut);margin:6px 0 16px}
+.abrir{background:#fff7e0;border:2px solid #f6d58a;border-radius:12px;padding:10px 14px}
+.quiz{background:#f5efff;border:2px solid #d9c8f7;border-radius:16px;padding:14px 16px;margin:18px 0}
+.quiz>b{color:var(--vio)}
+.quiz ol{margin:8px 0 0;padding-left:22px}.quiz li{margin:10px 0}
+details{margin-top:6px}
+summary{cursor:pointer;color:var(--vio);font-weight:700}
+details p{margin:6px 0 0;background:#fff;border-radius:10px;padding:8px 12px}
+.check{list-style:none;padding:0;margin:10px 0}
+.check li{margin:6px 0}
+.check label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.check input{width:22px;height:22px;margin-top:3px;flex:none;accent-color:var(--grn)}
+.boss{background:#14213d;color:#fff;border-radius:18px;padding:18px;margin:20px 0}
+.boss h3{margin-top:0;color:var(--yel)}
+.boss table td{background:#fff;color:var(--ink)}.boss table tr:nth-child(even) td{background:#f4f1ea}
+.boss code.ic{background:#ffffff22;color:#fff}
+.sym{font:700 24px "Cascadia Mono",Consolas,monospace;color:var(--blue);white-space:nowrap}
+.fim{text-align:center;margin-top:40px;color:var(--mut);font-size:15px}
+td code.ic{word-break:break-word}
+@media (max-width:520px){body{font-size:17px}table{font-size:14px}th,td{padding:6px 6px}.sym{font-size:18px}.balao{margin-left:52px}.balao::before{left:-52px;font-size:34px}}
+@media print{
+  body{background:#fff;font-size:12pt}.page{max-width:none;padding:0}nav.top{display:none}
+  .fase{break-before:page}.ex,.box,.quiz,.boss,table{break-inside:avoid}
+  details{display:block}details>summary{display:none}details p{display:block}
+  .boss{background:#fff;color:#000;border:2px solid #000}.boss h3{color:#000}
+}
+
+/* sem ligaduras: // e != aparecem sempre como dois caracteres */
+pre,code,.ln,.blk,.op code,.code,.out,.real,.mk,#cod,#rcod{font-variant-ligatures:none!important;font-feature-settings:"liga" 0,"calt" 0!important}
+/* ---------- peças visuais (posts, comunicados, amostras) — usadas em slides, celular, roteiro e guia ---------- */
+.pm-wrap{font-size:var(--pm,16px);display:flex;justify-content:center;gap:1em;flex-wrap:wrap;margin:.3em 0}
+.pm{width:20em;max-width:100%;aspect-ratio:1/1;border-radius:.6em;overflow:hidden;position:relative;box-shadow:0 .25em .8em #0002;font-family:"Segoe UI",Roboto,"Noto Sans",Ubuntu,Arial,sans-serif;line-height:1.2;color:#1d2433;text-align:left}
+.pm *{box-sizing:border-box}
+.pm-lbl{font:800 .75em/1.2 "Segoe UI",Roboto,Arial,sans-serif;text-align:center;margin-top:.4em;color:#3d4659}
+.pm-col{display:flex;flex-direction:column;align-items:center}
+/* post bagunçado */
+.pm-ruim{background:linear-gradient(135deg,#ff00ff 0 30%,#7fff00 30% 55%,#00ffff 55% 80%,#ffff00 80%);padding:.5em}
+.pm-ruim .a{font-family:"Brush Script MT","Comic Sans MS",cursive;font-size:1.6em;color:#ffff00;transform:rotate(-6deg);margin:.1em 0 0 .2em}
+.pm-ruim .b{font-family:Impact,"Arial Black",sans-serif;font-size:1.05em;color:#ff0000;background:#ff00ff;padding:.1em .3em;display:inline-block;margin:.15em 0}
+.pm-ruim .c{font-family:"Times New Roman",Georgia,serif;font-size:.48em;color:#00ffff;line-height:1.05;margin:.1em 0}
+.pm-ruim .d{font-family:"Comic Sans MS",cursive;font-size:.5em;color:#7fff00;background:#ffff00;padding:.1em .2em}
+.pm-ruim .ic{position:absolute;font-size:1.7em;opacity:.95}
+.pm-ruim .e{font-family:Impact,"Arial Black",sans-serif;font-size:.5em;color:#ffffff;position:absolute;right:.4em;bottom:.4em;transform:rotate(4deg)}
+/* post organizado */
+.pm-bom{background:#ffffff;display:flex;flex-direction:column}
+.pm-bom .topo{background:#1f4e8c;color:#fff;padding:.7em .8em .6em}
+.pm-bom .marca{font-size:.55em;letter-spacing:.12em;font-weight:700;opacity:.9}
+.pm-bom .tit{font-size:1.45em;font-weight:900;line-height:1.05;margin-top:.15em}
+.pm-bom .meio{flex:1;padding:.7em .8em;display:flex;flex-direction:column;justify-content:center;gap:.5em}
+.pm-bom .sub{font-size:.95em;font-weight:700;color:#1d2433}
+.pm-bom .selo{align-self:flex-start;background:#f28c28;color:#1d2433;font-weight:900;font-size:.95em;padding:.25em .6em;border-radius:.4em}
+.pm-bom .det{font-size:.7em;color:#3d4659}
+.pm-bom .acao{margin:0 .8em .8em;background:#1f4e8c;color:#fff;font-weight:800;text-align:center;border-radius:.4em;padding:.45em;font-size:.8em}
+/* números de hierarquia */
+.pm .hn{display:inline-grid;place-items:center;width:1.25em;height:1.25em;border-radius:50%;background:#14213d;color:#ffd43b;font:900 .6em/1 "Segoe UI",Arial,sans-serif;margin-right:.35em;vertical-align:middle}
+/* amostras de contraste */
+.pm-sw{width:9.5em;aspect-ratio:auto;padding:.7em .6em;text-align:center;border-radius:.5em}
+.pm-sw .t{font-size:1.15em;font-weight:800}
+.pm-sw .r{font-size:.7em;margin-top:.35em;font-weight:700;background:#ffffffd9;color:#1d2433;border-radius:.3em;padding:.1em .3em;display:inline-block}
+/* amostras de fonte */
+.pm-fo{width:12.5em;aspect-ratio:auto;background:#fff;padding:.8em .7em;text-align:center}
+.pm-fo .t{font-size:1em}
+.f-dec{font-family:"Brush Script MT","Lucida Handwriting","Comic Sans MS",cursive;font-style:italic;letter-spacing:.03em;font-size:1.25em!important}
+.f-sem{font-family:"Segoe UI",Roboto,Arial,sans-serif;font-weight:900}
+.f-fina{font-family:"Segoe UI",Roboto,Arial,sans-serif;font-weight:300;color:#999999;font-size:.62em!important}
+/* comunicado com hierarquia */
+.pm-com{background:#fff;padding:.9em .9em;display:flex;flex-direction:column;gap:.35em;aspect-ratio:auto;width:21em}
+.pm-com .c1{font-size:1.6em;font-weight:900;color:#1f4e8c;line-height:1.05}
+.pm-com .c2{font-size:1.05em;font-weight:800;color:#1d2433}
+.pm-com .c3{font-size:.68em;color:#3d4659}
+.pm-com .c4{align-self:flex-start;background:#f28c28;color:#1d2433;font-weight:900;font-size:.9em;padding:.25em .7em;border-radius:.4em;margin-top:.2em}
+/* cédula (esquema simplificado) */
+.pm-ced{background:#fff;width:16em;aspect-ratio:auto;padding:.7em;display:grid;grid-template-columns:1fr 1.4em 1fr;gap:.35em .3em;align-items:center;font-size:1em}
+.pm-ced .l{text-align:right;font-size:.8em;font-weight:700;border:1px solid #9aa3b2;padding:.25em .35em;border-radius:.2em}
+.pm-ced .r2{text-align:left;font-size:.8em;font-weight:700;border:1px solid #9aa3b2;padding:.25em .35em;border-radius:.2em}
+.pm-ced .h{display:grid;place-items:center}
+.pm-ced .h i{display:block;width:.9em;height:.9em;border-radius:50%;border:2px solid #1d2433;background:#fff}
+.pm-ced .h i.x{background:#c0392b;border-color:#c0392b}
+.pm-ced .seta{font-size:.6em;color:#c0392b;font-weight:800}
+.pm-ced .cap{grid-column:1/-1;font-size:.6em;color:#5b6475;text-align:center}
+@media (prefers-reduced-motion:reduce){.pm *{transition:none!important;animation:none!important}}
+
+.page a{color:#1f4e8c}
+nav.top a{color:#fff}
+#leitura p{overflow-wrap:anywhere}
+.btn-colab{color:#1d2433!important}
+</style></head><body><div class="page">
+<nav class="top"><a href="index.html">⬅ Site</a><a href="#inicio">🏠 Início</a><a href="#f1">Fase 1</a><a href="#armadilhas">Armadilhas</a><a href="#leitura">Leitura</a><a href="jogo.html">🏢 Jogo</a></nav>
+
+<header class="capa" id="inicio">
+  <div class="kick">Guia do Estagiário · Informática Empresarial · 2º ADM</div>
+  <h1>Agência <span>Pixel</span></h1>
+  <p>Este guia prepara você para as aulas de design visual, slides institucionais e direitos autorais. Cada fase é uma aula. Leia <b>uma fase por vez</b>: dá uns 15 minutos cada.</p>
+  <div class="balao" data-who="🎨"><b>Como usar:</b> antes de abrir uma resposta, tente responder de cabeça ou no papel. Errar aqui não tira ponto. É treino para o jogo.</div>
+  <div class="box dica"><b>📱 Celular ou computador</b>Este guia e o jogo funcionam no celular. Para as atividades de montar slides, prefira um computador com <b>Google Chrome</b> ou <b>Firefox</b>.</div>
+  <h3>✅ Checklist da Fase 1</h3>
+  <p class="meta">Marque quando sentir que já sabe. Fica salvo neste navegador.</p>
+  <ul class="check" id="check">
+    <li><label><input type="checkbox" data-k="c1"><span>Sei explicar por que design visual é comunicação, e não só enfeite</span></label></li>
+    <li><label><input type="checkbox" data-k="c2"><span>Sei montar uma paleta com cor principal, de apoio e de destaque</span></label></li>
+    <li><label><input type="checkbox" data-k="c3"><span>Sei que contraste se mede e que o mínimo para texto comum é 4,5:1</span></label></li>
+    <li><label><input type="checkbox" data-k="c4"><span>Sei escolher fontes legíveis e usar poucas famílias</span></label></li>
+    <li><label><input type="checkbox" data-k="c5"><span>Sei organizar uma peça por hierarquia: primeiro, depois, detalhes, ação</span></label></li>
+    <li><label><input type="checkbox" data-k="c6"><span>Sei contar um caso real de design que deu errado e um que deu certo</span></label></li>
+  </ul>
+</header>
+
+<!-- ================= FASE 1 ================= -->
+<section class="fase" id="f1">
+  <span class="fase-tag">FASE 1 · AULA 1</span>
+  <h2>Design visual: cores, fontes e equilíbrio</h2>
+  <p class="meta">Você vai aprender: por que alguns materiais a gente entende num relance · como usar cores e fontes · como medir contraste · como guiar o olho de quem lê</p>
+
+  <h3>🧭 Design é comunicação</h3>
+  <p>Design visual não serve só para deixar bonito. Numa empresa, ele organiza a informação, mostra o que é mais importante e transmite a identidade da marca. Aparece em apresentações, posts, cartazes, relatórios, e-mails e comunicados.</p>
+  <p>Um comunicado bagunçado custa caro: as pessoas perdem o prazo, mandam a mesma pergunta várias vezes e alguém precisa explicar tudo de novo.</p>
+
+  <h3>🌈 O desafio do Gabriel</h3>
+  <p>Gabriel trabalha na <b>ORION Administração</b>, uma empresa fictícia. Ele fez este post para divulgar uma promoção:</p>
+  <div class="pm-wrap" style="--pm:15px"><div class="pm-col"><div class="pm pm-ruim" role="img" aria-label="Post bagunçado: cinco cores fortes, três fontes, letras pequenas e ícones espalhados"><div class="a">Super Promoção!!!</div><div class="b">ORION ADMINISTRAÇÃO</div><div class="c">20% de desconto na consultoria para pequenas empresas, válido até 30 de novembro, para clientes novos e antigos, exceto planos anuais, consulte condições, atendimento de segunda a sexta, fale com a nossa equipe pelo e-mail ou pelo site</div><div class="d">contato@orion.exemplo · orion.exemplo · @orion.exemplo</div><span class="ic" style="right:.3em;top:.3em">💼</span><span class="ic" style="left:40%;top:48%">📊</span><span class="ic" style="left:.4em;bottom:.5em">⭐</span><span class="ic" style="right:35%;bottom:.2em">🔥</span><span class="ic" style="right:.2em;top:40%">💰</span><div class="e">CORRA!!!</div></div><div class="pm-lbl">Post do Gabriel (versão 1)</div></div></div>
+  <p>Os colegas disseram: <i>"Não sei para onde olhar primeiro."</i> Ele usou 5 cores, 3 fontes, letras pequenas, informações coladas e ícones em todo canto.</p>
+  <div class="quiz"><b>🧠 Teste rápido</b><ol>
+    <li>O problema do Gabriel é falta de criatividade?
+      <details><summary>Ver resposta</summary><p>Não. Ele foi criativo. Faltou <b>organização</b>: tudo chama atenção ao mesmo tempo, então nada se destaca.</p></details></li>
+  </ol></div>
+
+  <h3>🎨 Cores: cada uma com uma função</h3>
+  <p>Regra prática da aula: <b>cor principal + cor de apoio + cor de destaque</b>.</p>
+  <table><tr><th>Papel</th><th>Exemplo da ORION</th><th>Para quê</th></tr>
+  <tr><td>Principal</td><td>🔵 Azul</td><td>Identidade da empresa</td></tr>
+  <tr><td>Apoio</td><td>⚪ Branco</td><td>Fundo e organização</td></tr>
+  <tr><td>Destaque</td><td>🟠 Laranja</td><td>Só o que precisa saltar aos olhos (o desconto)</td></tr></table>
+  <div class="box alerta"><b>⚠️ Se tudo tem destaque, nada tem destaque</b>Cor sem função só faz barulho. Antes de colocar uma cor, pergunte: para que ela está ali?</div>
+
+  <h3>📏 Contraste: dá para medir</h3>
+  <p>Contraste é a diferença entre a cor do texto e a cor do fundo. Existe uma regra internacional de acessibilidade, as <b>WCAG</b>, com uma fórmula que dá um número. Quanto maior, mais fácil de ler. O máximo é <b>21:1</b> (preto no branco).</p>
+  <div class="pm-wrap" style="--pm:15px"><div class="pm pm-sw" style="background:#F28C28;color:#FFFFFF" role="img" aria-label="Texto #FFFFFF sobre fundo #F28C28, contraste 2,45 para 1"><div class="t">Promoção</div><div class="r">2,45:1 ❌</div></div><div class="pm pm-sw" style="background:#F28C28;color:#1D2433" role="img" aria-label="Texto #1D2433 sobre fundo #F28C28, contraste 6,33 para 1"><div class="t">Promoção</div><div class="r">6,33:1 ✅</div></div><div class="pm pm-sw" style="background:#1F4E8C;color:#FFFFFF" role="img" aria-label="Texto #FFFFFF sobre fundo #1F4E8C, contraste 8,31 para 1"><div class="t">Promoção</div><div class="r">8,31:1 ✅</div></div><div class="pm pm-sw" style="background:#FFFFFF;color:#FFFF00" role="img" aria-label="Texto #FFFF00 sobre fundo #FFFFFF, contraste 1,07 para 1"><div class="t">Promoção</div><div class="r">1,07:1 ❌</div></div></div>
+  <table><tr><th>Tipo de texto</th><th>Contraste mínimo</th></tr>
+  <tr><td>Texto comum</td><td><b>4,5:1</b></td></tr>
+  <tr><td>Texto grande (18 pt, ou 14 pt em negrito)</td><td><b>3:1</b></td></tr></table>
+  <p>Repare: o laranja é ótimo para destaque, mas com <b>texto branco</b> em cima dá só 2,45:1. Com <b>texto escuro</b>, sobe para 6,33:1.</p>
+  <p>Quer testar outras cores? Use um verificador de contraste:</p>
+  <a class="btn-colab" href="https://webaim.org/resources/contrastchecker/" target="_blank" rel="noopener" title="Abrir o verificador de contraste em uma nova aba">🔍 Abrir o verificador de contraste <span aria-hidden="true">↗</span></a>
+  <p class="nova-aba">Abre em uma nova aba (o site é em inglês). Para voltar a este guia, clique na aba dele, lá em cima. Teste: <b>Foreground</b> <code class="ic">#FFFFFF</code> e <b>Background</b> <code class="ic">#F28C28</code>. O resultado deve dar 2,45:1.</p>
+  <div class="box dica"><b>💡 Cor não pode ser o único destaque</b>Algumas pessoas não distinguem bem certas cores, como vermelho e verde. Por isso a mesma regra das WCAG diz: além da cor, destaque com <b>tamanho, negrito ou posição</b>.</div>
+
+  <h3>🔤 Fontes: como a mensagem será lida</h3>
+  <table><tr><th>✅ Prefira</th><th>❌ Evite</th></tr>
+  <tr><td>Título destacado</td><td>Fonte muito enfeitada em texto longo</td></tr>
+  <tr><td>Texto em tamanho confortável</td><td>Letra muito pequena</td></tr>
+  <tr><td>Contraste adequado</td><td>Texto claro em fundo claro</td></tr>
+  <tr><td>Poucas famílias de fonte (até 2)</td><td>Uma fonte diferente em cada parte</td></tr></table>
+  <p><b>Família de fonte</b> é o conjunto: a mesma fonte em normal, <b>negrito</b> e <i>itálico</i> conta como uma família só.</p>
+  <div class="pm-wrap" style="--pm:14px"><div class="pm pm-fo"><div class="t f-dec">REUNIÃO DE EQUIPE – SEXTA-FEIRA</div><div class="pm-lbl">A</div></div><div class="pm pm-fo"><div class="t f-sem">REUNIÃO DE EQUIPE – SEXTA-FEIRA</div><div class="pm-lbl">B</div></div><div class="pm pm-fo"><div class="t f-fina">REUNIÃO DE EQUIPE – SEXTA-FEIRA</div><div class="pm-lbl">C</div></div></div>
+  <div class="quiz"><b>🧠 Teste rápido</b><ol>
+    <li>O chefe pediu um lembrete: <b>REUNIÃO DE EQUIPE – SEXTA-FEIRA</b>. Qual das três fontes acima você usaria?
+      <details><summary>Ver resposta</summary><p>A <b>B</b>: letra de forma, grossa, lida rápido e de longe. A cursiva (A) atrapalha num aviso. A fininha e clara (C) quase some.</p></details></li>
+  </ol></div>
+
+  <h3>⚖️ Equilíbrio e hierarquia</h3>
+  <p><b>Equilíbrio gráfico</b> é organizar tamanho, posição, espaço, texto, imagem e cor para que nenhum elemento pareça brigar pelo espaço. Espaço vazio não é desperdício: é ele que separa uma informação da outra.</p>
+  <p><b>Hierarquia visual</b> é a ordem de leitura que o material cria para o público: o que ler primeiro, o que ler depois e onde ficam os detalhes.</p>
+  <div class="pm-wrap" style="--pm:15px"><div class="pm pm-com" role="img" aria-label="Comunicado da Feira de Profissões com quatro níveis de leitura numerados"><div class="c1"><span class="hn">1</span>FEIRA DE PROFISSÕES</div><div class="c2"><span class="hn">2</span>25 de setembro · 19h</div><div class="c3"><span class="hn">3</span>Local: ginásio da escola. Programação: palestras, oficinas e estandes dos cursos. Traga um documento com foto.</div><div class="c4"><span class="hn">4</span>Inscreva-se!</div></div></div>
+  <div class="flow">
+    <div class="st"><span class="k">1️⃣</span><div><b>Título</b>: o que é</div></div><div class="arr">↓</div>
+    <div class="st"><span class="k">2️⃣</span><div><b>Informação principal</b>: quando, quanto</div></div><div class="arr">↓</div>
+    <div class="st"><span class="k">3️⃣</span><div><b>Detalhes</b>: local, condições</div></div><div class="arr">↓</div>
+    <div class="st"><span class="k">4️⃣</span><div><b>Ação</b>: o que a pessoa deve fazer</div></div>
+  </div>
+
+  <h3>📰 Dois casos reais</h3>
+  <div class="box erro"><b>❌ Deu errado: a cédula borboleta (EUA, 2000)</b>No condado de Palm Beach, na Flórida, a cédula da eleição para presidente tinha nomes dos dois lados e os furos no meio. O segundo nome da esquerda era do candidato democrata, mas o segundo furo marcava outro candidato. Um estudo de 2001 estimou que <b>mais de 2.000</b> eleitores votaram por engano. A diferença final no estado foi de <b>537 votos</b>. O erro de design: o nome não ficava junto do seu furo (falta de proximidade e de alinhamento).
+    <p style="margin:8px 0 0;font-size:15px">Fontes: <a href="https://www.cambridge.org/core/journals/american-political-science-review/article/butterfly-did-it-the-aberrant-vote-for-buchanan-in-palm-beach-county-florida/90253BB8ADFD43F862FCBFA4F0BF00A3" target="_blank" rel="noopener">American Political Science Review (2001)</a> · <a href="https://www.fec.gov/documents/1732/FederalElections2000_PresidentialGeneralElectionResultsbyState.pdf" target="_blank" rel="noopener">FEC, resultados oficiais (PDF)</a> · <a href="https://ischool.uw.edu/documents-that-changed-world/palm-beach-county-butterfly-ballot" target="_blank" rel="noopener">Universidade de Washington (2016)</a></p></div>
+  <div class="box dica"><b>✅ Deu certo: o GOV.UK (Reino Unido, 2013)</b>O site que juntou os sites do governo britânico num endereço só ganhou o prêmio <b>Design do Ano</b> do Design Museum, de Londres, concorrendo com moda, móveis e arquitetura. Os jurados elogiaram um design bem pensado e discreto. Mostra que design claro e fácil de usar também é design de primeira.
+    <p style="margin:8px 0 0;font-size:15px">Fontes: <a href="https://gds.blog.gov.uk/2013/04/17/gov-uk-wins-design-of-the-year-2013/" target="_blank" rel="noopener">blog do Government Digital Service (17 abr. 2013)</a> · <a href="https://www.dezeen.com/2013/04/16/gov-uk-government-website-wins-designs-of-the-year-2013/" target="_blank" rel="noopener">Dezeen (16 abr. 2013)</a> · <a href="https://www.designweek.co.uk/issues/april-2013/gov-uk-named-design-of-the-year/" target="_blank" rel="noopener">Design Week (abr. 2013)</a></p></div>
+
+  <div class="boss"><h3>🏆 Missão da fase: arrume o post do Gabriel</h3>
+    <div class="passo"><span class="n">1</span><div>Escolha <b>3 cores</b>: principal, apoio e destaque.</div></div>
+    <div class="passo"><span class="n">2</span><div>Escolha <b>1 fonte</b> para o título e, se quiser, outra para o texto (no máximo 2).</div></div>
+    <div class="passo"><span class="n">3</span><div>Numere a ordem de leitura: <b>1</b> título · <b>2</b> oferta · <b>3</b> detalhes · <b>4</b> contato.</div></div>
+    <div class="passo"><span class="n">4</span><div>Desenhe o post no caderno.</div></div>
+    <div class="passo"><span class="n">5</span><div>Escreva uma frase: <i>"Escolhi ___ porque ___."</i></div></div>
+    <details><summary>Já fiz. Ver uma resposta possível</summary><div class="pm-wrap" style="--pm:15px;margin-top:10px"><div class="pm-col"><div class="pm pm-bom" role="img" aria-label="Post organizado: fundo branco, faixa azul com o título, selo laranja com o desconto e botão de contato"><div class="topo"><div class="marca">ORION ADMINISTRAÇÃO</div><div class="tit">Consultoria para pequenas empresas</div></div><div class="meio"><span class="selo">20% de desconto</span><div class="sub">Até 30 de novembro</div><div class="det">Vale para clientes novos e antigos. Planos anuais ficam fora.</div></div><div class="acao">Fale com a gente: contato@orion.exemplo</div></div><div class="pm-lbl">Post do Gabriel (versão 2)</div></div></div></details>
+  </div>
+
+  <div class="quiz"><b>🧠 Teste final da fase</b><ol>
+    <li>Na paleta azul, branco e laranja, qual cor marca o desconto?
+      <details><summary>Ver resposta</summary><p>O <b>laranja</b>, a cor de destaque. E o texto em cima dele deve ser escuro, por causa do contraste.</p></details></li>
+    <li>Qual é o contraste mínimo para texto comum?
+      <details><summary>Ver resposta</summary><p><b>4,5:1</b>. Texto grande pode ter 3:1.</p></details></li>
+    <li>Uma apresentação pode ser bonita e, mesmo assim, ser ruim?
+      <details><summary>Ver resposta</summary><p><b>Sim.</b> Pode ter cores e imagens legais e esconder a informação principal. <b>Design = estética + organização + comunicação.</b></p></details></li>
+  </ol></div>
+</section>
+
+<!-- ================= ARMADILHAS ================= -->
+<section class="fase" id="armadilhas">
+  <span class="fase-tag">ITENS DE CONSULTA</span>
+  <h2>🪤 Armadilhas de design</h2>
+  <table><tr><th>Armadilha</th><th>Por que atrapalha</th><th>Como corrigir</th></tr>
+  <tr><td>Muitas cores sem função</td><td>Tudo grita, nada se destaca</td><td>3 papéis: principal, apoio, destaque</td></tr>
+  <tr><td>Texto branco em cor clara (amarelo, laranja)</td><td>Contraste abaixo de 4,5:1</td><td>Texto escuro, ou fundo mais escuro</td></tr>
+  <tr><td>Fonte enfeitada em texto longo</td><td>Cansa e atrasa a leitura</td><td>Fonte simples no texto, enfeite só no título</td></tr>
+  <tr><td>Três ou mais fontes</td><td>Parece bagunça</td><td>No máximo 2 famílias</td></tr>
+  <tr><td>Destaque só com cor</td><td>Quem não distingue a cor perde a informação</td><td>Use também tamanho, negrito ou posição</td></tr>
+  <tr><td>Sem espaço entre as informações</td><td>O olho não sabe onde uma termina</td><td>Deixe respiro entre os blocos</td></tr>
+  <tr><td>A ação some no meio dos detalhes</td><td>A pessoa lê e não faz nada</td><td>Botão ou selo com a cor de destaque</td></tr></table>
+  <div class="box alerta"><b>📌 Avisos sobre o material da aula</b>O post do Gabriel, as amostras de contraste e os dois casos reais são complementos, feitos para esta aula. No slide de hierarquia visual, quem precisa perceber a ordem de leitura é o <b>público</b> (o material escreveu "o estudante").</div>
+</section>
+
+<section class="fase" id="leitura">
+  <span class="fase-tag">PARA IR ALÉM</span>
+  <h2>📚 Sugestões de leitura</h2>
+  <p>WILLIAMS, Robin. <i>Design para quem não é designer</i>: princípios de design e tipografia para iniciantes. 4. ed. [<i>S. l.</i>]: Callis, 2013.</p>
+  <p>W3C. <i>Understanding Success Criterion 1.4.3</i>: contrast (minimum). [<i>S. l.</i>]: W3C, [20--]. Disponível em: https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html. Acesso em: 20 out. 2026.</p>
+  <div class="balao" data-who="🏢">Quer treinar jogando? Abra o jogo <a href="jogo.html"><b>Agência Pixel</b></a>. O 1º andar, o <b>Estúdio de Design</b>, tem as mesmas coisas desta fase.</div>
+  <p class="fim">Guia do Estagiário · Agência Pixel · Informática Empresarial · 2º ADM · IEEL<br>Para imprimir: Ctrl + P (as respostas aparecem abertas na impressão).</p>
+</section>
+
+</div>
+<script>
+const CK='guia_agencia_pixel_check';
+let st={};try{st=JSON.parse(localStorage.getItem(CK))||{};}catch(e){}
+document.querySelectorAll('#check input').forEach(i=>{i.checked=!!st[i.dataset.k];i.onchange=()=>{st[i.dataset.k]=i.checked;try{localStorage.setItem(CK,JSON.stringify(st));}catch(e){}};});
+</script>
+</body></html>

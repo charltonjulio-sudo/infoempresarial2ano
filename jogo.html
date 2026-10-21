@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Agência Pixel</title>
+<style>
+:root{--bg:#10172a;--pn:#1a2440;--pn2:#253257;--ink:#eef2fb;--mut:#aeb9d4;--gold:#f6a04d;--blue:#4b8bd4;--grn:#3ccf7a;--red:#ff6b6b;--vio:#a678ff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.45 "Segoe UI",Roboto,"Noto Sans",Ubuntu,Arial,sans-serif;min-height:100%}
+body{background:radial-gradient(circle at 50% -10%,#1f4e8c 0,transparent 55%),var(--bg);min-height:100vh}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;padding:8px 12px;background:#0e0c18ee;border-bottom:1px solid #2e2848;backdrop-filter:blur(6px)}
+.topbar .brand{flex:1;font-weight:800;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .brand span{color:var(--gold)}
+.wrap{max-width:720px;margin:0 auto;padding:14px 14px 48px}
+button{font:inherit;color:inherit;cursor:pointer;border:0}
+button:disabled{cursor:not-allowed}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:#1b1630;font-weight:800;border-radius:14px;padding:14px 22px;font-size:18px;box-shadow:0 5px 0 #b38f10;transition:transform .08s;text-decoration:none}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #b38f10}
+.btn:disabled{opacity:.45;box-shadow:none}
+.btn.sec{background:var(--pn2);color:var(--ink);box-shadow:0 5px 0 #15121f}
+.btn.red{background:var(--red);color:#2a0b0b;box-shadow:0 5px 0 #a33}
+.btn.full{width:100%}
+.icon-btn{background:var(--pn2);border-radius:12px;padding:8px 12px;font-size:15px;font-weight:700}
+.icon-btn.rst{background:#4a2233;color:#ffd6dc}
+h1{font-size:clamp(34px,9vw,54px);line-height:1;margin:6px 0 6px;letter-spacing:-.02em}
+h1 span{color:var(--gold)}
+h2{font-size:24px;margin:0 0 8px}
+.sub{color:var(--mut);margin:0 0 16px}
+.panel{background:var(--pn);border:2px solid #3a3358;border-radius:18px;padding:16px;margin-bottom:14px}
+label.f{display:block;font-weight:700;font-size:15px;margin:10px 0 4px}
+input.t,select.t{width:100%;font:inherit;color:var(--ink);background:#15121f;border:2px solid #463e6b;border-radius:12px;padding:11px 12px}
+input.t:focus,select.t:focus{outline:none;border-color:var(--gold)}
+.row2{display:grid;grid-template-columns:110px 1fr;gap:10px}
+.hint{font-size:14px;color:var(--gold);margin-top:8px;min-height:20px}
+.idcard{display:flex;align-items:center;gap:12px;background:var(--pn2);border-radius:14px;padding:12px}
+.idcard .e{font-size:36px}.idcard b{display:block}.idcard small{color:var(--mut)}
+.heroes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0 6px}
+.hero{background:var(--pn2);border:3px solid transparent;border-radius:16px;padding:10px 6px;text-align:center}
+.hero .e{font-size:40px;display:block}
+.hero.on{border-color:var(--gold);background:#3a2f5c}
+.hero small{display:block;color:var(--mut);font-size:12.5px}
+.how{margin:0;padding-left:20px;color:var(--mut)}.how li{margin:4px 0}.how b{color:var(--ink)}
+.map{display:grid;gap:12px}
+.floor{display:flex;align-items:center;gap:14px;text-align:left;width:100%;background:var(--pn);border:2px solid #3a3358;border-radius:18px;padding:14px}
+.floor .fi{font-size:40px;width:56px;text-align:center;flex:none}
+.floor .ft{flex:1}.floor .ft b{display:block;font-size:19px}.floor .ft small{color:var(--mut)}
+.floor .st{font-size:20px;letter-spacing:2px;flex:none;color:var(--gold)}
+.floor.lock{opacity:.45}.floor.next{border-color:var(--gold);box-shadow:0 0 0 3px #ffd43b33}
+.cta{display:inline-block;background:var(--gold);color:#1b1630;font-weight:800;border-radius:8px;padding:2px 8px;font-size:13px;margin-top:4px}
+.notabox{display:flex;justify-content:space-between;align-items:center;background:var(--pn2);border-radius:14px;padding:12px 14px;margin:14px 0}
+.notabox b{font-size:26px;color:var(--gold)}
+.hud{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.hearts{font-size:22px;letter-spacing:1px;white-space:nowrap}
+.hud .qn,.hud .xp,#paraMapa{white-space:nowrap}
+#paraMapa{padding:7px 10px}
+@media (max-width:400px){.hearts{font-size:18px;letter-spacing:0}.hud{gap:6px}.hud .xp{padding:5px 9px;font-size:15px}.hud .qn{font-size:14px}#paraMapa{font-size:14px;padding:6px 8px}}
+.xp{background:var(--pn2);border-radius:999px;padding:6px 12px;font-weight:800;color:var(--gold)}
+.qn{color:var(--mut);font-weight:700;font-size:15px}
+.arena{display:flex;align-items:center;gap:12px;background:var(--pn);border:2px solid #3a3358;border-radius:18px;padding:12px 14px;margin-bottom:12px}
+.foe{font-size:48px}
+.foe.hit{animation:hit .45s}
+@keyframes hit{0%{transform:none}25%{transform:translateX(10px) rotate(8deg);filter:brightness(2)}60%{transform:translateX(-6px)}100%{transform:none}}
+.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.foe-info{flex:1}.foe-info b{font-size:17px}
+.bar{height:12px;background:#0f0d18;border-radius:999px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--red),#ff9f6b);transition:width .4s}
+.qcard{background:var(--pn);border:2px solid #3a3358;border-radius:18px;padding:16px}
+.qid{float:right;font:700 12px "Cascadia Mono",Consolas,"DejaVu Sans Mono",monospace;color:var(--mut);background:#15121f;border:1px solid #3a3358;border-radius:6px;padding:3px 7px;margin-left:8px}
+.fb-id{font-size:13px;color:var(--mut);margin:0 0 10px!important}
+.qtype{display:inline-block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#1b1630;background:var(--vio);border-radius:8px;padding:3px 8px;margin-bottom:8px}
+.qtxt{font-size:19px;font-weight:700;margin:0 0 12px}
+.code{background:#1e1f24;border-radius:12px;overflow:hidden;margin-bottom:12px;border:1px solid #33343c}
+.code pre{margin:0;padding:12px 14px;font:15px/1.55 "Cascadia Mono",Consolas,"DejaVu Sans Mono",monospace;white-space:pre-wrap;word-break:break-word;color:#e6e6e6}
+.t-kw{color:#569cd6}.t-fn{color:#dcdcaa}.t-str{color:#ce9178}.t-num{color:#b5cea8}.t-com{color:#6a9955}.t-id{color:#9cdcfe}.t-op{color:#d4d4d4}.t-brace{color:#da70d6;font-weight:700}.t-var{color:#9cdcfe}
+.slot{display:inline-block;min-width:34px;text-align:center;border-bottom:3px dashed var(--gold);color:var(--gold);font-weight:700}
+.inp{font-size:14px;color:var(--mut);margin:-4px 0 12px}
+.inp code{background:var(--pn2);color:var(--gold);padding:1px 7px;border-radius:6px}
+.ops{display:grid;gap:10px}
+.op{display:flex;align-items:center;gap:12px;text-align:left;width:100%;background:var(--pn2);border:2px solid #463e6b;border-radius:14px;padding:12px 14px;min-height:54px}
+.op .l{flex:none;width:30px;height:30px;border-radius:8px;background:var(--vio);color:#1b1630;font-weight:900;display:grid;place-items:center}
+.op code{font:15px "Cascadia Mono",Consolas,"DejaVu Sans Mono",monospace;word-break:break-word;white-space:pre-wrap}
+.op.ok{border-color:var(--grn);background:#1d3b2c}.op.no{border-color:var(--red);background:#3e1f26}
+.lines{background:#1e1f24;border-radius:12px;overflow:hidden;margin-bottom:6px;border:1px solid #33343c}
+.ln{display:flex;width:100%;background:transparent;color:#e6e6e6;text-align:left;padding:9px 10px;border-bottom:1px solid #2a2b31;font:15px/1.5 "Cascadia Mono",Consolas,"DejaVu Sans Mono",monospace}
+.ln:last-child{border-bottom:0}
+.ln .n{flex:none;width:28px;color:#6e7181}
+.ln code{white-space:pre-wrap;word-break:break-word;font:inherit}
+.ln:hover:not(:disabled){background:#2a2b33}
+.ln.ok{background:#1d3b2c}.ln.no{background:#3e1f26}
+.pz-lbl{font-size:13px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.05em;margin:10px 0 6px}
+.pz{min-height:56px;border:2px dashed #463e6b;border-radius:12px;padding:6px;display:grid;gap:6px}
+.pz.ans{border-color:var(--gold)}
+.blk{display:flex;text-align:left;width:100%;background:#1e1f24;border:1px solid #3c3e48;border-radius:10px;padding:9px 10px;font:14.5px/1.45 "Cascadia Mono",Consolas,"DejaVu Sans Mono",monospace}
+.blk code{white-space:pre-wrap;word-break:break-word;font:inherit}
+.op .tx{font-size:16px;line-height:1.4;text-align:left}
+.ln.tx,.blk.tx{font-family:inherit}
+.caso-q{background:#fff6cc;color:#3b2f00;border-left:6px solid #ffd43b;border-radius:10px;padding:10px 12px;margin:0 0 12px;white-space:pre-wrap;line-height:1.45}
+.blk .n{flex:none;width:24px;color:var(--gold);font-weight:700}
+.empty{color:var(--mut);font-size:14px;padding:10px;text-align:center}
+.fb{margin-top:14px;border-radius:14px;padding:14px;border-left:8px solid}
+.fb.ok{background:#173226;border-color:var(--grn)}.fb.no{background:#3a1d24;border-color:var(--red)}
+.fb h3{margin:0 0 6px;font-size:18px}.fb p{margin:0 0 8px}
+.fb .real{font:14px "Cascadia Mono",Consolas,"DejaVu Sans Mono",monospace;background:#0f0d18;border-radius:8px;padding:8px 10px;white-space:pre-wrap;word-break:break-word;margin:0 0 10px}
+.center{text-align:center}
+.big-ico{font-size:72px;display:block;margin:6px 0}
+.stars{font-size:34px;letter-spacing:4px;color:var(--gold)}
+.pop{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);font-size:26px;white-space:nowrap;font-weight:900;color:var(--gold);pointer-events:none;text-shadow:0 3px 0 #000;animation:pop .9s forwards;z-index:30}
+@keyframes pop{0%{opacity:0;transform:translate(-50%,-30%) scale(.6)}30%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-90%)}}
+.foot{color:var(--mut);font-size:13px;text-align:center;margin-top:20px}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}
+.steps{margin:6px 0 0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding-left:40px;margin:10px 0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-1px;width:28px;height:28px;border-radius:50%;background:var(--grn);color:#082414;font-weight:900;display:grid;place-items:center;font-size:15px}
+#prev{width:100%;border-radius:14px;border:2px solid #3a3358;display:block;margin:10px 0}
+/* modal */
+.ov{position:fixed;inset:0;z-index:50;background:#07060cd9;display:grid;place-items:center;padding:16px}
+.md{background:var(--pn);border:2px solid #4a4170;border-radius:20px;padding:20px;max-width:440px;width:100%}
+.md h2{margin-top:0}
+/* pegadinha */
+.prank{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:radial-gradient(circle,#4a0f1c 0,#0b0710 70%);animation:alarm 1s infinite}
+@keyframes alarm{50%{background:radial-gradient(circle,#7a1426 0,#0b0710 70%)}}
+.prank.calm{animation:none;background:radial-gradient(circle,#24474a 0,#0b0710 70%)}
+.pk{text-align:center;max-width:440px}
+.pk-t{font-size:clamp(28px,8vw,40px);font-weight:900;line-height:1.1;margin-bottom:8px}
+.pk-s{font-size:19px;color:#ffd6dc;margin-bottom:12px}
+.pk-ring{position:relative;width:200px;height:200px;margin:12px auto}
+.pk-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.pk-ring circle{fill:none;stroke-width:12}
+.pk-ring .bg{stroke:#ffffff22}
+.pk-ring .fg{stroke:var(--red);stroke-linecap:round;stroke-dasharray:327;stroke-dashoffset:0;transition:stroke-dashoffset 4.5s linear}
+.pk-n{position:absolute;inset:0;display:grid;place-items:center;font-size:96px;font-weight:900;color:#fff}
+.pk-n.tick{animation:tick .9s}
+@keyframes tick{0%{transform:scale(1.8);opacity:0}30%{transform:scale(1);opacity:1}100%{transform:scale(.9)}}
+.pk-laugh{font-size:110px;line-height:1;animation:laugh .5s infinite alternate}
+@keyframes laugh{from{transform:rotate(-12deg) scale(1)}to{transform:rotate(12deg) scale(1.12)}}
+.pk-note{font-size:14px;color:var(--mut);margin:10px 0 16px}
+body.batalha #home{display:none}
+.printBadge{position:fixed;right:12px;bottom:12px;z-index:45;background:#0e0c18e6;color:var(--gold);border:1px solid #ffd43b66;border-radius:999px;padding:6px 12px;font-weight:800;font-size:14px;pointer-events:none}
+.pk-warn{background:#3a0d14;border:2px solid var(--red);border-radius:14px;padding:12px 14px;margin:12px 0 16px;color:#ffd6dc;font-weight:700;font-size:17px}
+/* game over */
+.go{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;justify-content:center;align-items:center;background:rgba(0,0,0,.84);animation:goBg 1.6s ease both}
+@keyframes goBg{from{background:rgba(0,0,0,0)}}
+.go-band{width:100%;padding:6vh 12px;text-align:center;background:linear-gradient(180deg,transparent,rgba(0,0,0,.92) 22%,rgba(0,0,0,.92) 78%,transparent)}
+.go-t{font-family:"Times New Roman",Georgia,"DejaVu Serif","Liberation Serif",serif;font-weight:400;font-size:clamp(30px,10vw,112px);white-space:nowrap;color:#a3151a;letter-spacing:.06em;line-height:1;text-shadow:0 0 22px #5a0a0d;animation:goT 3.2s cubic-bezier(.2,.6,.3,1) .5s both}
+@keyframes goT{from{opacity:0;transform:scale(.9);filter:blur(10px)}to{opacity:1;transform:scale(1.04);filter:blur(0)}}
+.go-info{text-align:center;color:#d8cfe9;max-width:440px;padding:0 16px;animation:goIn .8s ease 3.6s both}
+.go-info p{margin:6px 0}.go-info .btn{margin-top:16px}
+@keyframes goIn{from{opacity:0;visibility:hidden}to{opacity:1;visibility:visible}}
+.ok-list{margin:8px 0 0;padding:0;list-style:none}.ok-list li{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #3a3358}
+.ok-list .st{color:var(--gold);letter-spacing:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* sem ligaduras: // e != aparecem sempre como dois caracteres */
+pre,code,.ln,.blk,.op code,.code,.out,.real,.mk,#cod,#rcod{font-variant-ligatures:none!important;font-feature-settings:"liga" 0,"calt" 0!important}
+</style></head><body>
+<div class="topbar"><a class="icon-btn" id="home" href="index.html" aria-label="Início do site" style="text-decoration:none">🏠</a><span class="brand">🏢 Agência <span>Pixel</span></span><button class="icon-btn" id="som" aria-label="Som">🔊</button><button class="icon-btn rst" id="reiniciar">🔁 Reiniciar</button></div>
+<div class="wrap" id="app"></div>
+<script src="config.js"></script>
+<script>
+const ANDARES = [{"id": 1, "nome": "Estúdio de Design", "icone": "🎨", "tema": "cores, fontes, contraste, equilíbrio e hierarquia", "inimigo": "Arco-Íris Descontrolado", "ini_ico": "🌈", "q": [{"tipo": "conceito", "pergunta": "Qual era o problema principal do post do Gabriel?", "caso": "O post tinha 5 cores, 3 fontes, letras pequenas, informações coladas e ícones em todo canto. Os colegas disseram: \"Não sei para onde olhar primeiro\".", "ops": ["Falta de organização visual", "Falta de criatividade", "Poucas imagens", "Texto curto demais"], "c": 0, "exp": "Gabriel foi criativo. Faltou organizar: com tudo gritando ao mesmo tempo, o olho não sabe por onde começar.", "fonte": "Aula 1 · material da aula (Design visual)", "id": "1-01"}, {"tipo": "conceito", "pergunta": "Qual é a regra prática de cores da aula?", "ops": ["Cor principal + cor de apoio + cor de destaque", "Uma cor diferente para cada informação", "Pelo menos cinco cores para chamar atenção", "Usar só preto e branco"], "c": 0, "exp": "Três papéis: a principal dá a identidade, a de apoio organiza (fundo), a de destaque aponta o que importa.", "fonte": "Aula 1 · material da aula (Design visual)", "id": "1-02"}, {"tipo": "conceito", "pergunta": "A ORION usa azul (identidade), branco (fundo) e laranja (destaque). Qual cor deve marcar o \"20% de desconto\"?", "ops": ["Laranja", "Azul", "Branco", "Cada letra de uma cor"], "c": 0, "exp": "O desconto é a informação que precisa saltar aos olhos, então vai na cor de destaque.", "fonte": "Aula 1 · material da aula (Design visual)", "id": "1-03"}, {"tipo": "conceito", "pergunta": "Qual combinação tem MAIS contraste?", "ops": ["Texto preto no fundo branco", "Texto amarelo no fundo branco", "Texto branco no fundo laranja", "Texto cinza-claro no fundo branco"], "c": 0, "exp": "Preto no branco é o máximo da escala: 21:1. Amarelo no branco dá 1,07:1, branco no laranja 2,45:1 e cinza-claro (#999) no branco 2,85:1.", "fonte": "W3C · WCAG 2.1, critério 1.4.3 (contraste mínimo)", "id": "1-04"}, {"tipo": "conceito", "pergunta": "Pela regra internacional de acessibilidade (WCAG), qual é o contraste mínimo para texto comum?", "ops": ["4,5:1", "1:1", "2:1", "21:1"], "c": 0, "exp": "Texto comum precisa de pelo menos 4,5:1. Texto grande pode ter 3:1. O 21:1 é o máximo (preto no branco), não o mínimo.", "fonte": "W3C · WCAG 2.1, critério 1.4.3 (contraste mínimo)", "id": "1-05"}, {"tipo": "conceito", "pergunta": "Texto branco sobre o laranja da ORION dá 2,45:1. O que isso quer dizer?", "ops": ["Não passa nem para texto comum nem para texto grande", "Passa para qualquer texto", "Passa se a letra for grande", "Passa se a tela do celular estiver no máximo"], "c": 0, "exp": "O mínimo é 4,5:1 para texto comum e 3:1 para texto grande. 2,45 fica abaixo dos dois. Trocando o texto para escuro, sobe para 6,33:1.", "fonte": "W3C · WCAG 2.1, critério 1.4.3 (contraste mínimo)", "id": "1-06"}, {"tipo": "conceito", "pergunta": "Qual escolha de fontes segue a regra da aula?", "ops": ["Uma fonte de destaque no título e uma fonte simples no texto", "Uma fonte diferente em cada linha", "Fonte enfeitada em todo o texto", "Três fontes para parecer mais criativo"], "c": 0, "exp": "Poucas famílias de fonte: uma para chamar atenção no título, outra (ou a mesma) confortável para ler o resto.", "fonte": "Aula 1 · material da aula (Design visual)", "id": "1-07"}, {"tipo": "conceito", "pergunta": "O que a aula manda EVITAR nas fontes?", "ops": ["Fonte muito enfeitada em texto longo", "Título destacado", "Texto em tamanho confortável", "Poucas famílias de fonte"], "c": 0, "exp": "Fonte enfeitada cansa a leitura em texto longo. As outras três opções estão na lista do que preferir.", "fonte": "Aula 1 · material da aula (Design visual)", "id": "1-08"}, {"tipo": "conceito", "pergunta": "O que é hierarquia visual?", "ops": ["A ordem em que o público percebe as informações: primeiro, depois e por último", "Colocar o logotipo maior que tudo", "Deixar todas as informações do mesmo tamanho", "Usar o máximo de cores possível"], "c": 0, "exp": "Tamanho, cor, contraste e posição dizem ao olho o que ler primeiro, o que ler depois e onde ficam os detalhes.", "fonte": "Aula 1 · material da aula (Design visual)", "id": "1-09"}, {"tipo": "ordenar", "pergunta": "Ponha o comunicado na ordem de leitura que a aula ensinou.", "itens": ["Título: FEIRA DE PROFISSÕES", "Informação principal: 25 de setembro, 19h", "Detalhes: local e programação", "Ação: Inscreva-se!"], "exp": "Primeiro o que é, depois quando, depois os detalhes e, por fim, o que a pessoa deve fazer.", "fonte": "Aula 1 · material da aula (Design visual)", "id": "1-10", "aceitas": ["0,1,2,3"]}, {"tipo": "ordenar", "pergunta": "Ordene do MENOR para o MAIOR contraste.", "itens": ["Amarelo no branco (1,07:1)", "Branco no laranja (2,45:1)", "Texto escuro no laranja (6,33:1)", "Branco no azul-escuro (8,31:1)"], "exp": "Os números saem da fórmula oficial das WCAG. Só as duas últimas passam do mínimo de 4,5:1.", "fonte": "W3C · WCAG 2.1, critério 1.4.3 (contraste mínimo)", "id": "1-11", "aceitas": ["0,1,2,3"]}, {"tipo": "ordenar", "pergunta": "Ponha na ordem em que o leitor deve perceber as informações.", "itens": ["O que é mais importante", "O que ler depois", "Onde encontrar os detalhes"], "exp": "É a hierarquia visual: 1º o mais importante, 2º o que vem depois, 3º os detalhes.", "fonte": "Aula 1 · material da aula (Design visual)", "id": "1-12", "aceitas": ["0,1,2"]}, {"tipo": "trecho", "pergunta": "Ficha de design de um comunicado para 200 funcionários. Toque no item com problema.", "linhas": ["Título: AVISO · ENTREGA DO RELATÓRIO", "Prazo em destaque: sexta-feira, 18h", "Detalhes: fonte cursiva enfeitada, letra bem pequena, cinza-claro no branco", "Dúvidas: setor administrativo, ramal 210"], "c": 2, "fix": "Detalhes: fonte simples, tamanho confortável, texto escuro no fundo claro", "exp": "Fonte enfeitada em texto longo, letra pequena e pouco contraste: três coisas que a aula manda evitar, juntas.", "fonte": "Aula 1 · material da aula (Design visual)", "id": "1-13"}, {"tipo": "trecho", "pergunta": "Ficha de cores do post da ORION. Toque no item com problema.", "linhas": ["Cor principal: azul (identidade)", "Cor de apoio: branco (fundo)", "Cor de destaque: laranja (desconto)", "Texto do selo de desconto: branco sobre o laranja"], "c": 3, "fix": "Texto do selo de desconto: escuro sobre o laranja (6,33:1)", "exp": "Branco sobre esse laranja dá 2,45:1, abaixo do mínimo. A cor de destaque está certa; o texto em cima dela é que precisa ser escuro.", "fonte": "W3C · WCAG 2.1, critério 1.4.3 (contraste mínimo)", "id": "1-14"}, {"tipo": "trecho", "pergunta": "Ficha de hierarquia de um cartaz. Toque no item com problema.", "linhas": ["1º: título grande no topo", "2º: data e hora em negrito", "3º: detalhes em letra menor", "4º: \"Inscreva-se\" no mesmo tamanho e cor dos detalhes"], "c": 3, "fix": "4º: \"Inscreva-se\" em botão com a cor de destaque", "exp": "A ação é o que a pessoa deve fazer. Se ela some no meio dos detalhes, o cartaz informa mas não convence.", "fonte": "Aula 1 · material da aula (Design visual)", "id": "1-15"}, {"tipo": "conceito", "pergunta": "Qual foi o principal problema de design da cédula borboleta (EUA, 2000)?", "caso": "Os nomes ficavam dos dois lados e os furos no meio. O segundo nome da esquerda não correspondia ao segundo furo.", "ops": ["A ordem visual não batia com a ordem dos furos: nome e furo não ficavam juntos", "A cédula tinha cores demais", "Não havia o nome dos candidatos", "Os furos eram grandes demais"], "c": 0, "exp": "Faltou proximidade e alinhamento: cada nome precisava ficar colado ao seu furo. Um estudo estimou mais de 2.000 votos por engano.", "fonte": "Universidade de Washington, iSchool (2016) · Wand et al., American Political Science Review (2001)", "id": "1-16"}, {"tipo": "conceito", "pergunta": "O site GOV.UK ganhou o prêmio Design do Ano de 2013, do Design Museum. O que esse caso mostra?", "ops": ["Design claro e fácil de usar também é design premiado", "Só design cheio de enfeites ganha prêmio", "Site de governo não precisa de design", "Prêmio de design é só para moda"], "c": 0, "exp": "Os jurados elogiaram um design bem pensado e discreto. Ele ganhou de moda, móveis e arquitetura.", "fonte": "Blog do Government Digital Service, 17 abr. 2013 · Dezeen, 16 abr. 2013", "id": "1-17"}, {"tipo": "conceito", "pergunta": "O que é equilíbrio gráfico?", "ops": ["Organizar os elementos para que nenhum pareça brigar pelo espaço", "Deixar tudo do mesmo tamanho", "Preencher todo o espaço disponível", "Usar uma imagem em cada canto"], "c": 0, "exp": "Equilíbrio é distribuir tamanho, posição, espaço, texto, imagem e cor para o olho percorrer a peça sem esforço.", "fonte": "Aula 1 · material da aula (Design visual)", "id": "1-18"}, {"tipo": "conceito", "pergunta": "Num post, para que serve o espaço vazio entre as informações?", "ops": ["Separa as informações e facilita a leitura", "É desperdício e deve ser preenchido", "Serve para colocar mais ícones", "Só importa em sites, não em posts"], "c": 0, "exp": "\"Pouco espaço\" é um dos pesos que desequilibram a balança. O respiro mostra onde uma informação termina e a outra começa.", "fonte": "Aula 1 · material da aula (Design visual)", "id": "1-19"}, {"tipo": "conceito", "pergunta": "Um colega não distingue bem vermelho de verde. Como destacar o prazo para ele também?", "ops": ["Usar também tamanho maior, negrito ou posição de destaque", "Usar só a cor vermelha", "Usar vermelho e verde juntos", "Não destacar nada"], "c": 0, "exp": "A regra das WCAG diz que a cor não pode ser o único meio de destacar uma informação. Tamanho, negrito e posição funcionam para todo mundo.", "fonte": "W3C · WCAG 2.1, critério 1.4.1 (uso de cor)", "id": "1-20"}]}];
+/* ---------- compartilhado: realce de Python + renderização de slides + sincronização ---------- */
+const SYNC_KEY = 'aula_info2adm_ieel_v1';
+
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function md(s) {
+  return esc(s)
+    .replace(/`([^`]+)`/g, '<code class="ic">$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+}
+
+const PY_KW = new Set(['if','else','elif','for','while','def','return','import','from','in','and','or','not','True','False','None']);
+const PY_BI = new Set(['print','input','int','str','float','len']);
+function hlStr(tok) {
+  const isF = /^[fF]/.test(tok);
+  const body = isF ? tok.slice(1) : tok;
+  let html = isF ? '<span class="t-kw">' + tok[0] + '</span>' : '';
+  if (!isF) return html + '<span class="t-str">' + esc(body) + '</span>';
+  return html + body.split(/(\{[^{}]*\})/).map(p =>
+    /^\{[^{}]*\}$/.test(p)
+      ? '<span class="t-brace">{</span><span class="t-var">' + esc(p.slice(1, -1)) + '</span><span class="t-brace">}</span>'
+      : '<span class="t-str">' + esc(p) + '</span>'
+  ).join('');
+}
+function hl(src) {
+  const re = /(#[^\n]*)|([fF]?"(?:[^"\\\n]|\\.)*"|[fF]?'(?:[^'\\\n]|\\.)*'|[fF]?"(?:[^"\\\n]|\\.)*|[fF]?'(?:[^'\\\n]|\\.)*)|([A-Za-z_À-ÿ][A-Za-z0-9_À-ÿ]*)|(\d+(?:\.\d+)?)|(\/\/|\*\*|==|!=|<=|>=)|([\s\S])/g;
+  let out = '', m;
+  while ((m = re.exec(src))) {
+    if (m[1]) out += '<span class="t-com">' + esc(m[1]) + '</span>';
+    else if (m[2]) out += hlStr(m[2]);
+    else if (m[3]) {
+      const w = m[3];
+      if (/^[fF]$/.test(w) && /["']/.test(src[re.lastIndex] || '')) { out += esc(w); }
+      else out += PY_KW.has(w) ? '<span class="t-kw">' + w + '</span>'
+        : PY_BI.has(w) ? '<span class="t-fn">' + w + '</span>'
+        : '<span class="t-id">' + esc(w) + '</span>';
+    }
+    else if (m[4]) out += '<span class="t-num">' + m[4] + '</span>';
+    else if (m[5]) out += '<span class="t-op">' + esc(m[5]) + '</span>';
+    else out += /[=+\-*/%<>]/.test(m[6]) ? '<span class="t-op">' + esc(m[6]) + '</span>' : esc(m[6]);
+  }
+  return out;
+}
+function codeBox(src, lang) {
+  const body = lang === 'txt' ? esc(src) : hl(src);
+  return '<div class="code"><div class="code-bar"><span class="play">▶</span><span class="lang">' + (lang === 'txt' ? 'Portugol' : 'Python') + '</span></div><pre>' + body + '</pre></div>';
+}
+function outBox(txt, isErr) {
+  return '<div class="out' + (isErr ? ' err' : '') + '"><span class="out-lbl">' + (isErr ? 'Erro' : 'Saída') + '</span><pre>' + esc(txt) + '</pre></div>';
+}
+
+function blocoNome(id) { const b = BLOCOS.find(x => x.id === id); return b ? b.nome : ''; }
+
+/* ---------- digitação do código ---------- */
+function temDigitacao(s) { return s.tipo === 'conteudo' && !!s.code; }
+function passosDigitacao(s) { const p = []; s.code.split('\n').forEach((l, k) => { if (l.trim()) p.push(k); }); return p; }
+function totalPassos(s) { return passosDigitacao(s).length + (s.out ? 1 : 0); }
+function codeDigitando(s, dig, animar) {
+  const linhas = s.code.split('\n'), p = passosDigitacao(s);
+  const ate = dig > 0 ? p[Math.min(dig, p.length) - 1] : -1, vis = [];
+  for (let k = 0; k <= ate; k++) {
+    if (animar && dig <= p.length && k === ate) vis.push('<span class="tw" data-t="' + esc(linhas[k]) + '" data-h="' + esc(hl(linhas[k])) + '"></span>');
+    else vis.push(hl(linhas[k]));
+  }
+  const live = vis.join('\n') + (dig < p.length ? '<span class="caret">▌</span>' : '');
+  let html = '<div class="code"><div class="code-bar"><span class="play">▶</span><span class="lang">Python</span></div><pre class="stack"><span class="ghost">' + hl(s.code) + '</span><span class="live">' + live + '</span></pre></div>';
+  if (s.out) html += outBox(s.out).replace('class="out"', 'class="out ' + (dig > p.length ? 'out-in' : 'out-ghost') + '"');
+  return html;
+}
+function renderSlide(s, idx, revealed, dig, animar) {
+  const n = idx + 1, total = SLIDES.length;
+  const head = s.tipo === 'hero' ? '' :
+    '<div class="s-head"><span class="s-bloco">' + esc(blocoNome(s.b)) + '</span><span class="s-num">' + n + ' / ' + total + '</span></div>';
+  let body = '';
+  if (s.tipo === 'hero') {
+    body = '<div class="hero"><div class="hero-ico">' + s.icone + '</div><div class="hero-k">' + md(s.kicker) + '</div><h1>' + md(s.titulo) + '</h1><div class="hero-sub">' + md(s.sub) + '</div></div>';
+  } else if (s.tipo === 'conteudo') {
+    const itens = '<ul class="itens">' + s.itens.map(i => '<li>' + md(i) + '</li>').join('') + '</ul>';
+    if (s.code) {
+      const cod = dig === undefined || dig === null ? codeBox(s.code) + (s.out ? outBox(s.out) : '') : codeDigitando(s, dig, animar);
+      body = '<h2>' + md(s.titulo) + '</h2><div class="cols' + (s.code.split('\n').length > 3 ? ' wide-code' : '') + '"><div>' + itens + '</div><div>' + cod + '</div></div>';
+    } else body = '<h2>' + md(s.titulo) + '</h2>' + itens.replace('class="itens"', 'class="itens big"');
+  } else if (s.tipo === 'caso') {
+    body = '<h2><span class="tag tag-caso">' + esc(s.tag || 'Situação-problema') + '</span> ' + md(s.titulo) + '</h2>' +
+      '<div class="caso">' + (s.mock ? '<div class="caso-cols"><div>' : '') + '<p class="hist">' + md(s.historia) + '</p><ul class="dados">' + s.dados.map(d => '<li>' + md(d) + '</li>').join('') + '</ul>' + (s.mock ? '</div><div class="pm-wrap"' + (s.pm ? ' style="--pm:' + s.pm + 'px"' : '') + '>' + s.mock + '</div></div>' : '') +
+      '<div class="perg">❓ ' + md(s.pergunta) + '</div>' + (s.fonte ? '<div class="fonte">' + md(s.fonte) + '</div>' : '') + '</div>';
+  } else if (s.tipo === 'quadro') {
+    const cols = s.cols || Math.min(s.cards.length, 4);
+    body = '<h2>' + md(s.titulo) + '</h2><div class="quadro" style="grid-template-columns:repeat(' + cols + ',1fr)">' +
+      s.cards.map(c => '<div class="card' + (c.erro ? ' card-err' : '') + '"><div class="card-cab">' + md(c.cab) + '</div>' +
+        (c.big ? '<div class="card-big">' + esc(c.big) + '</div>' : '') +
+        (c.mock ? '<div class="pm-wrap"' + (c.pm ? ' style="--pm:' + c.pm + 'px"' : '') + '>' + c.mock + '</div>' : '') + (c.code ? codeBox(c.code, c.lang) : '') + (c.res ? outBox(c.res, c.erro) : '') +
+        (c.txt ? '<div class="card-txt">' + md(c.txt) + '</div>' : '') + '</div>').join('') + '</div>' +
+      (s.nota ? '<div class="nota">' + md(s.nota) + '</div>' : '');
+  } else if (s.tipo === 'atividade') {
+    const passos = '<ol class="passos">' + s.passos.map(p => '<li>' + md(p) + '</li>').join('') + '</ol>';
+    const resp = s.resposta_mock ? (revealed ? '<div class="resp"><div class="resp-lbl">✅ Uma resposta possível</div><div class="pm-wrap">' + s.resposta_mock + '</div></div>' : '<div class="resp-wait">🔒 A resposta aparece no final</div>') : s.resposta ? (revealed ? '<div class="resp"><div class="resp-lbl">✅ Uma resposta possível</div>' + codeBox(s.resposta) + outBox(s.out) + '</div>'
+      : '<div class="resp-wait">🔒 A resposta aparece no final</div>') : '';
+    body = '<h2><span class="tag tag-ativ">Mãos à obra · ' + s.tempo + ' min</span> ' + md(s.titulo) + '</h2>' +
+      (s.resposta || s.resposta_mock ? '<div class="cols"><div>' + passos + '</div><div>' + resp + '</div></div>' : passos);
+  } else if (s.tipo === 'quiz') {
+    const L = 'ABCD';
+    const ops = '<div class="ops">' + s.opcoes.map((o, k) => {
+      const cls = revealed ? (k === s.correta ? ' ok' : ' no') : '';
+      return '<div class="op' + cls + '"><span class="op-l">' + L[k] + '</span>' + (s.opcoes_code ? '<code class="op-c">' + esc(o) + '</code>' : '<span>' + esc(o) + '</span>') + '</div>';
+    }).join('') + '</div>';
+    body = '<h2><span class="tag tag-quiz">Quiz</span> ' + md(s.pergunta) + '</h2>' +
+      (s.code ? '<div class="cols quiz-cols"><div>' + codeBox(s.code) + '</div><div>' + ops + '</div></div>' : ops) +
+      (revealed ? '<div class="explica">💡 ' + md(s.explica) + '</div>' : '');
+  }
+  return '<div class="slide t-' + s.tipo + '">' + head + '<div class="s-body"><div class="s-inner">' + body + '</div></div></div>';
+}
+
+/* reduz o conteúdo se não couber no slide (rede de segurança) */
+function fitBody(root) {
+  const b = root.querySelector('.s-body'), inn = root.querySelector('.s-inner');
+  if (!b || !inn) return;
+  let z = 1; inn.style.zoom = 1;
+  while (inn.getBoundingClientRect().height > b.getBoundingClientRect().height + 1 && z > 0.66) { z -= 0.03; inn.style.zoom = z; }
+}
+/* --- estado compartilhado: slide atual, respostas reveladas, linhas digitadas --- */
+function salvar(p) { st = writeSync(Object.assign({ i: st.i || 0, rev: st.rev || {}, dig: st.dig || {} }, p)); return st; }
+function digDe(x, i) { return (x.dig || {})[i] || 0; }
+function avancar() {
+  const i = st.i || 0, s = SLIDES[i], d = digDe(st, i);
+  if (temDigitacao(s) && d < totalPassos(s)) { const D = Object.assign({}, st.dig || {}); D[i] = d + 1; return salvar({ dig: D }); }
+  return i < SLIDES.length - 1 ? salvar({ i: i + 1 }) : st;
+}
+function voltar() { const i = st.i || 0; return i > 0 ? salvar({ i: i - 1 }) : st; }
+function irPara(i) { return salvar({ i: Math.max(0, Math.min(SLIDES.length - 1, i)) }); }
+function zerarAula() { st = writeSync({ i: 0, rev: {}, dig: {} }); return st; }
+function alternarRev() { const rev = Object.assign({}, st.rev || {}); rev[st.i || 0] = !rev[st.i || 0]; return salvar({ rev }); }
+function definirDig(v) { const D = Object.assign({}, st.dig || {}); D[st.i || 0] = v; return salvar({ dig: D }); }
+/* --- sincronização entre as duas janelas (mesma pasta, mesmo navegador) --- */
+function readSync() {
+  try { return JSON.parse(localStorage.getItem(SYNC_KEY)) || { i: 0, rev: {}, t: 0 }; }
+  catch (e) { return { i: 0, rev: {}, t: 0 }; }
+}
+function writeSync(st) {
+  st.t = Date.now();
+  try { localStorage.setItem(SYNC_KEY, JSON.stringify(st)); } catch (e) {}
+  return st;
+}
+function onSync(cb) {
+  let last = -1;
+  const check = () => { const st = readSync(); if (st.t !== last) { last = st.t; cb(st); } };
+  window.addEventListener('storage', e => { if (e.key === SYNC_KEY) check(); });
+  setInterval(check, 500);
+  check();
+}
+
+/* ---------- placar: nota, código de conferência (usado no jogo e no conferidor) ---------- */
+/* colégio vai junto na turma ("IEEL · 1º Ano ADM - Turma A"): o formulário não muda e o código de conferência já inclui o colégio */
+const COLEGIOS = [
+  { curto: 'IEEL', nome: 'Instituto de Educação Estadual de Londrina', turmas: ['2º Ano ADM - Turma A', '2º Ano ADM - Turma B', '2º Ano ADM - Turma C'] },
+];
+const SEP_COL = ' · ';
+const TURMAS = COLEGIOS.flatMap(c => c.turmas.map(t => c.curto + SEP_COL + t));
+const escT = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+function separarTurma(v) {
+  v = String(v || ''); const c = COLEGIOS.find(x => v.startsWith(x.curto + SEP_COL));
+  return c ? { col: c.curto, turma: v.slice((c.curto + SEP_COL).length) } : { col: '', turma: v };
+}
+function opcoesTurma(c, sel) {
+  if (!c) return '<option value="">Escolha o colégio primeiro</option>';
+  return '<option value="">Escolha…</option>' + c.turmas.map(t => '<option' + (t === sel ? ' selected' : '') + '>' + escT(t) + '</option>').join('') + '<option value="outra"' + (sel === 'outra' ? ' selected' : '') + '>Outra turma</option>';
+}
+/* seletores de colégio e turma; p = prefixo dos ids; atual = turma já salva */
+function turmaHtml(p, atual) {
+  const s = separarTurma(atual), c = COLEGIOS.length === 1 ? COLEGIOS[0] : COLEGIOS.find(x => x.curto === s.col), padrao = !!c && c.turmas.includes(s.turma), outra = !!c && !!s.turma && !padrao;
+  const um = COLEGIOS.length === 1;
+  return '<label class="f" for="' + p + 'col"' + (um ? ' hidden style="display:none"' : '') + '>Colégio</label><select class="t" id="' + p + 'col"' + (um ? ' hidden style="display:none"' : '') + '><option value="">Escolha…</option>' +
+    COLEGIOS.map(x => '<option value="' + escT(x.curto) + '"' + (x === c ? ' selected' : '') + '>' + escT(x.curto + ' – ' + x.nome) + '</option>').join('') + '</select>' +
+    '<label class="f" for="' + p + 'tur">Turma</label><select class="t" id="' + p + 'tur"' + (c ? '' : ' disabled') + '>' + opcoesTurma(c, padrao ? s.turma : outra ? 'outra' : '') + '</select>' +
+    '<input class="t" id="' + p + 'out" placeholder="Digite sua turma" maxlength="40" value="' + (outra ? escT(s.turma) : '') + '" style="display:' + (outra ? 'block' : 'none') + ';margin-top:8px">';
+}
+/* liga os seletores e devolve uma função que lê a turma completa ('' se faltar algo) */
+function ligarTurma(p) {
+  const g = id => document.getElementById(p + id), col = g('col'), tur = g('tur'), out = g('out');
+  col.onchange = () => { const c = COLEGIOS.find(x => x.curto === col.value); tur.innerHTML = opcoesTurma(c, ''); tur.disabled = !c; out.style.display = 'none'; };
+  tur.onchange = () => { out.style.display = tur.value === 'outra' ? 'block' : 'none'; };
+  return () => { const v = tur.value === 'outra' ? out.value.trim() : tur.value; return col.value && v ? col.value + SEP_COL + v : ''; };
+}
+const NOTA_POR_ESTRELAS = [0, 1.5, 2.0, 2.5];   /* andar concluído com 1, 2 ou 3 estrelas; 4 andares = 10 */
+const SALT = 'agencia-pixel-2adm-rocco-2026';
+const EPOCA = Date.UTC(2026, 0, 1);
+const NOMES_ANDAR = ['Estúdio de Design', 'Sala de Reunião', 'Departamento Jurídico', 'Diretoria'];
+
+function cyrb53(str) {
+  let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+  for (let i = 0; i < str.length; i++) {
+    const ch = str.charCodeAt(i);
+    h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677);
+  }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+}
+function normTxt(s) {
+  return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\s+/g, ' ').trim();
+}
+function calcNota(stars) { return stars.reduce((a, s) => a + NOTA_POR_ESTRELAS[s || 0], 0); }
+function fmtNota(n) { return n.toFixed(1).replace('.', ','); }
+
+/* empacota nota, estrelas, saídas, partida e minuto em um número; o checksum amarra ao aluno */
+function gerarCodigo(id, stars, saidas, partida, minuto, restaurado) {
+  const nota10 = Math.round(calcNota(stars) * 10) + (restaurado ? 200 : 0);
+  const sb = (stars[0] || 0) + 4 * (stars[1] || 0) + 16 * (stars[2] || 0) + 64 * (stars[3] || 0);
+  const p = (((nota10 * 256 + sb) * 64 + Math.min(saidas, 63)) * 64 + Math.min(partida, 63)) * 16777216 + minuto;
+  const chk = cyrb53(normTxt(id.nome) + '|' + String(id.numero).trim() + '|' + normTxt(id.turma) + '|' + p + '|' + SALT) % 60466176;
+  return p.toString(36).toUpperCase() + '-' + chk.toString(36).toUpperCase().padStart(5, '0');
+}
+function lerCodigo(code) {
+  const m = String(code).trim().toUpperCase().replace(/\s/g, '').match(/^([0-9A-Z]+)-([0-9A-Z]{5})$/);
+  if (!m) return null;
+  let p = parseInt(m[1], 36);
+  if (!Number.isSafeInteger(p)) return null;
+  const minuto = p % 16777216; p = Math.floor(p / 16777216);
+  const partida = p % 64; p = Math.floor(p / 64);
+  const saidas = p % 64; p = Math.floor(p / 64);
+  const sb = p % 256; let nota10 = Math.floor(p / 256); const restaurado = nota10 >= 200; if (restaurado) nota10 -= 200;
+  const stars = [sb % 4, Math.floor(sb / 4) % 4, Math.floor(sb / 16) % 4, Math.floor(sb / 64) % 4];
+  return { nota: nota10 / 10, restaurado, stars, saidas, partida, minuto, data: new Date(EPOCA + minuto * 60000), chk: m[2], payload: m[1] };
+}
+function validarCodigo(code, id) {
+  const d = lerCodigo(code);
+  if (!d) return false;
+  return gerarCodigo(id, d.stars, d.saidas, d.partida, d.minuto, d.restaurado) === String(code).trim().toUpperCase().replace(/\s/g, '');
+}
+function minutoAgora() { return Math.max(0, Math.min(16777215, Math.floor((Date.now() - EPOCA) / 60000))); }
+function fmtData(d) {
+  const z = n => String(n).padStart(2, '0');
+  return z(d.getDate()) + '/' + z(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + z(d.getHours()) + ':' + z(d.getMinutes());
+}
+
+/* aceita o código com espaços, sem hífen ou com O/0 e I/1 trocados na digitação */
+function normCodigo(code) {
+  let c = String(code).toUpperCase().replace(/[\s\u2010-\u2015]/g, '').replace(/-+/g, '-');
+  if (!c.includes('-') && c.length > 5) c = c.slice(0, -5) + '-' + c.slice(-5);
+  return c;
+}
+function acharCodigo(code, id) {
+  const c = normCodigo(code);
+  if (validarCodigo(c, id)) return c;
+  const pos = []; for (let i = 0; i < c.length; i++) if ('O0I1'.includes(c[i])) pos.push(i);
+  if (!pos.length || pos.length > 12) return null;
+  const tr = { O: '0', '0': 'O', I: '1', '1': 'I' };
+  for (let m = 1; m < (1 << pos.length); m++) {
+    const a = c.split(''); pos.forEach((p, k) => { if ((m >> k) & 1) a[p] = tr[a[p]]; });
+    const v = a.join(''); if (validarCodigo(v, id)) return v;
+  }
+  return null;
+}
+
+/* ---------- Google Forms: link pré-preenchido com marcadores (NOME, NUMERO, TURMA, NOTA, CODIGO...) ---------- */
+const CAMPOS_FORM = ['NOME', 'NUMERO', 'TURMA', 'NOTA', 'CODIGO', 'ESTRELAS', 'SAIDAS', 'SITUACAO'];
+const CAMPOS_OBRIG = ['NOME', 'NUMERO', 'TURMA', 'CODIGO'];
+function analisarFormulario(base) {
+  base = String(base || '').trim();
+  if (!base) return { ok: false, vazio: true, motivo: 'Nenhum link configurado.', campos: [] };
+  let u; try { u = new URL(base); } catch (e) { return { ok: false, motivo: 'O link não é um endereço válido.', campos: [] }; }
+  if (u.hostname !== 'docs.google.com' || u.pathname.indexOf('/forms/') !== 0) return { ok: false, motivo: 'O link precisa ser do Google Forms (começa com https://docs.google.com/forms/). O link curto forms.gle não serve.', campos: [] };
+  const mapa = {};
+  u.searchParams.forEach((v, k) => { if (k.indexOf('entry.') === 0) { const c = normTxt(v).toUpperCase(); if (CAMPOS_FORM.includes(c)) mapa[c] = k; } });
+  const faltam = CAMPOS_OBRIG.filter(c => !mapa[c]);
+  return { ok: !faltam.length, motivo: faltam.length ? 'Faltam marcadores no link: ' + faltam.join(', ') + '.' : '', campos: Object.keys(mapa), mapa, url: u.toString() };
+}
+function montarLinkFormulario(base, vals) {
+  const a = analisarFormulario(base); if (!a.ok) return null;
+  const u = new URL(a.url);
+  Object.keys(a.mapa).forEach(c => { if (vals[c] !== undefined) u.searchParams.set(a.mapa[c], String(vals[c])); });
+  return u.toString();
+}
+
+const POR_ANDAR = 10;
+const KEY = 'agencia_pixel_2adm_v1', META = 'agencia_pixel_2adm_meta_v1';
+const HEROIS = [{e:'🎨',n:'Designer',d:'Olho bom para cor e fonte'},{e:'📋',n:'Gestora',d:'Organiza tudo'},{e:'📣',n:'Comunicador',d:'Fala com o cliente'}];
+const TIPO = {prever:'Preveja a saída',escolha:'Escolha a linha certa',valido:'Escolha o código válido',lacuna:'Complete o código',bug:'Caça ao bug',logica:'Bug de lógica',parsons:'Monte o código',conceito:'Pergunta',ordenar:'Ponha em ordem',trecho:'Ache o problema'};
+const $ = s => document.querySelector(s), app = $('#app');
+let som = true;
+
+/* ---------- salvamento (o progresso sobrevive a recarregar a página) ---------- */
+function novoSave() { return { lib: 1, andares: {}, run: null, saidas: 0, fim: false }; }
+function ler(k, def) { try { return Object.assign(def, JSON.parse(localStorage.getItem(k)) || {}); } catch (e) { return def; } }
+let meta = ler(META, { partidas: 1, id: null, hero: 0 });
+let save = ler(KEY, novoSave());
+function store() { try { localStorage.setItem(KEY, JSON.stringify(save)); localStorage.setItem(META, JSON.stringify(meta)); } catch (e) {} }
+function stats(id) { return save.andares[id] || (save.andares[id] = { tent: 0, stars: 0, xp: 0, erros: null }); }
+function estrelas() { return ANDARES.map(a => (save.andares[a.id] || {}).stars || 0); }
+function totalXP() { return Object.values(save.andares).reduce((t, s) => t + (s.xp || 0), 0); }
+
+/* ---------- utilidades ---------- */
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function beep(f, d, t) { if (!som) return; try { const C = window._ac || (window._ac = new (window.AudioContext || window.webkitAudioContext)()); const o = C.createOscillator(), g = C.createGain(); o.type = t || 'square'; o.frequency.value = f; g.gain.setValueAtTime(.06, C.currentTime); g.gain.exponentialRampToValueAtTime(.0001, C.currentTime + d); o.connect(g); g.connect(C.destination); o.start(); o.stop(C.currentTime + d); } catch (e) {} }
+const okSound = () => { beep(660, .1); setTimeout(() => beep(990, .15), 90); };
+const noSound = () => beep(180, .25, 'sawtooth');
+function pop(txt) { const d = document.createElement('div'); d.className = 'pop'; d.textContent = txt; document.body.appendChild(d); setTimeout(() => d.remove(), 900); }
+function modal(titulo, html, botoes) {
+  const ov = document.createElement('div'); ov.className = 'ov';
+  ov.innerHTML = '<div class="md" role="dialog" aria-modal="true"><h2>' + titulo + '</h2><div>' + html + '</div><div class="row" style="margin-top:16px"></div></div>';
+  const row = ov.querySelector('.row');
+  botoes.forEach(b => { const el = document.createElement('button'); el.className = 'btn ' + (b.cls || ''); el.textContent = b.t; el.onclick = () => { ov.remove(); b.fn && b.fn(); }; row.appendChild(el); });
+  document.body.appendChild(ov);
+}
+function topo() { window.scrollTo(0, 0); document.body.classList.remove('batalha'); }
+
+/* ---------- reiniciar (botão fixo no topo) ---------- */
+$('#som').onclick = () => { som = !som; $('#som').textContent = som ? '🔊' : '🔇'; };
+$('#reiniciar').onclick = () => modal('🔁 Reiniciar o jogo?',
+  '<p>Volta para o início, <b>apaga o progresso desta partida</b> e sorteia perguntas novas.</p><p class="sub">Isso conta como uma nova partida no placar.</p>',
+  [{ t: 'Cancelar', cls: 'sec' }, { t: 'Reiniciar', cls: 'red', fn: reiniciar }]);
+function reiniciar() { meta.partidas = Math.min(63, (meta.partidas || 1) + 1); save = novoSave(); store(); telaInicio(); }
+
+/* ---------- tela inicial: identificação ---------- */
+function telaInicio() {
+  topo();
+  const id = meta.id, h = HEROIS[meta.hero || 0];
+  const form = id ? `<div class="idcard"><span class="e">${h.e}</span><div style="flex:1"><b>${esc(id.nome)}</b><small>Nº ${esc(id.numero)} · ${esc(id.turma)}</small></div></div>
+      <button class="icon-btn" id="naoSou" style="margin-top:10px">🙋 Não sou eu (novo aluno)</button>`
+    : `<label class="f" for="nome">Nome completo</label><input class="t" id="nome" autocomplete="name" maxlength="60" placeholder="Seu nome e sobrenome">
+       <label class="f" for="num">Número da chamada</label><input class="t" id="num" inputmode="numeric" maxlength="3" placeholder="Nº" style="max-width:140px">
+       ${turmaHtml('i', '')}
+       <b style="display:block;margin-top:14px">Escolha seu personagem</b>
+       <div class="heroes">${HEROIS.map((x, i) => `<button class="hero ${i === (meta.hero || 0) ? 'on' : ''}" data-h="${i}"><span class="e">${x.e}</span><b>${x.n}</b><small>${x.d}</small></button>`).join('')}</div>`;
+  const cont = save.run ? ANDARES.find(a => a.id === save.run.aid) : null;
+  app.innerHTML = `<p class="sub" style="margin:4px 0 0">Informática Empresarial · 2º ADM · IEEL</p>
+    <h1>Agência <span>Pixel</span></h1>
+    <p class="sub">Você foi contratado como estagiário. Suba ${ANDARES.length} ${ANDARES.length > 1 ? 'andares' : 'andar'} do prédio, resolva os problemas de cada setor e baixe seu placar no final.</p>
+    <div class="panel"><h2>${id ? '👋 Jogador' : '1. Quem está jogando?'}</h2>${form}<div class="hint" id="hint"></div></div>
+    <div class="panel"><h2>Como funciona</h2><ul class="how">
+      <li>Cada andar sorteia <b>10 perguntas</b> de um banco de 20. As alternativas também mudam de lugar.</li>
+      <li>Acertou: um problema a menos para o vilão do andar. <b>Errou: perde 1 ❤️</b> e a pergunta volta para o fim da fila.</li>
+      <li>Perdeu os 3 ❤️? Recomeça o andar com perguntas novas.</li>
+      <li>Recarregar a página <b>não devolve corações</b>: o jogo continua de onde parou.</li>
+      <li>No final, <b>envie sua nota</b> pelo botão da tela de placar e baixe a imagem como comprovante.</li>
+      <li>Trocou de computador? Use <b>Já joguei em outro computador</b> com a imagem do placar que você baixou.</li>
+    </ul></div>
+    <button class="btn full" id="go">${cont ? '▶ Continuar: ' + cont.nome : '🏢 Entrar na agência'}</button>
+    <button class="btn sec full" id="rest" style="margin-top:12px">📂 Já joguei em outro computador</button>`;
+  $('#rest').onclick = telaRestaurar;
+  if (id) {
+    $('#naoSou').onclick = () => modal('Trocar de aluno?', '<p>O progresso de <b>' + esc(id.nome) + '</b> neste navegador será apagado para você começar do zero.</p>',
+      [{ t: 'Cancelar', cls: 'sec' }, { t: 'Sou outro aluno', cls: 'red', fn: () => { meta = { partidas: 1, id: null, hero: 0 }; save = novoSave(); store(); telaInicio(); } }]);
+    $('#go').onclick = () => { beep(520, .08); cont ? telaPergunta() : telaMapa(); };
+    return;
+  }
+  const lerTurma = ligarTurma('i');
+  app.querySelectorAll('.hero').forEach(b => b.onclick = () => { meta.hero = +b.dataset.h; app.querySelectorAll('.hero').forEach(x => x.classList.toggle('on', x === b)); });
+  $('#go').onclick = () => {
+    const nome = $('#nome').value.trim().replace(/\s+/g, ' '), num = $('#num').value.trim(), turma = lerTurma();
+    const falta = nome.split(' ').length < 2 || nome.length < 5 ? '👆 Escreva seu nome e sobrenome.' : !/^\d{1,3}$/.test(num) ? '👆 Escreva seu número da chamada (só números).' : !turma ? '👆 Escolha seu colégio e sua turma.' : '';
+    if (falta) { $('#hint').textContent = falta; beep(200, .15); return; }
+    meta.id = { nome, numero: num, turma }; store(); beep(520, .08); telaMapa();
+  };
+}
+
+/* ---------- mapa ---------- */
+function telaMapa() {
+  topo();
+  const st = estrelas(), nota = calcNota(st), run = save.run;
+  app.innerHTML = `<div class="hud"><span class="qn">${HEROIS[meta.hero || 0].e} ${esc(meta.id.nome.split(' ')[0])}</span><span class="xp">⭐ ${totalXP()} XP</span></div>
+  <h1 style="font-size:32px">Mapa do prédio</h1><p class="sub">Toque no andar com borda amarela para jogar.</p>
+  <div class="map">${ANDARES.map((a, i) => { const lock = a.id > save.lib, s = st[i], ativo = run && run.aid === a.id, nx = ativo || (!run && a.id === save.lib && !s), t = (save.andares[a.id] || {}).tent || 0;
+    return `<button class="floor ${lock ? 'lock' : ''} ${nx ? 'next' : ''}" data-a="${a.id}" ${lock ? 'disabled' : ''}><span class="fi">${lock ? '🔒' : a.icone}</span><span class="ft"><b>${a.id}. ${a.nome}</b><small>${a.tema}${t ? ' · ' + t + (t > 1 ? ' tentativas' : ' tentativa') : ''}</small>${ativo ? `<br><span class="cta">▶ Continuar · ${'❤️'.repeat(run.vidas)}${'🖤'.repeat(3 - run.vidas)} · golpe ${Math.min(run.acertos + 1, run.total)}/${run.total}</span>` : nx ? '<br><span class="cta">👉 Jogar agora</span>' : ''}</span><span class="st">${'★'.repeat(s)}${'☆'.repeat(3 - s)}</span></button>`; }).join('')}</div>
+  <div class="notabox"><span>Nota sugerida até agora</span><b>${fmtNota(nota)} / 10</b></div>
+  ${run ? '<button class="btn sec full" id="placar" disabled>📸 Placar: termine o andar em andamento</button>' : `<button class="btn ${save.fim ? '' : 'sec'} full" id="placar">📸 ${save.fim ? 'Ver e baixar meu placar final' : 'Baixar placar parcial'}</button>`}
+  <p class="foot">Cada andar concluído vale até 2,5 pontos: ★ 1,5 · ★★ 2,0 · ★★★ 2,5.<br>Dá para rejogar um andar para melhorar as estrelas.</p>`;
+  app.querySelectorAll('.floor:not([disabled])').forEach(b => b.onclick = () => {
+    const id = +b.dataset.a;
+    if (!run) return iniciar(id);
+    if (run.aid === id) return telaPergunta();
+    const atual = ANDARES.find(a => a.id === run.aid);
+    modal('Abandonar o andar?', '<p>Você está no meio do andar <b>' + esc(atual.nome) + '</b>. Se começar outro andar agora, perde essa tentativa.</p>',
+      [{ t: '▶ Voltar ao ' + atual.nome, cls: 'sec', fn: telaPergunta }, { t: 'Abandonar', cls: 'red', fn: () => iniciar(id) }]);
+  });
+  if (!run) $('#placar').onclick = telaPlacar;
+}
+
+/* ---------- batalha ---------- */
+function andarAtual() { return ANDARES.find(a => a.id === save.run.aid); }
+function iniciar(id) {
+  const a = ANDARES.find(x => x.id === id);
+  const sorteio = shuffle(a.q.map((_, i) => i)).slice(0, POR_ANDAR);
+  stats(id).tent++;
+  save.run = { aid: id, fila: sorteio, total: sorteio.length, vidas: 3, xp: 0, combo: 0, erradas: [], acertos: 0, resp: 0 };
+  store(); telaPergunta();
+}
+function hud() {
+  const r = save.run, a = andarAtual(), pct = 100 * (r.total - r.acertos) / r.total;
+  return `<div class="hud"><span class="hearts" aria-label="${r.vidas} vidas">${'❤️'.repeat(r.vidas)}${'🖤'.repeat(3 - r.vidas)}</span><span class="qn">Tarefa ${Math.min(r.acertos + 1, r.total)}/${r.total}</span><span class="xp">⭐ ${r.xp}</span><button class="icon-btn" id="paraMapa">🗺️ Mapa</button></div>
+  <div class="arena"><span class="foe" id="foe">${a.ini_ico}</span><div class="foe-info"><b>${a.inimigo}</b> <small style="color:var(--mut)">· ${a.nome}</small><div class="bar"><i style="width:${pct}%"></i></div></div><span style="font-size:34px">${HEROIS[meta.hero || 0].e}</span></div>`;
+}
+const codeHtml = src => '<div class="code"><pre>' + hl(src) + '</pre></div>';
+function opsHtml(ops, texto) {
+  return '<div class="ops">' + shuffle(ops.map((o, i) => [o, i])).map(([o, i], k) => `<button class="op" data-i="${i}"><span class="l">${'ABCD'[k]}</span>${texto ? '<span class="tx">' + esc(o) + '</span>' : '<code>' + esc(o) + '</code>'}</button>`).join('') + '</div>';
+}
+function telaPergunta() {
+  topo(); document.body.classList.add('batalha');
+  const r = save.run, q = andarAtual().q[r.fila[0]];
+  let corpo = '', perg = q.pergunta;
+  const inp = q.inputs ? `<p class="inp">⌨️ A pessoa digita: ${q.inputs.map(v => '<code>' + esc(v) + '</code>').join(' e depois ')}</p>` : '';
+  if (q.tipo === 'prever') { perg = perg || 'O que aparece na tela?'; corpo = codeHtml(q.code) + inp + opsHtml(q.ops); }
+  else if (q.tipo === 'escolha') { perg = perg || `Qual linha mostra exatamente: ${q.alvo}`; corpo = codeHtml(q.pre) + opsHtml(q.ops); }
+  else if (q.tipo === 'valido') { corpo = (q.pre ? codeHtml(q.pre) : '') + opsHtml(q.ops); }
+  else if (q.tipo === 'lacuna') { perg = perg || `O que vai no lugar de ___ para aparecer: ${q.alvo_ui || q.alvo}`; corpo = '<div class="code"><pre>' + hl(q.code).replace('___', '<span class="slot" id="slot">?</span>') + '</pre></div>' + inp + opsHtml(q.ops); }
+  else if (q.tipo === 'bug' || q.tipo === 'logica') { perg = perg || 'Este código dá erro. Toque na linha com o problema.'; corpo = inp + '<div class="lines">' + q.code.split('\n').map((l, i) => `<button class="ln" data-i="${i}"><span class="n">${i + 1}</span><code>${hl(l)}</code></button>`).join('') + '</div>'; }
+  else if (q.tipo === 'parsons' || q.tipo === 'ordenar') {
+    const txt = q.tipo === 'ordenar', L = txt ? q.itens : q.linhas;
+    perg = perg || (txt ? 'Ponha na ordem certa' : 'Monte o código na ordem certa');
+    let ord; do { ord = shuffle(L.map((_, i) => i)); } while (q.aceitas.includes(ord.join(',')));
+    r.pz = { pool: ord, ans: [] };
+    corpo = inp + (q.caso ? '<div class="caso-q">' + esc(q.caso) + '</div>' : '') + '<div class="pz-lbl">' + (txt ? 'Itens' : 'Peças') + ' (toque para encaixar)</div><div class="pz" id="pool"></div><div class="pz-lbl">' + (txt ? 'Sua ordem' : 'Seu programa') + ' (toque para tirar)</div><div class="pz ans" id="ans"></div><button class="btn full" id="testar" style="margin-top:12px">' + (txt ? '✔ Conferir' : '▶ Executar') + '</button>';
+  }
+  else if (q.tipo === 'conceito') { corpo = (q.caso ? '<div class="caso-q">' + esc(q.caso) + '</div>' : '') + opsHtml(q.ops, true); }
+  else if (q.tipo === 'trecho') { perg = perg || 'Toque no trecho com o problema.'; corpo = (q.caso ? '<div class="caso-q">' + esc(q.caso) + '</div>' : '') + '<div class="lines">' + q.linhas.map((l, i) => `<button class="ln tx" data-i="${i}"><span class="n">${i + 1}</span><span>${esc(l)}</span></button>`).join('') + '</div>'; }
+  app.innerHTML = hud() + `<div class="qcard" id="qcard"><span class="qid" title="Código da pergunta">#${q.id}</span><span class="qtype">${TIPO[q.tipo]}</span><p class="qtxt">${esc(perg)}</p>${corpo}<div id="fb"></div></div>`;
+  $('#paraMapa').onclick = telaMapa;
+  if (q.tipo === 'parsons' || q.tipo === 'ordenar') { drawPz(q); $('#testar').onclick = () => { if (r.pz.pool.length) { pop(q.tipo === 'ordenar' ? 'Coloque todos os itens' : 'Encaixe todas as peças'); return; } responder(q.aceitas.includes(r.pz.ans.join(',')), q); }; }
+  else if (q.tipo === 'bug' || q.tipo === 'logica' || q.tipo === 'trecho') app.querySelectorAll('.ln').forEach(b => b.onclick = () => { const i = +b.dataset.i, ok = i === q.c; app.querySelectorAll('.ln').forEach(x => x.disabled = true); b.classList.add(ok ? 'ok' : 'no'); if (!ok) app.querySelector(`.ln[data-i="${q.c}"]`).classList.add('ok'); responder(ok, q); });
+  else app.querySelectorAll('.op').forEach(b => b.onclick = () => { const i = +b.dataset.i, ok = i === q.c; if (q.tipo === 'lacuna') $('#slot').textContent = q.ops[i]; app.querySelectorAll('.op').forEach(x => x.disabled = true); b.classList.add(ok ? 'ok' : 'no'); if (!ok) app.querySelector(`.op[data-i="${q.c}"]`).classList.add('ok'); responder(ok, q, i); });
+}
+function drawPz(q) {
+  const r = save.run, txt = q.tipo === 'ordenar', L = txt ? q.itens : q.linhas, blk = (i, w) => `<button class="blk${txt ? ' tx' : ''}" data-i="${i}" data-w="${w}"><span class="n">${w === 'ans' ? r.pz.ans.indexOf(i) + 1 : '•'}</span>${txt ? '<span>' + esc(L[i]) + '</span>' : '<code>' + hl(L[i]) + '</code>'}</button>`;
+  $('#pool').innerHTML = r.pz.pool.length ? r.pz.pool.map(i => blk(i, 'pool')).join('') : '<div class="empty">' + (txt ? 'Tudo encaixado ✔ Agora toque em Conferir' : 'Todas as peças encaixadas ✔ Agora toque em Executar') + '</div>';
+  $('#ans').innerHTML = r.pz.ans.length ? r.pz.ans.map(i => blk(i, 'ans')).join('') : '<div class="empty">' + (txt ? 'Toque nos itens acima, na ordem certa' : 'Toque nas peças acima, na ordem em que o programa deve rodar') + '</div>';
+  app.querySelectorAll('.blk').forEach(b => b.onclick = () => { const i = +b.dataset.i, f = b.dataset.w, t = f === 'pool' ? 'ans' : 'pool'; r.pz[f] = r.pz[f].filter(x => x !== i); r.pz[t].push(i); beep(440, .04); drawPz(q); });
+}
+function responder(ok, q, escolha) {
+  const r = save.run, qi = r.fila.shift(); r.resp++;
+  if (ok) {
+    r.combo++; r.acertos++;
+    const ganho = (r.erradas.includes(qi) ? 50 : 100) + Math.min(r.combo - 1, 4) * 25; r.xp += ganho;
+    okSound(); pop('+' + ganho + ' XP' + (r.combo > 1 ? ' · combo x' + r.combo : ''));
+    $('#foe').classList.add('hit'); $('.bar i').style.width = (100 * (r.total - r.acertos) / r.total) + '%';
+  } else {
+    r.combo = 0; r.vidas--; if (!r.erradas.includes(qi)) r.erradas.push(qi); r.fila.push(qi);
+    noSound(); $('#qcard').classList.add('shake');
+    $('.hearts').textContent = '❤️'.repeat(r.vidas) + '🖤'.repeat(3 - r.vidas);
+  }
+  delete r.pz;
+  const fim = r.vidas <= 0 ? 'perdeu' : r.fila.length === 0 ? 'venceu' : '';
+  if (fim === 'perdeu') { save.run = null; }
+  if (fim === 'venceu') registrarVitoria(r);
+  store();   /* grava já: recarregar a página não desfaz o erro */
+  let real = '';
+  if (q.tipo === 'prever') real = (q.inputs ? 'Na tela (o que foi digitado também aparece):\n' : 'Saída real:\n') + q.real;
+  else if ((q.tipo === 'escolha' || q.tipo === 'lacuna') && !ok && escolha !== undefined) real = 'Com a sua escolha aparece:\n' + q.reais[escolha];
+  else if (q.tipo === 'bug') real = 'Mensagem:\n' + q.erro;
+  else if (q.tipo === 'logica') real = 'Linha corrigida:\n' + q.fix;
+  else if (q.tipo === 'parsons') real = 'Uma ordem certa:\n' + q.linhas.join('\n');
+  else if (q.tipo === 'ordenar') real = 'Ordem certa:\n' + q.itens.map((t, k) => (k + 1) + '. ' + t).join('\n');
+  else if (q.tipo === 'trecho' && q.fix) real = 'Como deveria ser:\n' + q.fix;
+  if (q.fonte) real += (real ? '\n\n' : '') + 'Fonte: ' + q.fonte;
+  $('#fb').innerHTML = `<div class="fb ${ok ? 'ok' : 'no'}"><h3>${ok ? '✅ Acertou!' : '❌ Não foi dessa vez'}</h3><p>${esc(q.exp)}</p>${real ? '<div class="real">' + esc(real) + '</div>' : ''}<p class="fb-id">Achou algo estranho nesta pergunta? Avise o professor o código <b>#${q.id}</b>.</p>
+   <button class="btn full" id="cont">${fim === 'venceu' ? '🏆 Ver vitória' : fim === 'perdeu' ? '☕ Continuar' : ok ? '➡️ Próxima tarefa' : '🔁 Continuar (essa pergunta volta depois)'}</button></div>`;
+  if ($('#testar')) { $('#testar').disabled = true; app.querySelectorAll('.blk').forEach(b => b.disabled = true); }
+  $('#cont').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  const qAndar = andarAtualOu(r.aid);
+  $('#cont').onclick = () => fim === 'venceu' ? telaVitoria() : fim === 'perdeu' ? telaDerrota(qAndar) : telaPergunta();
+}
+function andarAtualOu(id) { return ANDARES.find(a => a.id === id); }
+let ultimaVitoria = null;
+function registrarVitoria(r) {
+  const s = stats(r.aid), stars = r.vidas, erros = 3 - r.vidas;
+  if (stars > s.stars || (stars === s.stars && r.xp > s.xp)) { s.stars = stars; s.xp = r.xp; s.erros = erros; }
+  if (r.aid === save.lib && save.lib < ANDARES.length) save.lib++;
+  if (r.aid === ANDARES[ANDARES.length - 1].id) save.fim = true;
+  ultimaVitoria = { aid: r.aid, stars, xp: r.xp, acertos: r.acertos, resp: r.resp };
+  save.run = null;
+}
+function telaVitoria() {
+  topo();
+  const v = ultimaVitoria, a = andarAtualOu(v.aid), chefe = !!a.chefe;
+  [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, .15), i * 120));
+  app.innerHTML = `<div class="panel center"><span class="big-ico">${chefe ? '🏆' : '🎉'}</span><h1 style="font-size:34px">${a.inimigo}: resolvido!</h1>
+   <div class="stars">${'★'.repeat(v.stars)}${'☆'.repeat(3 - v.stars)}</div><p class="sub">XP neste andar: <b style="color:var(--gold)">${v.xp}</b> · ${v.acertos} acertos em ${v.resp} respostas</p>
+   <div class="row"><button class="btn sec" id="again">🔁 Rejogar este andar</button><button class="btn" id="next">${chefe ? '🏆 Ver placar final' : '🗺️ Próximo andar'}</button></div></div>`;
+  $('#again').onclick = () => iniciar(a.id);
+  $('#next').onclick = () => chefe ? telaPlacar() : telaMapa();
+}
+function telaDerrota(a) {
+  topo();
+  app.innerHTML = `<div class="panel center"><span class="big-ico">☕</span><h1 style="font-size:32px">Expediente encerrado: ${esc(a.nome)}</h1>
+   <p class="sub">Os erros mostraram o que treinar. Releia as explicações e tente de novo: as perguntas serão sorteadas outra vez.</p>
+   <div class="row"><button class="btn sec" id="map">🗺️ Mapa</button><button class="btn" id="again">🔁 Tentar de novo</button></div></div>`;
+  $('#map').onclick = telaMapa; $('#again').onclick = () => iniciar(a.id);
+}
+
+/* ---------- placar em imagem ---------- */
+function rankDe(n) { return n >= 10 ? 'S' : n >= 8.5 ? 'A' : n >= 7 ? 'B' : n >= 5 ? 'C' : 'D'; }
+function desenharPlacar() {
+  const W = 1080, H = 1500, c = document.createElement('canvas'); c.width = W; c.height = H;
+  const g = c.getContext('2d'), F = '"Segoe UI",Roboto,"Noto Sans",Ubuntu,Arial,sans-serif', M = '"Cascadia Mono",Consolas,"DejaVu Sans Mono",monospace';
+  const st = estrelas(), nota = calcNota(st), min = minutoAgora(), data = new Date(EPOCA + min * 60000);
+  const codigo = gerarCodigo(meta.id, st, save.saidas, meta.partidas || 1, min, !!save.restaurado);
+  const bg = g.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, '#1f4e8c'); bg.addColorStop(1, '#0e1424'); g.fillStyle = bg; g.fillRect(0, 0, W, H);
+  g.fillStyle = '#f6a04d'; g.fillRect(0, H - 18, W / 2, 18); g.fillStyle = '#4b8bd4'; g.fillRect(W / 2, H - 18, W / 2, 18);
+  const txt = (s, x, y, size, color, weight, align, font) => { g.font = (weight || 400) + ' ' + size + 'px ' + (font || F); g.fillStyle = color; g.textAlign = align || 'left'; g.fillText(s, x, y); };
+  const fit = (s, max, size, weight) => { let z = size; do { g.font = weight + ' ' + z + 'px ' + F; z -= 2; } while (g.measureText(s).width > max && z > 18); return z + 2; };
+  const card = (x, y, w, h) => { g.fillStyle = '#ffffff12'; g.strokeStyle = '#ffffff26'; g.lineWidth = 2; g.beginPath(); g.roundRect ? g.roundRect(x, y, w, h, 28) : g.rect(x, y, w, h); g.fill(); g.stroke(); };
+  txt('AGÊNCIA PIXEL', 70, 110, 64, '#f6a04d', 900);
+  txt('Placar · Informática Empresarial · 2º ADM', 70, 160, 32, '#c9d3ee', 600);
+  card(60, 200, W - 120, 210);
+  txt('ALUNO', 100, 252, 24, '#b9b0d4', 800);
+  txt(meta.id.nome, 100, 308, fit(meta.id.nome, W - 200, 52, 800), '#ffffff', 800);
+  txt('Nº ' + meta.id.numero + '   ·   ' + meta.id.turma, 100, 362, 32, '#e7e0fb', 600);
+  card(60, 440, 460, 330);
+  txt('NOTA SUGERIDA', 290, 500, 26, '#b9b0d4', 800, 'center');
+  txt(fmtNota(nota), 290, 650, 150, '#f6a04d', 900, 'center');
+  txt('de 10', 290, 720, 34, '#e7e0fb', 600, 'center');
+  card(560, 440, 460, 330);
+  txt('RANK', 790, 500, 26, '#b9b0d4', 800, 'center');
+  txt(rankDe(nota), 790, 650, 150, '#ffffff', 900, 'center');
+  txt('⭐ ' + totalXP() + ' XP', 790, 720, 34, '#e7e0fb', 600, 'center');
+  card(60, 800, W - 120, 400);
+  txt('ANDAR', 100, 855, 22, '#b9b0d4', 800); txt('ESTRELAS', 590, 855, 22, '#b9b0d4', 800, 'center');
+  txt('TENTATIVAS', 785, 855, 22, '#b9b0d4', 800, 'center'); txt('PONTOS', 980, 855, 22, '#b9b0d4', 800, 'right');
+  ANDARES.forEach((a, i) => {
+    const y = 920 + i * 70, s = st[i], sa = save.andares[a.id] || {}, t = sa.tent || 0;
+    g.fillStyle = '#ffffff10'; if (i % 2 === 0) g.fillRect(80, y - 46, W - 160, 64);
+    txt((i + 1) + '. ' + NOMES_ANDAR[i], 100, y, 32, '#ffffff', 700);
+    txt(s ? '★'.repeat(s) + '☆'.repeat(3 - s) : 'não concluído', 590, y, s ? 40 : 26, s ? '#ffd43b' : '#8f86ad', 700, 'center');
+    txt(String(t) + (sa.rest ? ' ↺' : ''), 785, y, 32, '#ffffff', 600, 'center');
+    txt(fmtNota(NOTA_POR_ESTRELAS[s]), 980, y, 32, '#ffffff', 800, 'right');
+  });
+  if (ANDARES.some(a => (save.andares[a.id] || {}).rest)) txt('↺ = andar concluído antes, em outro computador', 100, 1182, 20, '#b9b0d4', 600);
+  const linha = 'Saídas da tela: ' + save.saidas + '  ·  Partida nº ' + (meta.partidas || 1) + '  ·  ' + (save.fim ? 'Jogo completo' : 'Placar parcial') + (save.restaurado ? '  ·  Continuado de outro PC' : '') + (save.prints ? '  ·  Prints liberados: ' + save.prints : '');
+  txt(linha, W / 2, 1255, fit(linha, W - 140, 28, 600), '#e7e0fb', 600, 'center');
+  card(60, 1290, W - 120, 150);
+  txt('CÓDIGO DE CONFERÊNCIA', 100, 1340, 22, '#b9b0d4', 800);
+  txt(codigo, 100, 1405, 46, '#7dffb0', 700, 'left', M);
+  txt(fmtData(data), W - 100, 1405, 30, '#e7e0fb', 600, 'right');
+  return { canvas: c, codigo, nota };
+}
+function nomeArquivo() {
+  const s = normTxt(meta.id.nome).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return 'placar-' + s + '-n' + meta.id.numero + '.png';
+}
+function telaPlacar() {
+  topo();
+  const { canvas, nota, codigo } = desenharPlacar(), url = canvas.toDataURL('image/png'), st = estrelas();
+  const linkForm = montarLinkFormulario((window.DUNGEON_CONFIG || {}).formulario, { NOME: meta.id.nome, NUMERO: meta.id.numero, TURMA: meta.id.turma, NOTA: fmtNota(nota), CODIGO: codigo, ESTRELAS: st.join('/'), SAIDAS: save.saidas, SITUACAO: save.fim ? 'completo' : 'parcial' });
+  app.innerHTML = `<div class="panel center"><p class="sub" style="margin:0">${save.fim ? 'Resultado final' : 'Placar parcial'}</p>
+    <h1 style="font-size:40px">Nota sugerida: <span>${fmtNota(nota)}</span></h1>
+    <img id="prev" src="${url}" alt="Imagem do placar">
+    <button class="btn full" id="baixar">⬇️ Baixar imagem do placar (PNG)</button></div>
+    ${linkForm ? `<div class="panel"><h2>📨 Entregar a nota</h2><ol class="steps">
+      <li>Toque em <b>Enviar minha nota</b>. Abre um formulário do Google já preenchido, em outra aba.</li>
+      <li>Confira nome, número e turma. <b>Não mude o código.</b></li>
+      <li>Clique em <b>Enviar</b> no final do formulário e volte para esta aba.</li>
+      <li>Baixe também a imagem do placar: é o seu comprovante e serve para continuar em outro computador.</li></ol>
+      <a class="btn full" id="enviar" href="${esc(linkForm)}" target="_blank" rel="noopener">📨 Enviar minha nota</a>
+      ${save.fim ? '' : '<p class="sub" style="margin-top:10px">Este é um placar parcial. Quando terminar o jogo, envie de novo: vale a maior nota.</p>'}</div>` : `
+    <div class="panel"><h2>📤 Como enviar para o professor</h2><ol class="steps">
+      <li>Toque em <b>Baixar imagem do placar</b>. O arquivo <b>${esc(nomeArquivo())}</b> vai para a pasta Downloads.</li>
+      <li>Abra a atividade no <b>Google Classroom</b>.</li>
+      <li>Em <b>Seus trabalhos</b>, toque em <b>+ Adicionar ou criar</b> → <b>Arquivo</b> e escolha a imagem.</li>
+      <li>Toque em <b>Entregar</b>.</li></ol>
+      <p class="sub" style="margin-top:12px">O download não funcionou? Tire um print desta tela mostrando a imagem inteira e envie o print.</p></div>`}
+    <button class="btn sec full" id="map">🗺️ Voltar ao mapa</button>`;
+  $('#baixar').onclick = () => {
+    ignorarSaidaAte = Date.now() + 8000;
+    const bytes = pngComTexto(dataURLparaBytes(url), PNG_KEY, encodeURIComponent(JSON.stringify(dadosPNG(codigo))));
+    const u = URL.createObjectURL(new Blob([bytes], { type: 'image/png' }));
+    const a = document.createElement('a'); a.download = nomeArquivo(); a.href = u;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(u), 4000);
+    pop('Imagem baixada!');
+  };
+  if ($('#enviar')) $('#enviar').onclick = () => { passeLivre = true; pop('Formulário aberto em outra aba'); };
+  $('#map').onclick = telaMapa;
+}
+
+/* ---------- PNG: guardar e ler os dados do jogo dentro da imagem ---------- */
+const PNG_KEY = 'agencia-pixel-2adm';
+const CRC_T = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(b) { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = CRC_T[(c ^ b[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+function dataURLparaBytes(url) { const bin = atob(url.split(',')[1]), b = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) b[i] = bin.charCodeAt(i); return b; }
+function ascii(b) { let s = ''; for (let i = 0; i < b.length; i++) s += String.fromCharCode(b[i]); return s; }
+function pngComTexto(bytes, chave, texto) {
+  const kt = new Uint8Array(chave.length + 1 + texto.length);
+  for (let i = 0; i < chave.length; i++) kt[i] = chave.charCodeAt(i);
+  for (let i = 0; i < texto.length; i++) kt[chave.length + 1 + i] = texto.charCodeAt(i);
+  const ch = new Uint8Array(12 + kt.length), dv = new DataView(ch.buffer);
+  dv.setUint32(0, kt.length); ch.set([116, 69, 88, 116], 4); ch.set(kt, 8);
+  dv.setUint32(8 + kt.length, crc32(ch.subarray(4, 8 + kt.length)));
+  let p = 8, iend = -1; const bv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  while (p + 8 <= bytes.length) { const len = bv.getUint32(p); if (ascii(bytes.subarray(p + 4, p + 8)) === 'IEND') { iend = p; break; } p += 12 + len; }
+  if (iend < 0) return bytes;
+  const out = new Uint8Array(bytes.length + ch.length);
+  out.set(bytes.subarray(0, iend)); out.set(ch, iend); out.set(bytes.subarray(iend), iend + ch.length);
+  return out;
+}
+function lerTextoPNG(bytes, chave) {
+  const sig = [137, 80, 78, 71, 13, 10, 26, 10];
+  if (bytes.length < 8 || !sig.every((v, i) => bytes[i] === v)) return null;
+  const bv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength); let p = 8;
+  while (p + 8 <= bytes.length) {
+    const len = bv.getUint32(p), tipo = ascii(bytes.subarray(p + 4, p + 8));
+    if (tipo === 'tEXt') { const d = bytes.subarray(p + 8, p + 8 + len), z = d.indexOf(0); if (z > 0 && ascii(d.subarray(0, z)) === chave) return ascii(d.subarray(z + 1)); }
+    if (tipo === 'IEND') break;
+    p += 12 + len;
+  }
+  return null;
+}
+function dadosPNG(codigo) {
+  const andares = {}; ANDARES.forEach(a => { const s = save.andares[a.id]; if (s) andares[a.id] = { tent: s.tent || 0, xp: s.xp || 0 }; });
+  return { v: 1, nome: meta.id.nome, numero: meta.id.numero, turma: meta.id.turma, hero: meta.hero || 0, codigo, andares };
+}
+
+/* ---------- continuar de onde parou (outro computador) ---------- */
+function mesmoAluno(id) {
+  return !!meta.id && normTxt(meta.id.nome) === normTxt(id.nome) && String(meta.id.numero).trim() === String(id.numero).trim() && normTxt(meta.id.turma) === normTxt(id.turma);
+}
+function aplicarRestauro(id, codigo, extra) {
+  const d = lerCodigo(codigo);
+  if (!mesmoAluno(id)) { save = novoSave(); meta.partidas = 1; }
+  meta.id = { nome: id.nome, numero: String(id.numero).trim(), turma: id.turma };
+  if (extra && HEROIS[extra.hero]) meta.hero = extra.hero;
+  meta.partidas = Math.max(meta.partidas || 1, d.partida || 1);
+  save.saidas = Math.max(save.saidas || 0, d.saidas);
+  save.restaurado = true;
+  ANDARES.forEach((a, i) => {
+    const cs = d.stars[i], s = stats(a.id), ex = extra && extra.andares && extra.andares[a.id];
+    if (cs > s.stars) { s.stars = cs; s.rest = true; s.erros = 3 - cs; }
+    if (ex) { s.tent = Math.max(s.tent || 0, +ex.tent || 0); s.xp = Math.max(s.xp || 0, +ex.xp || 0); }
+  });
+  let k = 0; while (k < ANDARES.length && stats(ANDARES[k].id).stars > 0) k++;
+  save.lib = Math.max(save.lib, Math.min(k + 1, ANDARES.length));
+  if (stats(ANDARES[ANDARES.length - 1].id).stars > 0) save.fim = true;
+  store();
+}
+function tentarRestaurar(id, codigoDigitado, extra, hint) {
+  if (!lerCodigo(normCodigo(codigoDigitado))) { hint.textContent = '👆 Código incompleto ou com formato errado. Copie com o hífen, igual está na imagem.'; beep(200, .15); return; }
+  const codigo = acharCodigo(codigoDigitado, id);
+  if (!codigo) { hint.textContent = '👆 O código não bate com esse nome, número e turma. Escreva exatamente como está na imagem do placar.'; beep(200, .15); return; }
+  const ok = () => {
+    aplicarRestauro(id, codigo, extra);
+    const st = estrelas();
+    modal('✅ Progresso recuperado!', '<p>Bem-vindo de volta, <b>' + esc(meta.id.nome.split(' ')[0]) + '</b>. Seus andares:</p><ul class="ok-list">' +
+      ANDARES.map((a, i) => '<li><span>' + a.id + '. ' + esc(a.nome) + '</span><span class="st">' + (st[i] ? '★'.repeat(st[i]) + '☆'.repeat(3 - st[i]) : 'a jogar') + '</span></li>').join('') + '</ul>',
+      [{ t: '🗺️ Ir para o mapa', fn: telaMapa }]);
+  };
+  if (meta.id && !mesmoAluno(id)) modal('Trocar de aluno?', '<p>Este computador tem o progresso de <b>' + esc(meta.id.nome) + '</b>. Ele será substituído pelo de <b>' + esc(id.nome) + '</b>.</p>',
+    [{ t: 'Cancelar', cls: 'sec' }, { t: 'Continuar', cls: 'red', fn: ok }]);
+  else ok();
+}
+function telaRestaurar() {
+  topo();
+  const id = meta.id || { nome: '', numero: '', turma: '' };
+  app.innerHTML = `<h1 style="font-size:30px">Continuar de onde parei</h1>
+    <p class="sub">Use o placar que você baixou em outro computador. As estrelas voltam e os andares ficam liberados.</p>
+    <div class="panel"><h2>Opção 1 · Enviar a imagem do placar</h2>
+      <p class="sub">É o jeito mais fácil. Tem que ser o arquivo PNG que o jogo baixou. Print da tela não funciona aqui: para print, use a opção 2.</p>
+      <label class="btn full" for="arq" id="arqLbl">🖼️ Escolher a imagem do placar</label><input type="file" id="arq" accept="image/png,.png" hidden>
+      <div class="hint" id="h1"></div></div>
+    <div class="panel"><h2>Opção 2 · Digitar o código</h2>
+      <p class="sub">Copie do placar, exatamente como está escrito.</p>
+      <label class="f" for="rnome">Nome completo</label><input class="t" id="rnome" maxlength="60" value="${esc(id.nome)}">
+      <label class="f" for="rnum">Número da chamada</label><input class="t" id="rnum" inputmode="numeric" maxlength="3" value="${esc(id.numero)}" style="max-width:140px">
+      ${turmaHtml('r', id.turma)}
+      <label class="f" for="rcod">Código de conferência</label><input class="t" id="rcod" placeholder="Ex.: FRBLB1X8GG-4CUXJ" autocomplete="off" spellcheck="false" style="font-family:'Cascadia Code',Consolas,monospace;text-transform:uppercase;font-size:19px">
+      <button class="btn full" id="rok" style="margin-top:14px">✅ Continuar com este código</button>
+      <div class="hint" id="h2"></div></div>
+    <button class="btn sec full" id="volta">⬅ Voltar</button>`;
+  const lerTurmaR = ligarTurma('r');
+  $('#volta').onclick = () => meta.id && save.lib > 1 || save.run ? telaMapa() : telaInicio();
+  $('#arqLbl').onclick = () => { seletorAberto = true; };
+  $('#arq').onchange = e => {
+    seletorAberto = false; const f = e.target.files[0], h = $('#h1'); e.target.value = '';
+    if (!f) return;
+    const rd = new FileReader();
+    rd.onload = () => {
+      let dados = null;
+      try { const t = lerTextoPNG(new Uint8Array(rd.result), PNG_KEY); dados = t && JSON.parse(decodeURIComponent(t)); } catch (err) { dados = null; }
+      if (!dados || !dados.codigo) { h.textContent = '👆 Essa imagem não tem os dados do jogo (pode ser um print ou outra imagem). Use a opção 2 e digite o código.'; beep(200, .15); return; }
+      tentarRestaurar({ nome: dados.nome, numero: dados.numero, turma: dados.turma }, dados.codigo, dados, h);
+    };
+    rd.onerror = () => { h.textContent = '👆 Não consegui abrir esse arquivo. Tente de novo ou use a opção 2.'; };
+    rd.readAsArrayBuffer(f);
+  };
+  $('#rok').onclick = () => {
+    const nome = $('#rnome').value.trim().replace(/\s+/g, ' '), numero = $('#rnum').value.trim(), turma = lerTurmaR(), h = $('#h2');
+    if (!nome || !numero || !turma) { h.textContent = '👆 Preencha nome, número, colégio e turma iguais aos do placar.'; beep(200, .15); return; }
+    if (!$('#rcod').value.trim()) { h.textContent = '👆 Digite o código de conferência.'; beep(200, .15); return; }
+    tentarRestaurar({ nome, numero, turma }, $('#rcod').value, null, h);
+  };
+}
+
+/* ---------- pegadinha e game over: saiu da tela ---------- */
+let saiuEm = 0, pegadinhaAtiva = false, ultimaPegadinha = 0, ignorarSaidaAte = 0, seletorAberto = false, passeLivre = false;
+const AVISOS = 4;
+const TITULOS = ['👀 Saiu da tela, é?', '🤨 De novo?!', '🕵️ Te peguei mais uma vez!', '☠️ Quarta vez…'];
+const emBatalha = () => !!save.run && !!meta.id;
+function marcarSaida() { if (!saiuEm && emBatalha()) saiuEm = Date.now(); }
+function voltou() {
+  if (!saiuEm || document.hidden || !document.hasFocus()) return;   /* mouse passando sobre a janela sem foco não conta como volta */
+  const ini = saiuEm, fora = Date.now() - saiuEm; saiuEm = 0;
+  if (printAte && ini <= printAte) { encerrarPrint(); if (fora <= PRINT_MS) return; }   /* saída curta dentro da liberação de print não conta */
+  if (seletorAberto || passeLivre) { seletorAberto = passeLivre = false; return; }
+  if (fora < 2000 || !emBatalha() || pegadinhaAtiva || Date.now() < ignorarSaidaAte || Date.now() - ultimaPegadinha < 6000 || !meta.id) return;
+  contarSaida();
+}
+/* liberação de print: digitar a palavra secreta durante o jogo libera UMA saída curta por 1 minuto */
+const PALAVRA_PRINT = 'charlton', PRINT_MS = 60000, PRINTS_POR_ANDAR = 3;
+let teclas = '', ultimaTecla = 0, printAte = 0, printTimer = null;
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey || e.altKey || e.metaKey || e.key.length !== 1 || !meta.id) return;
+  const ag = Date.now(); if (ag - ultimaTecla > 2500) teclas = ''; ultimaTecla = ag;
+  teclas = (teclas + e.key.toLowerCase()).slice(-PALAVRA_PRINT.length);
+  if (teclas === PALAVRA_PRINT) { teclas = ''; ativarPrint(); }
+});
+function ativarPrint() {
+  if (save.run) {
+    if ((save.run.prints || 0) >= PRINTS_POR_ANDAR) { pop('Limite de prints neste andar'); return; }
+    save.run.prints = (save.run.prints || 0) + 1;
+  }
+  save.prints = (save.prints || 0) + 1; store();
+  printAte = Date.now() + PRINT_MS;
+  let b = document.getElementById('printBadge');
+  if (!b) { b = document.createElement('div'); b.id = 'printBadge'; b.className = 'printBadge'; document.body.appendChild(b); }
+  const tick = () => { const r = Math.max(0, printAte - Date.now()); const sg = Math.ceil(r / 1000); b.textContent = '📸 Pode tirar o print · ' + Math.floor(sg / 60) + ':' + String(sg % 60).padStart(2, '0'); if (!r && !saiuEm) encerrarPrint(); };   /* se saiu dentro do minuto, a liberação vale até ele voltar */
+  clearInterval(printTimer); tick(); printTimer = setInterval(tick, 250);
+  beep(880, .08, 'triangle');
+}
+function encerrarPrint() { printAte = 0; clearInterval(printTimer); const b = document.getElementById('printBadge'); if (b) b.remove(); }
+/* total vai para o placar; os avisos e o game over contam só na tentativa atual do andar */
+function contarSaida() {
+  if (!save.run) return;
+  save.saidas = Math.min(63, (save.saidas || 0) + 1);
+  save.run.saidas = (save.run.saidas || 0) + 1; store();
+  save.run.saidas > AVISOS ? gameOver() : pegadinha(save.run.saidas);
+}
+/* saiu da página no meio de uma pergunta (botão voltar, outro endereço) e voltou em menos de 30 min: conta como saída */
+window.addEventListener('pagehide', () => { if (save.run && meta.id && !pegadinhaAtiva) { save.foraDesde = Date.now(); store(); } });
+document.addEventListener('visibilitychange', () => document.hidden ? marcarSaida() : voltou());
+window.addEventListener('blur', marcarSaida);
+window.addEventListener('focus', voltou);
+function pegadinha(n) {
+  pegadinhaAtiva = true;
+  const ov = document.createElement('div'); ov.className = 'prank';
+  ov.innerHTML = `<div class="pk"><div class="pk-t">${TITULOS[Math.min(n - 1, TITULOS.length - 1)]}</div><div class="pk-s">O jogo vai <b>REINICIAR</b> em</div>
+    <div class="pk-ring"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" cx="60" cy="60" r="52"/></svg><span class="pk-n" id="pkN">5</span></div>
+    <div class="pk-s">Todo o seu progresso vai sumir…</div></div>`;
+  document.body.appendChild(ov);
+  requestAnimationFrame(() => requestAnimationFrame(() => { ov.querySelector('.fg').style.strokeDashoffset = 327; }));
+  let k = 5; beep(440, .12);
+  const tm = setInterval(() => {
+    k--;
+    if (k > 0) { const el = $('#pkN'); el.textContent = k; el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick'); beep(440 + (5 - k) * 60, .12); return; }
+    clearInterval(tm);
+    ov.classList.add('calm');
+    const ultimo = n >= AVISOS;
+    const aviso = ultimo
+      ? '<div class="pk-warn">⚠️ Último aviso! Se sair da tela mais uma vez <b>neste andar</b>, é <b>GAME OVER</b>: você perde a tentativa e recomeça o andar.</div>'
+      : `<div class="pk-note">Aviso <b>${n}</b> de ${AVISOS} neste andar · fica registrado no seu placar</div>`;
+    ov.innerHTML = `<div class="pk"><div class="pk-laugh">😂</div><div class="pk-t">Vou não!</div><div class="pk-s">Mas não faça mais isso.</div>${aviso}<button class="btn" id="pkOk">${ultimo ? 'Entendi 😬' : 'Tá bom 😅'}</button></div>`;
+    [880, 740, 880, 740, 990].forEach((f, i) => setTimeout(() => beep(f, .09, 'triangle'), i * 110));
+    $('#pkOk').onclick = () => { ov.remove(); pegadinhaAtiva = false; ultimaPegadinha = Date.now(); };
+  }, 900);
+}
+function gameOver() {
+  pegadinhaAtiva = true;
+  let perdido = '';
+  if (save.run) { const a = andarAtual(); perdido = a ? a.nome : ''; save.run = null; store(); }
+  const ov = document.createElement('div'); ov.className = 'go';
+  ov.innerHTML = `<div class="go-band"><div class="go-t">VOCÊ MORREU</div></div>
+    <div class="go-info"><p>Você saiu da tela <b>${(save.run && save.run.saidas) || AVISOS + 1}</b> vezes neste andar.</p>
+    <p>${perdido ? 'O andar <b>' + esc(perdido) + '</b> foi perdido. As estrelas que você já tinha continuam.' : 'Nenhum andar estava em andamento, mas a saída ficou registrada.'}</p>
+    <button class="btn" id="goOk">🔥 Levantar de novo</button></div>`;
+  document.body.appendChild(ov);
+  beep(82, 2.4, 'sine'); setTimeout(() => beep(55, 2.8, 'sine'), 300);
+  $('#goOk').onclick = () => { ov.remove(); pegadinhaAtiva = false; ultimaPegadinha = Date.now(); telaMapa(); };
+}
+
+/* ---------- início ---------- */
+if (save.run && !ANDARES.some(a => a.id === save.run.aid)) save.run = null;
+if (meta.id && save.run) telaPergunta(); else telaInicio();
+if (save.foraDesde) {
+  const t = Date.now() - save.foraDesde; delete save.foraDesde; store();
+  if (t > 4000 && t < 30 * 60000 && save.run && meta.id) setTimeout(contarSaida, 700);
+}
+</script></body></html>

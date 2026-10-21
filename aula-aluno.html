@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1f4e8c">
+<title>Informática Empresarial · 2º ADM · Aula no celular</title>
+<style>
+:root{--bg:#f6f4ee;--pn:#fff;--ink:#1d2433;--mut:#5b6475;--ln:#e3e0d8;--az:#1f4e8c;--am:#f28c28;--vd:#1e8a4c;--vm:#c0392b;--lil:#6c3fc4}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:calc(17px * var(--z,1))/1.5 "Segoe UI",Roboto,"Noto Sans",Ubuntu,Arial,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--az);color:#fff;padding:8px 12px}
+.hrow{display:flex;align-items:center;gap:8px}
+.hrow .t{flex:1;font-weight:800;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ib{font:inherit;font-size:15px;font-weight:700;border:0;border-radius:10px;padding:6px 10px;background:#ffffff26;color:#fff;cursor:pointer}
+.bar{height:4px;background:#ffffff33;border-radius:4px;margin-top:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--am)}
+main{max-width:720px;margin:0 auto;padding:14px 14px 110px}
+h1{font-size:calc(26px * var(--z,1));line-height:1.2;margin:6px 0 12px}
+h2{font-size:calc(22px * var(--z,1));line-height:1.25;margin:4px 0 12px}
+.meta{display:flex;justify-content:space-between;gap:8px;color:var(--mut);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.pn{background:var(--pn);border:1px solid var(--ln);border-radius:14px;padding:14px;margin:0 0 12px}
+.bl{display:flex;flex-direction:column;gap:8px}
+.bl .nm{font-weight:800}
+.bl .st{font-size:14px;color:var(--mut)}
+.row{display:flex;gap:8px}
+.row input{flex:1;min-width:0;font:inherit;font-size:18px;text-transform:uppercase;border:2px solid var(--ln);border-radius:10px;padding:8px 10px}
+.btn{font:inherit;font-weight:800;border:0;border-radius:12px;padding:10px 14px;background:var(--az);color:#fff;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
+.btn.am{background:var(--am);color:var(--az)}.btn.cl{background:#e9e6dd;color:var(--ink)}
+.msg{font-size:14px;font-weight:700;min-height:20px}.msg.no{color:var(--vm)}.msg.ok{color:var(--vd)}
+.hero{text-align:center;padding:26px 6px}.hero .ic{font-size:56px}.hero .k{color:var(--mut);font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:.06em}
+.hero .sub{color:var(--mut);font-size:18px}
+ul.it{padding-left:22px;margin:0 0 12px}ul.it li{margin:6px 0}
+.tag{display:inline-block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;border-radius:8px;padding:2px 8px;margin-bottom:6px}
+.tg-caso{background:#e7defa;color:var(--lil)}.tg-at{background:#dff3e7;color:var(--vd)}.tg-q{background:#fff1b8;color:#7a5b00}
+.perg{background:#fff6cc;border-left:6px solid var(--am);border-radius:10px;padding:10px 12px;font-weight:700}
+.nota{background:#eef2fb;border-left:6px solid var(--az);border-radius:10px;padding:10px 12px;margin-top:8px}
+.card{background:var(--pn);border:1px solid var(--ln);border-radius:12px;padding:12px;margin:0 0 10px}
+.card .cab{font-weight:800;margin-bottom:6px}.card .big{font:800 26px "Cascadia Mono",Consolas,"DejaVu Sans Mono",monospace;margin:4px 0}
+.card.err{border-color:#f0b4ad}
+.code{background:#0f1420;border-radius:12px;overflow:hidden;margin:8px 0}
+.code .cb{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:#1a2133;color:#9fb0d0;font-size:12px;font-weight:700}
+.code pre,pre.o{margin:0;padding:10px 12px;font:calc(15px * var(--z,1))/1.5 "Cascadia Mono",Consolas,"DejaVu Sans Mono",monospace;white-space:pre-wrap;word-break:break-word;font-variant-ligatures:none;color:#e6e6e6}
+pre.o{background:#f1efe8;color:var(--ink);border-radius:10px;border:1px solid var(--ln)}
+pre.o.err{background:#fde9e7;border-color:#f0b4ad;color:#7d1d12}
+.run{font:inherit;font-size:13px;font-weight:800;border:0;border-radius:8px;padding:4px 10px;background:var(--am);color:var(--az);cursor:pointer}
+details{margin:8px 0}details summary{cursor:pointer;font-weight:800;color:var(--lil)}
+.ops{display:flex;flex-direction:column;gap:8px}
+.op{display:flex;gap:10px;align-items:flex-start;text-align:left;font:inherit;background:var(--pn);border:2px solid var(--ln);border-radius:12px;padding:12px;cursor:pointer;color:var(--ink)}
+.op b{flex:none;width:26px;height:26px;border-radius:50%;background:#e9e6dd;display:grid;place-items:center;font-size:14px}
+.op.ok{border-color:var(--vd);background:#e6f5ec}.op.no{border-color:var(--vm);background:#fde9e7}
+.op:disabled{cursor:default;opacity:1}
+.exp{background:#eef2fb;border-radius:10px;padding:10px 12px;margin-top:10px}
+code.ic{font-family:"Cascadia Mono",Consolas,monospace;background:#0000000f;padding:1px 6px;border-radius:6px;font-variant-ligatures:none}
+.t-kw{color:#ff9e64}.t-fn{color:#7dcfff}.t-str{color:#9ece6a}.t-num{color:#e0af68}.t-com{color:#7a869e;font-style:italic}.t-op{color:#bb9af7}.t-var{color:#f7768e}.t-brace{color:#ff9e64}.t-id{color:#e6e6e6}
+nav.bot{position:fixed;left:0;right:0;bottom:0;z-index:5;display:grid;grid-template-columns:1fr auto 1fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:#fffffff2;border-top:1px solid var(--ln)}
+nav.bot button{font:inherit;font-weight:800;font-size:17px;border:0;border-radius:14px;padding:14px 10px;cursor:pointer}
+#prev,#home{background:#e9e6dd;color:var(--ink)}#next{background:var(--az);color:#fff}
+nav.bot button:disabled{opacity:.4}
+.aviso{font-size:13px;color:var(--mut)}
+.pm-wrap{--pm:14px}
+.fonte{font-size:13px;color:var(--mut);margin-top:8px}.fonte a{color:var(--az)}
+/* ---------- peças visuais (posts, comunicados, amostras) — usadas em slides, celular, roteiro e guia ---------- */
+.pm-wrap{font-size:var(--pm,16px);display:flex;justify-content:center;gap:1em;flex-wrap:wrap;margin:.3em 0}
+.pm{width:20em;max-width:100%;aspect-ratio:1/1;border-radius:.6em;overflow:hidden;position:relative;box-shadow:0 .25em .8em #0002;font-family:"Segoe UI",Roboto,"Noto Sans",Ubuntu,Arial,sans-serif;line-height:1.2;color:#1d2433;text-align:left}
+.pm *{box-sizing:border-box}
+.pm-lbl{font:800 .75em/1.2 "Segoe UI",Roboto,Arial,sans-serif;text-align:center;margin-top:.4em;color:#3d4659}
+.pm-col{display:flex;flex-direction:column;align-items:center}
+/* post bagunçado */
+.pm-ruim{background:linear-gradient(135deg,#ff00ff 0 30%,#7fff00 30% 55%,#00ffff 55% 80%,#ffff00 80%);padding:.5em}
+.pm-ruim .a{font-family:"Brush Script MT","Comic Sans MS",cursive;font-size:1.6em;color:#ffff00;transform:rotate(-6deg);margin:.1em 0 0 .2em}
+.pm-ruim .b{font-family:Impact,"Arial Black",sans-serif;font-size:1.05em;color:#ff0000;background:#ff00ff;padding:.1em .3em;display:inline-block;margin:.15em 0}
+.pm-ruim .c{font-family:"Times New Roman",Georgia,serif;font-size:.48em;color:#00ffff;line-height:1.05;margin:.1em 0}
+.pm-ruim .d{font-family:"Comic Sans MS",cursive;font-size:.5em;color:#7fff00;background:#ffff00;padding:.1em .2em}
+.pm-ruim .ic{position:absolute;font-size:1.7em;opacity:.95}
+.pm-ruim .e{font-family:Impact,"Arial Black",sans-serif;font-size:.5em;color:#ffffff;position:absolute;right:.4em;bottom:.4em;transform:rotate(4deg)}
+/* post organizado */
+.pm-bom{background:#ffffff;display:flex;flex-direction:column}
+.pm-bom .topo{background:#1f4e8c;color:#fff;padding:.7em .8em .6em}
+.pm-bom .marca{font-size:.55em;letter-spacing:.12em;font-weight:700;opacity:.9}
+.pm-bom .tit{font-size:1.45em;font-weight:900;line-height:1.05;margin-top:.15em}
+.pm-bom .meio{flex:1;padding:.7em .8em;display:flex;flex-direction:column;justify-content:center;gap:.5em}
+.pm-bom .sub{font-size:.95em;font-weight:700;color:#1d2433}
+.pm-bom .selo{align-self:flex-start;background:#f28c28;color:#1d2433;font-weight:900;font-size:.95em;padding:.25em .6em;border-radius:.4em}
+.pm-bom .det{font-size:.7em;color:#3d4659}
+.pm-bom .acao{margin:0 .8em .8em;background:#1f4e8c;color:#fff;font-weight:800;text-align:center;border-radius:.4em;padding:.45em;font-size:.8em}
+/* números de hierarquia */
+.pm .hn{display:inline-grid;place-items:center;width:1.25em;height:1.25em;border-radius:50%;background:#14213d;color:#ffd43b;font:900 .6em/1 "Segoe UI",Arial,sans-serif;margin-right:.35em;vertical-align:middle}
+/* amostras de contraste */
+.pm-sw{width:9.5em;aspect-ratio:auto;padding:.7em .6em;text-align:center;border-radius:.5em}
+.pm-sw .t{font-size:1.15em;font-weight:800}
+.pm-sw .r{font-size:.7em;margin-top:.35em;font-weight:700;background:#ffffffd9;color:#1d2433;border-radius:.3em;padding:.1em .3em;display:inline-block}
+/* amostras de fonte */
+.pm-fo{width:12.5em;aspect-ratio:auto;background:#fff;padding:.8em .7em;text-align:center}
+.pm-fo .t{font-size:1em}
+.f-dec{font-family:"Brush Script MT","Lucida Handwriting","Comic Sans MS",cursive;font-style:italic;letter-spacing:.03em;font-size:1.25em!important}
+.f-sem{font-family:"Segoe UI",Roboto,Arial,sans-serif;font-weight:900}
+.f-fina{font-family:"Segoe UI",Roboto,Arial,sans-serif;font-weight:300;color:#999999;font-size:.62em!important}
+/* comunicado com hierarquia */
+.pm-com{background:#fff;padding:.9em .9em;display:flex;flex-direction:column;gap:.35em;aspect-ratio:auto;width:21em}
+.pm-com .c1{font-size:1.6em;font-weight:900;color:#1f4e8c;line-height:1.05}
+.pm-com .c2{font-size:1.05em;font-weight:800;color:#1d2433}
+.pm-com .c3{font-size:.68em;color:#3d4659}
+.pm-com .c4{align-self:flex-start;background:#f28c28;color:#1d2433;font-weight:900;font-size:.9em;padding:.25em .7em;border-radius:.4em;margin-top:.2em}
+/* cédula (esquema simplificado) */
+.pm-ced{background:#fff;width:16em;aspect-ratio:auto;padding:.7em;display:grid;grid-template-columns:1fr 1.4em 1fr;gap:.35em .3em;align-items:center;font-size:1em}
+.pm-ced .l{text-align:right;font-size:.8em;font-weight:700;border:1px solid #9aa3b2;padding:.25em .35em;border-radius:.2em}
+.pm-ced .r2{text-align:left;font-size:.8em;font-weight:700;border:1px solid #9aa3b2;padding:.25em .35em;border-radius:.2em}
+.pm-ced .h{display:grid;place-items:center}
+.pm-ced .h i{display:block;width:.9em;height:.9em;border-radius:50%;border:2px solid #1d2433;background:#fff}
+.pm-ced .h i.x{background:#c0392b;border-color:#c0392b}
+.pm-ced .seta{font-size:.6em;color:#c0392b;font-weight:800}
+.pm-ced .cap{grid-column:1/-1;font-size:.6em;color:#5b6475;text-align:center}
+@media (prefers-reduced-motion:reduce){.pm *{transition:none!important;animation:none!important}}
+
+</style></head><body>
+<header>
+  <div class="hrow"><span class="t" id="ht">📱 Informática Empresarial · 2º ADM</span><button class="ib" id="zm" aria-label="Diminuir letra">A−</button><button class="ib" id="zp" aria-label="Aumentar letra">A+</button></div>
+  <div class="bar"><i id="pg"></i></div>
+</header>
+<main id="m"></main>
+<nav class="bot" id="nav" hidden><button id="prev">◀</button><button id="home" aria-label="Voltar ao início">☰ Blocos</button><button id="next">▶</button></nav>
+<script>
+const SLIDES = [{"b": "A", "tipo": "hero", "tempo": 1, "icone": "🎨", "kicker": "Informática Empresarial · 2º ADM", "titulo": "Design visual", "sub": "Cores, fontes e equilíbrio gráfico"}, {"b": "A", "tipo": "conteudo", "tempo": 2, "titulo": "O que vamos fazer hoje", "itens": ["Ver como **cores, fontes e organização** mudam o entendimento de uma mensagem", "Analisar se um material tem **leitura fácil, contraste e equilíbrio**", "Usar regras simples de design para deixar uma peça **clara e profissional**"]}, {"b": "A", "tipo": "caso", "tempo": 2, "tag": "Aquecimento", "titulo": "Para começar", "historia": "Pense no último anúncio, post ou cartaz que fez você parar de rolar a tela.", "dados": ["🎨 A cor", "🖼️ A imagem", "🔤 As palavras"], "pergunta": "O que chamou sua atenção **primeiro**?"}, {"b": "A", "tipo": "caso", "tempo": 3, "titulo": "O desafio do Gabriel", "historia": "Gabriel trabalha na **ORION Administração**, uma empresa fictícia. Ele montou um post para divulgar uma promoção e colocou:", "dados": ["5 cores diferentes", "3 tipos de fonte", "letras muito pequenas", "informações coladas umas nas outras", "ícones e imagens em todo canto"], "pergunta": "Os colegas disseram: \"Não sei para onde olhar primeiro\". O problema é **falta de criatividade** ou **falta de organização**?"}, {"b": "A", "tipo": "quadro", "tempo": 3, "titulo": "O post do Gabriel", "cards": [{"cab": "Versão 1", "mock": "<div class=\"pm-col\"><div class=\"pm pm-ruim\" role=\"img\" aria-label=\"Post bagunçado: cinco cores fortes, três fontes, letras pequenas e ícones espalhados\"><div class=\"a\">Super Promoção!!!<\/div><div class=\"b\">ORION ADMINISTRAÇÃO<\/div><div class=\"c\">20% de desconto na consultoria para pequenas empresas, válido até 30 de novembro, para clientes novos e antigos, exceto planos anuais, consulte condições, atendimento de segunda a sexta, fale com a nossa equipe pelo e-mail ou pelo site<\/div><div class=\"d\">contato@orion.exemplo · orion.exemplo · @orion.exemplo<\/div><span class=\"ic\" style=\"right:.3em;top:.3em\">💼<\/span><span class=\"ic\" style=\"left:40%;top:48%\">📊<\/span><span class=\"ic\" style=\"left:.4em;bottom:.5em\">⭐<\/span><span class=\"ic\" style=\"right:35%;bottom:.2em\">🔥<\/span><span class=\"ic\" style=\"right:.2em;top:40%\">💰<\/span><div class=\"e\">CORRA!!!<\/div><\/div><div class=\"pm-lbl\">Post do Gabriel (versão 1)<\/div><\/div>", "pm": 24, "txt": "Se esse post aparecesse no seu celular, você leria ou passaria?"}], "cols": 1, "nota": "📌 Complemento ao material: o post foi criado para esta aula. O material descreve o post, mas não mostra."}, {"b": "A", "tipo": "conteudo", "tempo": 2, "titulo": "Criatividade também precisa de organização", "itens": ["🎨 **Cores**: destacam o que importa e criam identidade", "🔤 **Fontes**: precisam ser fáceis de ler e combinar com a mensagem", "📐 **Organização**: os elementos dividem o espaço com equilíbrio", "👀 **Hierarquia**: o público percebe o que ler primeiro, depois e por último"]}, {"b": "A", "tipo": "conteudo", "tempo": 2, "titulo": "Design visual é comunicação", "itens": ["Organiza as informações e **facilita a leitura**", "Mostra o que é **mais importante** e guia o olhar", "Transmite a **identidade** da empresa", "Na empresa aparece em: apresentações, posts, cartazes, relatórios, e-mails, comunicados e documentos"]}, {"b": "A", "tipo": "quiz", "tempo": 2, "titulo": "Quiz", "pergunta": "Você precisa avisar **200 funcionários** sobre um prazo. Que comunicado funciona melhor?", "opcoes": ["Um texto longo com todos os detalhes no mesmo tamanho de letra", "Um comunicado organizado, com o prazo em destaque e os detalhes depois", "Um comunicado com uma cor diferente em cada frase para chamar atenção", "Uma imagem bonita com o prazo escrito em letra pequena no rodapé"], "correta": 1, "explica": "Com o prazo em destaque, cada pessoa acha a informação principal em segundos. Menos dúvida e menos mensagem perguntando a mesma coisa."}, {"b": "A", "tipo": "conteudo", "tempo": 3, "titulo": "As cores também comunicam", "itens": ["Cores chamam atenção, criam destaque e **reforçam a identidade**", "Regra prática: **cor principal + cor de apoio + cor de destaque**", "Exemplo: 🔵 azul (identidade) · ⚪ branco (fundo) · 🟠 laranja (destaque)", "Evite cor **sem função**: se tudo tem destaque, nada tem destaque"]}, {"b": "A", "tipo": "quadro", "tempo": 3, "titulo": "Contraste: dá para medir", "cards": [{"cab": "Texto branco no laranja", "mock": "<div class=\"pm pm-sw\" style=\"background:#F28C28;color:#FFFFFF\" role=\"img\" aria-label=\"Texto #FFFFFF sobre fundo #F28C28, contraste 2,45 para 1\"><div class=\"t\">Promoção<\/div><div class=\"r\">2,45:1 ❌<\/div><\/div>", "pm": 30, "txt": "Difícil de ler"}, {"cab": "Texto escuro no laranja", "mock": "<div class=\"pm pm-sw\" style=\"background:#F28C28;color:#1D2433\" role=\"img\" aria-label=\"Texto #1D2433 sobre fundo #F28C28, contraste 6,33 para 1\"><div class=\"t\">Promoção<\/div><div class=\"r\">6,33:1 ✅<\/div><\/div>", "pm": 30, "txt": "Passa"}, {"cab": "Texto branco no azul", "mock": "<div class=\"pm pm-sw\" style=\"background:#1F4E8C;color:#FFFFFF\" role=\"img\" aria-label=\"Texto #FFFFFF sobre fundo #1F4E8C, contraste 8,31 para 1\"><div class=\"t\">Promoção<\/div><div class=\"r\">8,31:1 ✅<\/div><\/div>", "pm": 30, "txt": "Passa"}, {"cab": "Amarelo no branco", "mock": "<div class=\"pm pm-sw\" style=\"background:#FFFFFF;color:#FFFF00\" role=\"img\" aria-label=\"Texto #FFFF00 sobre fundo #FFFFFF, contraste 1,07 para 1\"><div class=\"t\">Promoção<\/div><div class=\"r\">1,07:1 ❌<\/div><\/div>", "pm": 30, "txt": "Quase invisível"}], "cols": 4, "nota": "📏 Regra internacional (WCAG): texto comum precisa de pelo menos **4,5:1**; texto grande, **3:1**. Complemento ao material."}, {"b": "A", "tipo": "conteudo", "tempo": 3, "titulo": "Escolher a fonte é escolher como a mensagem será lida", "itens": ["Uma fonte precisa ser **legível**, combinar com o contexto e ser usada **sempre igual**", "✅ Prefira: título destacado, texto em tamanho confortável, **poucas famílias** de fonte", "❌ Evite: fonte enfeitada em texto longo, letra pequena, muitas fontes, pouco contraste", "Exemplo: título com uma fonte de destaque, texto com uma fonte simples"]}, {"b": "A", "tipo": "quadro", "tempo": 2, "titulo": "Lembrete para a equipe", "cards": [{"cab": "Qual fonte para este título?", "mock": "<div class=\"pm pm-fo\"><div class=\"t f-dec\">REUNIÃO DE EQUIPE – SEXTA-FEIRA<\/div><div class=\"pm-lbl\">A<\/div><\/div><div class=\"pm pm-fo\"><div class=\"t f-sem\">REUNIÃO DE EQUIPE – SEXTA-FEIRA<\/div><div class=\"pm-lbl\">B<\/div><\/div><div class=\"pm pm-fo\"><div class=\"t f-fina\">REUNIÃO DE EQUIPE – SEXTA-FEIRA<\/div><div class=\"pm-lbl\">C<\/div><\/div>", "pm": 30, "txt": "O que esse título precisa transmitir?"}], "cols": 1}, {"b": "A", "tipo": "conteudo", "tempo": 2, "titulo": "Equilíbrio gráfico", "itens": ["Nenhum elemento pode parecer estar **brigando pelo espaço**", "Observe: tamanho, posição, espaçamento, alinhamento, imagens, textos e cores", "Pense numa balança: ⚠️ muito texto · ⚠️ muitas imagens · ⚠️ muitas cores · ⚠️ pouco espaço", "Equilíbrio bom deixa o olho **percorrer** a informação sem esforço"]}, {"b": "A", "tipo": "quadro", "tempo": 3, "titulo": "Hierarquia visual na prática", "cards": [{"cab": "Comunicado", "mock": "<div class=\"pm pm-com\" role=\"img\" aria-label=\"Comunicado da Feira de Profissões com quatro níveis de leitura numerados\"><div class=\"c1\"><span class=\"hn\">1<\/span>FEIRA DE PROFISSÕES<\/div><div class=\"c2\"><span class=\"hn\">2<\/span>25 de setembro · 19h<\/div><div class=\"c3\"><span class=\"hn\">3<\/span>Local: ginásio da escola. Programação: palestras, oficinas e estandes dos cursos. Traga um documento com foto.<\/div><div class=\"c4\"><span class=\"hn\">4<\/span>Inscreva-se!<\/div><\/div>", "pm": 30, "txt": "Tamanho, cor, contraste e posição mostram a ordem de leitura."}], "cols": 1}, {"b": "A", "tipo": "caso", "tempo": 3, "tag": "Caso real · deu errado", "titulo": "A cédula borboleta (EUA, 2000)", "historia": "Na eleição para presidente dos EUA em 2000, o condado de Palm Beach, na Flórida, usou uma cédula com nomes **dos dois lados** e os furos para marcar **no meio**. O segundo nome da esquerda era o do candidato democrata, mas o segundo furo marcava outro candidato.", "dados": ["Estudo de 2001: **mais de 2.000** eleitores democratas votaram por engano em outro candidato", "Diferença final no estado inteiro: **537 votos**"], "pergunta": "Que regra de design a cédula quebrou?", "mock": "<div class=\"pm pm-ced\" role=\"img\" aria-label=\"Esquema: nomes dos dois lados e furos no meio; o segundo nome da esquerda não corresponde ao segundo furo\"><div class=\"l\">1 · Bush<\/div><div class=\"h\"><i><\/i><\/div><div><\/div><div><\/div><div class=\"h\"><i class=\"x\"><\/i><\/div><div class=\"r2\">Buchanan · 2<\/div><div class=\"l\">3 · Gore<\/div><div class=\"h\"><i><\/i><\/div><div><\/div><div><\/div><div class=\"h\"><i><\/i><\/div><div class=\"r2\">outros · 4<\/div><div class=\"cap\">Esquema simplificado feito para esta aula. Não é a cédula original.<\/div><\/div>", "pm": 26, "fonte": "Fontes: Wand et al., American Political Science Review, dez. 2001 · FEC, resultados oficiais de 2000 · Universidade de Washington, iSchool, 2016", "fonte_url": "https://www.cambridge.org/core/journals/american-political-science-review/article/butterfly-did-it-the-aberrant-vote-for-buchanan-in-palm-beach-county-florida/90253BB8ADFD43F862FCBFA4F0BF00A3"}, {"b": "A", "tipo": "caso", "tempo": 2, "tag": "Caso real · deu certo", "titulo": "Um site do governo ganhou prêmio de design", "historia": "O **GOV.UK** juntou os sites do governo do Reino Unido em um endereço só. Em 2013, ganhou o prêmio **Design do Ano** do Design Museum, de Londres, concorrendo com moda, móveis e arquitetura.", "dados": ["Os jurados elogiaram um design **bem pensado e discreto**", "Objetivo da equipe: serviços tão bons que as pessoas **preferissem** usar"], "pergunta": "Por que um site \"sem enfeite\" ganharia um prêmio de design?", "fonte": "Fontes: blog do Government Digital Service (17 abr. 2013) · Dezeen (16 abr. 2013) · Design Week (abr. 2013)", "fonte_url": "https://gds.blog.gov.uk/2013/04/17/gov-uk-wins-design-of-the-year-2013/"}, {"b": "A", "tipo": "quiz", "tempo": 2, "titulo": "Quiz", "pergunta": "Qual alternativa é uma **boa prática** de design visual?", "opcoes": ["Usar muitas fontes para deixar o material mais criativo", "Usar uma cor diferente em quase todas as informações", "Organizar cores, fontes, espaços e elementos com equilíbrio, priorizando a leitura", "Colocar o máximo de informação possível para aproveitar o espaço"], "correta": 2, "explica": "Design bom não depende da quantidade de elementos, e sim de como eles são organizados. **Design = estética + organização + comunicação.**"}, {"b": "A", "tipo": "atividade", "tempo": 8, "titulo": "Arrume o post do Gabriel", "passos": ["Escolha **3 cores**: principal, apoio e destaque", "Escolha **1 fonte** para o título e, se quiser, outra para o texto (no máximo 2)", "Numere a ordem de leitura: **1** título · **2** oferta · **3** detalhes · **4** contato", "Desenhe o post no caderno (ou monte no celular, se o professor liberar)", "Escreva **uma frase** justificando uma das suas escolhas"], "resposta_mock": "<div class=\"pm-col\"><div class=\"pm pm-bom\" role=\"img\" aria-label=\"Post organizado: fundo branco, faixa azul com o título, selo laranja com o desconto e botão de contato\"><div class=\"topo\"><div class=\"marca\">ORION ADMINISTRAÇÃO<\/div><div class=\"tit\">Consultoria para pequenas empresas<\/div><\/div><div class=\"meio\"><span class=\"selo\">20% de desconto<\/span><div class=\"sub\">Até 30 de novembro<\/div><div class=\"det\">Vale para clientes novos e antigos. Planos anuais ficam fora.<\/div><\/div><div class=\"acao\">Fale com a gente: contato@orion.exemplo<\/div><\/div><div class=\"pm-lbl\">Post do Gabriel (versão 2)<\/div><\/div>"}, {"b": "A", "tipo": "quiz", "tempo": 1, "titulo": "Quiz", "pergunta": "Uma apresentação pode ser **bonita** e, mesmo assim, ser **ruim**?", "opcoes": ["Não: se é bonita, comunica bem", "Sim: pode ter cores e imagens legais e ainda esconder a informação principal", "Não: beleza e clareza são a mesma coisa", "Sim, mas só se tiver texto demais"], "correta": 1, "explica": "Material bonito pode dificultar a leitura ou não deixar claro o que importa. Beleza ajuda, mas não substitui organização."}, {"b": "A", "tipo": "conteudo", "tempo": 1, "titulo": "Resumo da aula", "itens": ["🎨 Cores organizam e destacam · 🔤 Fontes precisam ser legíveis", "⚖️ Equilíbrio divide o espaço · 👀 Hierarquia guia o olhar", "📏 Contraste se mede: 4,5:1 para texto comum", "💼 Na empresa, design também é comunicação"]}], BLOCOS = [{"id": "A", "nome": "Aula 1 · Design visual: cores, fontes e equilíbrio"}], HASH = {"A": "7cdabe563fbbf6d3b2aa6501dfac2d271c513d2ca43de95c72f46c8c37567507", "TODOS": "1bc0f4fbf7e2129774d14187aa512b8c8ea9ef4ddafdc54fcc9cdffadf6eeace"}, SAL = 'info2adm_ieel';
+/* ---------- compartilhado: realce de Python + renderização de slides + sincronização ---------- */
+const SYNC_KEY = 'aula_info2adm_ieel_v1';
+
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function md(s) {
+  return esc(s)
+    .replace(/`([^`]+)`/g, '<code class="ic">$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+}
+
+const PY_KW = new Set(['if','else','elif','for','while','def','return','import','from','in','and','or','not','True','False','None']);
+const PY_BI = new Set(['print','input','int','str','float','len']);
+function hlStr(tok) {
+  const isF = /^[fF]/.test(tok);
+  const body = isF ? tok.slice(1) : tok;
+  let html = isF ? '<span class="t-kw">' + tok[0] + '</span>' : '';
+  if (!isF) return html + '<span class="t-str">' + esc(body) + '</span>';
+  return html + body.split(/(\{[^{}]*\})/).map(p =>
+    /^\{[^{}]*\}$/.test(p)
+      ? '<span class="t-brace">{</span><span class="t-var">' + esc(p.slice(1, -1)) + '</span><span class="t-brace">}</span>'
+      : '<span class="t-str">' + esc(p) + '</span>'
+  ).join('');
+}
+function hl(src) {
+  const re = /(#[^\n]*)|([fF]?"(?:[^"\\\n]|\\.)*"|[fF]?'(?:[^'\\\n]|\\.)*'|[fF]?"(?:[^"\\\n]|\\.)*|[fF]?'(?:[^'\\\n]|\\.)*)|([A-Za-z_À-ÿ][A-Za-z0-9_À-ÿ]*)|(\d+(?:\.\d+)?)|(\/\/|\*\*|==|!=|<=|>=)|([\s\S])/g;
+  let out = '', m;
+  while ((m = re.exec(src))) {
+    if (m[1]) out += '<span class="t-com">' + esc(m[1]) + '</span>';
+    else if (m[2]) out += hlStr(m[2]);
+    else if (m[3]) {
+      const w = m[3];
+      if (/^[fF]$/.test(w) && /["']/.test(src[re.lastIndex] || '')) { out += esc(w); }
+      else out += PY_KW.has(w) ? '<span class="t-kw">' + w + '</span>'
+        : PY_BI.has(w) ? '<span class="t-fn">' + w + '</span>'
+        : '<span class="t-id">' + esc(w) + '</span>';
+    }
+    else if (m[4]) out += '<span class="t-num">' + m[4] + '</span>';
+    else if (m[5]) out += '<span class="t-op">' + esc(m[5]) + '</span>';
+    else out += /[=+\-*/%<>]/.test(m[6]) ? '<span class="t-op">' + esc(m[6]) + '</span>' : esc(m[6]);
+  }
+  return out;
+}
+function codeBox(src, lang) {
+  const body = lang === 'txt' ? esc(src) : hl(src);
+  return '<div class="code"><div class="code-bar"><span class="play">▶</span><span class="lang">' + (lang === 'txt' ? 'Portugol' : 'Python') + '</span></div><pre>' + body + '</pre></div>';
+}
+function outBox(txt, isErr) {
+  return '<div class="out' + (isErr ? ' err' : '') + '"><span class="out-lbl">' + (isErr ? 'Erro' : 'Saída') + '</span><pre>' + esc(txt) + '</pre></div>';
+}
+
+function blocoNome(id) { const b = BLOCOS.find(x => x.id === id); return b ? b.nome : ''; }
+
+/* ---------- digitação do código ---------- */
+function temDigitacao(s) { return s.tipo === 'conteudo' && !!s.code; }
+function passosDigitacao(s) { const p = []; s.code.split('\n').forEach((l, k) => { if (l.trim()) p.push(k); }); return p; }
+function totalPassos(s) { return passosDigitacao(s).length + (s.out ? 1 : 0); }
+function codeDigitando(s, dig, animar) {
+  const linhas = s.code.split('\n'), p = passosDigitacao(s);
+  const ate = dig > 0 ? p[Math.min(dig, p.length) - 1] : -1, vis = [];
+  for (let k = 0; k <= ate; k++) {
+    if (animar && dig <= p.length && k === ate) vis.push('<span class="tw" data-t="' + esc(linhas[k]) + '" data-h="' + esc(hl(linhas[k])) + '"></span>');
+    else vis.push(hl(linhas[k]));
+  }
+  const live = vis.join('\n') + (dig < p.length ? '<span class="caret">▌</span>' : '');
+  let html = '<div class="code"><div class="code-bar"><span class="play">▶</span><span class="lang">Python</span></div><pre class="stack"><span class="ghost">' + hl(s.code) + '</span><span class="live">' + live + '</span></pre></div>';
+  if (s.out) html += outBox(s.out).replace('class="out"', 'class="out ' + (dig > p.length ? 'out-in' : 'out-ghost') + '"');
+  return html;
+}
+function renderSlide(s, idx, revealed, dig, animar) {
+  const n = idx + 1, total = SLIDES.length;
+  const head = s.tipo === 'hero' ? '' :
+    '<div class="s-head"><span class="s-bloco">' + esc(blocoNome(s.b)) + '</span><span class="s-num">' + n + ' / ' + total + '</span></div>';
+  let body = '';
+  if (s.tipo === 'hero') {
+    body = '<div class="hero"><div class="hero-ico">' + s.icone + '</div><div class="hero-k">' + md(s.kicker) + '</div><h1>' + md(s.titulo) + '</h1><div class="hero-sub">' + md(s.sub) + '</div></div>';
+  } else if (s.tipo === 'conteudo') {
+    const itens = '<ul class="itens">' + s.itens.map(i => '<li>' + md(i) + '</li>').join('') + '</ul>';
+    if (s.code) {
+      const cod = dig === undefined || dig === null ? codeBox(s.code) + (s.out ? outBox(s.out) : '') : codeDigitando(s, dig, animar);
+      body = '<h2>' + md(s.titulo) + '</h2><div class="cols' + (s.code.split('\n').length > 3 ? ' wide-code' : '') + '"><div>' + itens + '</div><div>' + cod + '</div></div>';
+    } else body = '<h2>' + md(s.titulo) + '</h2>' + itens.replace('class="itens"', 'class="itens big"');
+  } else if (s.tipo === 'caso') {
+    body = '<h2><span class="tag tag-caso">' + esc(s.tag || 'Situação-problema') + '</span> ' + md(s.titulo) + '</h2>' +
+      '<div class="caso">' + (s.mock ? '<div class="caso-cols"><div>' : '') + '<p class="hist">' + md(s.historia) + '</p><ul class="dados">' + s.dados.map(d => '<li>' + md(d) + '</li>').join('') + '</ul>' + (s.mock ? '</div><div class="pm-wrap"' + (s.pm ? ' style="--pm:' + s.pm + 'px"' : '') + '>' + s.mock + '</div></div>' : '') +
+      '<div class="perg">❓ ' + md(s.pergunta) + '</div>' + (s.fonte ? '<div class="fonte">' + md(s.fonte) + '</div>' : '') + '</div>';
+  } else if (s.tipo === 'quadro') {
+    const cols = s.cols || Math.min(s.cards.length, 4);
+    body = '<h2>' + md(s.titulo) + '</h2><div class="quadro" style="grid-template-columns:repeat(' + cols + ',1fr)">' +
+      s.cards.map(c => '<div class="card' + (c.erro ? ' card-err' : '') + '"><div class="card-cab">' + md(c.cab) + '</div>' +
+        (c.big ? '<div class="card-big">' + esc(c.big) + '</div>' : '') +
+        (c.mock ? '<div class="pm-wrap"' + (c.pm ? ' style="--pm:' + c.pm + 'px"' : '') + '>' + c.mock + '</div>' : '') + (c.code ? codeBox(c.code, c.lang) : '') + (c.res ? outBox(c.res, c.erro) : '') +
+        (c.txt ? '<div class="card-txt">' + md(c.txt) + '</div>' : '') + '</div>').join('') + '</div>' +
+      (s.nota ? '<div class="nota">' + md(s.nota) + '</div>' : '');
+  } else if (s.tipo === 'atividade') {
+    const passos = '<ol class="passos">' + s.passos.map(p => '<li>' + md(p) + '</li>').join('') + '</ol>';
+    const resp = s.resposta_mock ? (revealed ? '<div class="resp"><div class="resp-lbl">✅ Uma resposta possível</div><div class="pm-wrap">' + s.resposta_mock + '</div></div>' : '<div class="resp-wait">🔒 A resposta aparece no final</div>') : s.resposta ? (revealed ? '<div class="resp"><div class="resp-lbl">✅ Uma resposta possível</div>' + codeBox(s.resposta) + outBox(s.out) + '</div>'
+      : '<div class="resp-wait">🔒 A resposta aparece no final</div>') : '';
+    body = '<h2><span class="tag tag-ativ">Mãos à obra · ' + s.tempo + ' min</span> ' + md(s.titulo) + '</h2>' +
+      (s.resposta || s.resposta_mock ? '<div class="cols"><div>' + passos + '</div><div>' + resp + '</div></div>' : passos);
+  } else if (s.tipo === 'quiz') {
+    const L = 'ABCD';
+    const ops = '<div class="ops">' + s.opcoes.map((o, k) => {
+      const cls = revealed ? (k === s.correta ? ' ok' : ' no') : '';
+      return '<div class="op' + cls + '"><span class="op-l">' + L[k] + '</span>' + (s.opcoes_code ? '<code class="op-c">' + esc(o) + '</code>' : '<span>' + esc(o) + '</span>') + '</div>';
+    }).join('') + '</div>';
+    body = '<h2><span class="tag tag-quiz">Quiz</span> ' + md(s.pergunta) + '</h2>' +
+      (s.code ? '<div class="cols quiz-cols"><div>' + codeBox(s.code) + '</div><div>' + ops + '</div></div>' : ops) +
+      (revealed ? '<div class="explica">💡 ' + md(s.explica) + '</div>' : '');
+  }
+  return '<div class="slide t-' + s.tipo + '">' + head + '<div class="s-body"><div class="s-inner">' + body + '</div></div></div>';
+}
+
+/* reduz o conteúdo se não couber no slide (rede de segurança) */
+function fitBody(root) {
+  const b = root.querySelector('.s-body'), inn = root.querySelector('.s-inner');
+  if (!b || !inn) return;
+  let z = 1; inn.style.zoom = 1;
+  while (inn.getBoundingClientRect().height > b.getBoundingClientRect().height + 1 && z > 0.66) { z -= 0.03; inn.style.zoom = z; }
+}
+/* --- estado compartilhado: slide atual, respostas reveladas, linhas digitadas --- */
+function salvar(p) { st = writeSync(Object.assign({ i: st.i || 0, rev: st.rev || {}, dig: st.dig || {} }, p)); return st; }
+function digDe(x, i) { return (x.dig || {})[i] || 0; }
+function avancar() {
+  const i = st.i || 0, s = SLIDES[i], d = digDe(st, i);
+  if (temDigitacao(s) && d < totalPassos(s)) { const D = Object.assign({}, st.dig || {}); D[i] = d + 1; return salvar({ dig: D }); }
+  return i < SLIDES.length - 1 ? salvar({ i: i + 1 }) : st;
+}
+function voltar() { const i = st.i || 0; return i > 0 ? salvar({ i: i - 1 }) : st; }
+function irPara(i) { return salvar({ i: Math.max(0, Math.min(SLIDES.length - 1, i)) }); }
+function zerarAula() { st = writeSync({ i: 0, rev: {}, dig: {} }); return st; }
+function alternarRev() { const rev = Object.assign({}, st.rev || {}); rev[st.i || 0] = !rev[st.i || 0]; return salvar({ rev }); }
+function definirDig(v) { const D = Object.assign({}, st.dig || {}); D[st.i || 0] = v; return salvar({ dig: D }); }
+/* --- sincronização entre as duas janelas (mesma pasta, mesmo navegador) --- */
+function readSync() {
+  try { return JSON.parse(localStorage.getItem(SYNC_KEY)) || { i: 0, rev: {}, t: 0 }; }
+  catch (e) { return { i: 0, rev: {}, t: 0 }; }
+}
+function writeSync(st) {
+  st.t = Date.now();
+  try { localStorage.setItem(SYNC_KEY, JSON.stringify(st)); } catch (e) {}
+  return st;
+}
+function onSync(cb) {
+  let last = -1;
+  const check = () => { const st = readSync(); if (st.t !== last) { last = st.t; cb(st); } };
+  window.addEventListener('storage', e => { if (e.key === SYNC_KEY) check(); });
+  setInterval(check, 500);
+  check();
+}
+
+const KEY = 'aluno_info2adm_ieel', $ = s => document.querySelector(s);
+let st = { lib: {}, i: null, ans: {}, z: 1, cod: '' };
+try { st = Object.assign(st, JSON.parse(localStorage.getItem(KEY)) || {}); } catch (e) {}
+const salvarA = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
+const doBloco = id => SLIDES.map((s, k) => [s, k]).filter(([s]) => s.b === id).map(([, k]) => k);
+const norm = c => String(c).toUpperCase().normalize('NFD').replace(/[^A-Z0-9]/g, '');
+async function sha(t) { const h = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)); return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2, '0')).join(''); }
+
+/* ---------- tela inicial: blocos ---------- */
+function inicio() {
+  st.i = null; salvarA(); $('#nav').hidden = true; $('#pg').style.width = '0';
+  let h = '<h1>Informática Empresarial · 2º ADM</h1><p>Cada bloco abre com o <b>código que o professor escreve no quadro</b>. Siga no seu ritmo e responda aos quizzes. As respostas ficam salvas neste aparelho.</p>';
+  BLOCOS.forEach(b => {
+    const ks = doBloco(b.id), qz = ks.filter(k => SLIDES[k].tipo === 'quiz'), feitos = qz.filter(k => k in st.ans), certos = qz.filter(k => st.ans[k] === SLIDES[k].correta);
+    h += '<div class="pn bl"><span class="nm">' + (st.lib[b.id] ? '🔓 ' : '🔒 ') + esc(b.nome) + '</span>';
+    if (st.lib[b.id]) h += '<span class="st">' + ks.length + ' telas' + (qz.length ? ' · quizzes: ' + certos.length + ' certos de ' + qz.length + (feitos.length < qz.length ? ' (' + (qz.length - feitos.length) + ' sem responder)' : '') : '') + '</span><button class="btn" data-abre="' + b.id + '">Abrir</button>';
+    else h += '<div class="row"><input data-cod="' + b.id + '" placeholder="Código do quadro" autocomplete="off" autocapitalize="characters" aria-label="Código do bloco ' + esc(b.nome) + '"><button class="btn am" data-lib="' + b.id + '">Liberar</button></div><span class="msg" id="msg-' + b.id + '"></span>';
+    h += '</div>';
+  });
+  h += '<div class="pn"><b>Links</b><p style="margin:6px 0 0"><a href="guia.html">📖 Guia do Jogador</a> · <a href="jogo.html">🏢 Jogo</a> · <a href="index.html">🏠 Site</a></p></div>';
+  $('#m').innerHTML = h; scrollTo(0, 0);
+}
+async function liberar(id) {
+  const inp = document.querySelector('[data-cod="' + id + '"]'), m = $('#msg-' + id), c = norm(inp.value);
+  if (!c) { m.className = 'msg no'; m.textContent = 'Digite o código.'; return; }
+  if (!window.crypto || !crypto.subtle) { m.className = 'msg no'; m.textContent = 'Abra pelo link do site (https).'; return; }
+  if (await sha(SAL + '|TODOS|' + c) === HASH.TODOS) { BLOCOS.forEach(b => st.lib[b.id] = true); salvarA(); inicio(); return; }
+  if (await sha(SAL + '|' + id + '|' + c) === HASH[id]) { st.lib[id] = true; salvarA(); abrir(doBloco(id)[0]); return; }
+  m.className = 'msg no'; m.textContent = 'Código não confere. Confira no quadro.';
+}
+$('#m').addEventListener('click', e => {
+  const t = e.target.closest('button'); if (!t) return;
+  if (t.dataset.lib) liberar(t.dataset.lib);
+  else if (t.dataset.abre) abrir(doBloco(t.dataset.abre)[0]);
+  else if (t.dataset.op !== undefined) responder(+t.dataset.op);
+});
+$('#m').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.dataset.cod) liberar(e.target.dataset.cod); });
+
+/* ---------- telas da aula ---------- */
+let RUNS = [];
+function cod(src, lang) {
+  if (lang === 'txt') return '<div class="code"><div class="cb"><span>Portugol</span></div><pre>' + esc(src) + '</pre></div>';
+  RUNS.push(src);
+  return '<div class="code"><pre>' + esc(src) + '</pre></div>';
+}
+const saidaBox = (t, err) => '<pre class="o' + (err ? ' err' : '') + '">' + esc(t) + '</pre>';
+function tela(s, i) {
+  RUNS = [];
+  if (s.tipo === 'hero') return '<div class="hero"><div class="ic">' + s.icone + '</div><div class="k">' + md(s.kicker) + '</div><h1>' + md(s.titulo) + '</h1><div class="sub">' + md(s.sub) + '</div></div>';
+  if (s.tipo === 'conteudo') return '<h2>' + md(s.titulo) + '</h2><ul class="it">' + s.itens.map(t => '<li>' + md(t) + '</li>').join('') + '</ul>' +
+    (s.code ? cod(s.code) + (s.out ? '<details><summary>Pense antes: o que aparece? Ver a saída</summary>' + saidaBox(s.out) + '</details>' : '') : '');
+  if (s.tipo === 'caso') return '<span class="tag tg-caso">' + esc(s.tag || 'Situação-problema') + '</span><h2>' + md(s.titulo) + '</h2><p>' + md(s.historia) + '</p>' + (s.mock ? '<div class="pm-wrap">' + s.mock + '</div>' : '') + '<ul class="it">' + s.dados.map(t => '<li>' + md(t) + '</li>').join('') + '</ul><div class="perg">❓ ' + md(s.pergunta) + '</div>' + (s.fonte ? '<div class="fonte">' + (s.fonte_url ? '<a href="' + esc(s.fonte_url) + '" target="_blank" rel="noopener">' + md(s.fonte) + ' ↗</a>' : md(s.fonte)) + '</div>' : '');
+  if (s.tipo === 'quadro') return '<h2>' + md(s.titulo) + '</h2>' + s.cards.map(c => '<div class="card' + (c.erro ? ' err' : '') + '"><div class="cab">' + md(c.cab) + '</div>' +
+    (c.big ? '<div class="big">' + esc(c.big) + '</div>' : '') + (c.mock ? '<div class="pm-wrap">' + c.mock + '</div>' : '') + (c.code ? cod(c.code, c.lang) : '') + (c.res ? saidaBox(c.res, c.erro) : '') + (c.txt ? '<div>' + md(c.txt) + '</div>' : '') + '</div>').join('') +
+    (s.nota ? '<div class="nota">' + md(s.nota) + '</div>' : '');
+  if (s.tipo === 'atividade') return '<span class="tag tg-at">Mãos à obra · ' + s.tempo + ' min</span><h2>' + md(s.titulo) + '</h2><ol>' + s.passos.map(t => '<li>' + md(t) + '</li>').join('') + '</ol>' +
+    (s.resposta_mock ? '<details><summary>Já tentei. Ver uma resposta possível</summary><div class="pm-wrap">' + s.resposta_mock + '</div></details>' : '');
+  if (s.tipo === 'quiz') {
+    const r = st.ans[i], L = 'ABCD';
+    return '<span class="tag tg-q">Quiz</span><h2>' + md(s.pergunta) + '</h2>' + (s.code ? cod(s.code) : '') + '<div class="ops">' +
+      s.opcoes.map((o, k) => '<button class="op' + (r === undefined ? '' : k === s.correta ? ' ok' : k === r ? ' no' : '') + '" data-op="' + k + '"' + (r === undefined ? '' : ' disabled') + '><b>' + L[k] + '</b><span>' + (s.opcoes_code ? '<code class="ic">' + esc(o) + '</code>' : esc(o)) + '</span></button>').join('') + '</div>' +
+      (r === undefined ? '' : '<div class="exp">' + (r === s.correta ? '✅ Isso.' : '❌ Não é essa.') + ' ' + md(s.explica) + '</div>');
+  }
+  return '';
+}
+function abrir(i) {
+  st.i = i; salvarA();
+  const s = SLIDES[i], ks = doBloco(s.b), p = ks.indexOf(i), b = BLOCOS.find(x => x.id === s.b);
+  $('#m').innerHTML = '<div class="meta"><span>' + esc(b.nome) + '</span><span>' + (p + 1) + ' / ' + ks.length + '</span></div>' + tela(s, i);
+  $('#nav').hidden = false; $('#pg').style.width = (100 * (p + 1) / ks.length) + '%';
+  $('#prev').disabled = p === 0;
+  $('#next').textContent = p === ks.length - 1 ? 'Fim do bloco ✔' : '▶';
+  scrollTo(0, 0);
+}
+function responder(k) { const i = st.i; if (i === null || i in st.ans) return; st.ans[i] = k; salvarA(); abrir(i); }
+function passo(d) {
+  if (st.i === null) return;
+  const ks = doBloco(SLIDES[st.i].b), p = ks.indexOf(st.i) + d;
+  if (p < 0) return; if (p >= ks.length) return inicio(); abrir(ks[p]);
+}
+$('#prev').onclick = () => passo(-1); $('#next').onclick = () => passo(1); $('#home').onclick = inicio;
+$('#zp').onclick = () => { st.z = Math.min(1.6, +(st.z + .1).toFixed(1)); salvarA(); document.documentElement.style.setProperty('--z', st.z); };
+$('#zm').onclick = () => { st.z = Math.max(.8, +(st.z - .1).toFixed(1)); salvarA(); document.documentElement.style.setProperty('--z', st.z); };
+let x0 = null, y0 = null;
+addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+addEventListener('touchend', e => { if (x0 === null || st.i === null) return; const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; if (Math.abs(dx) > 70 && Math.abs(dx) > 2 * Math.abs(dy)) passo(dx < 0 ? 1 : -1); x0 = null; });
+
+document.documentElement.style.setProperty('--z', st.z);
+if (st.i !== null && SLIDES[st.i] && st.lib[SLIDES[st.i].b]) abrir(st.i); else inicio();
+</script></body></html>
