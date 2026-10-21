@@ -60,7 +60,7 @@ tfoot td{font-weight:800;background:#fff6cc}
       <p>Três fases, uma por aula: design visual, slides institucionais e direitos autorais. Tem exemplos, casos reais, armadilhas e testes rápidos.</p>
       <a class="btn sec" href="guia.html">Abrir o Guia do Estagiário</a></div>
     <div class="card"><span class="n">2º PASSO</span><div class="ic">🏢</div><h2>Jogue a Agência Pixel</h2>
-      <p>Um andar do prédio com perguntas sorteadas sobre o que está no guia. Cada andar vencido vale nota.</p>
+      <p>Quatro andares do prédio com perguntas sorteadas sobre o que está no guia. Cada andar vencido vale nota.</p>
       <a class="btn" href="jogo.html">Entrar na agência</a></div>
     <div class="card"><span class="n">3º PASSO</span><div class="ic">📨</div><h2>Entregue a nota</h2>
       <p id="entrega">No final do jogo, baixe a imagem do placar e entregue no Google Classroom.</p>
@@ -71,7 +71,7 @@ tfoot td{font-weight:800;background:#fff6cc}
     <h2>Regras do jogo</h2>
     <div class="regras">
       <ul>
-        <li>O jogo tem <b>um andar</b>. Cada um sorteia <b>10 perguntas</b> de um banco de 20, e as alternativas mudam de lugar a cada tentativa.</li>
+        <li>O jogo tem <b>quatro andares</b>. Cada um sorteia <b>10 perguntas</b> de um banco de 20, e as alternativas mudam de lugar a cada tentativa.</li>
         <li>Você começa cada andar com <b>3 ❤️</b>. Errou, perde 1 e a pergunta volta para o fim da fila.</li>
         <li>Perdeu os 3? Tenta o andar de novo, com perguntas novas.</li>
         <li>As <b>estrelas</b> do andar são os corações que sobraram.</li>
@@ -81,7 +81,7 @@ tfoot td{font-weight:800;background:#fff6cc}
       <table>
         <thead><tr><th>Andar vencido com</th><th>Vale</th></tr></thead>
         <tbody><tr><td class="st">★★★</td><td>2,5 pontos</td></tr><tr><td class="st">★★☆</td><td>2,0 pontos</td></tr><tr><td class="st">★☆☆</td><td>1,5 ponto</td></tr><tr><td>Não concluído</td><td>0</td></tr></tbody>
-        <tfoot><tr><td>Um andar com ★★★</td><td>2,5</td></tr></tfoot>
+        <tfoot><tr><td>Quatro andares com ★★★</td><td>10,0</td></tr></tfoot>
       </table>
     </div>
   </section>
@@ -236,12 +236,12 @@ function montarLinkFormulario(base, vals) {
     const save = JSON.parse(localStorage.getItem('agencia_pixel_2adm_v1') || 'null');
     if (meta && meta.id && save) {
       const notas = [0, 1.5, 2, 2.5], and = save.andares || {};
-      const st = [1].map(i => (and[i] || {}).stars || 0);
+      const st = [1, 2, 3, 4].map(i => (and[i] || {}).stars || 0);
       const feitos = st.filter(Boolean).length, nota = st.reduce((a, s) => a + notas[s], 0);
       document.getElementById('pE').textContent = ['🎨', '📋', '📣'][meta.hero || 0] || '🎨';
       document.getElementById('pN').textContent = 'Olá, ' + String(meta.id.nome).split(' ')[0] + '!';
-      document.getElementById('pT').textContent = 'Andares vencidos: ' + feitos + ' de 1 · nota até agora: ' + nota.toFixed(1).replace('.', ',');
-      if (feitos === 1 && !save.run) document.getElementById('pB').textContent = '🏆 Ver meu placar';
+      document.getElementById('pT').textContent = 'Andares vencidos: ' + feitos + ' de 4 · nota até agora: ' + nota.toFixed(1).replace('.', ',');
+      if (feitos === 4 && !save.run) document.getElementById('pB').textContent = '🏆 Ver meu placar';
       document.getElementById('prog').style.display = 'flex';
     }
   } catch (e) {}

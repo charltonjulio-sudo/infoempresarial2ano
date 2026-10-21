@@ -135,13 +135,43 @@ pre,code,.ln,.blk,.op code,.code,.out,.real,.mk,#cod,#rcod{font-variant-ligature
 .pm-ced .seta{font-size:.6em;color:#c0392b;font-weight:800}
 .pm-ced .cap{grid-column:1/-1;font-size:.6em;color:#5b6475;text-align:center}
 @media (prefers-reduced-motion:reduce){.pm *{transition:none!important;animation:none!important}}
+/* mini-slides (16:9) */
+.pm-sl{width:22em;aspect-ratio:16/9;background:#fff;padding:.8em 1em;display:flex;flex-direction:column;gap:.4em}
+.pm-sl .st{font-weight:900;font-size:1.05em;color:#1f4e8c}
+.pm-sl .par{font-size:.5em;color:#3d4659;line-height:1.35}
+.pm-sl .blocos{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:.5em}
+.pm-sl .bl{background:#eef3fa;border-radius:.4em;padding:.4em;text-align:center;display:flex;flex-direction:column;gap:.2em;justify-content:center}
+.pm-sl .bl i{font-style:normal;font-size:1.3em}
+.pm-sl .bl b{font-size:.62em;color:#1d2433}
+.pm-sl .bl span{font-size:.5em;color:#3d4659}
+.pm-sl.cafe{background:#fff8ef}
+.pm-sl.cafe .st{color:#7a3e12}
+.pm-sl .faixa{height:.35em;background:linear-gradient(90deg,#7a3e12 0 70%,#e8a33d 70%);border-radius:.2em}
+.pm-sl .big{font-size:1.5em;font-weight:900;color:#7a3e12;line-height:1.05}
+.pm-sl .sm{font-size:.55em;color:#5a4636}
+.pm-sl.cafe .bl{background:#f6e7d3}
+/* ficha de verificação */
+.pm-ficha{width:22em;aspect-ratio:auto;background:#fff;padding:.7em .8em}
+.pm-ficha table{width:100%;border-collapse:collapse;font-size:.62em}
+.pm-ficha th{background:#1f4e8c;color:#fff;text-align:left;padding:.3em .4em}
+.pm-ficha td{border-bottom:1px solid #dfe5ee;padding:.3em .4em;vertical-align:top}
+.pm-ficha td:first-child{font-weight:800;color:#1f4e8c;width:38%}
+.pm-ficha .ttl{font-weight:900;font-size:.85em;margin-bottom:.4em;color:#1d2433}
+/* cartaz com crédito */
+.pm-cartaz{width:16em;aspect-ratio:3/4;background:#ffffff;display:flex;flex-direction:column}
+.pm-cartaz .img{flex:1;background:linear-gradient(160deg,#cfe3f7,#9ec5ea);display:grid;place-items:center;font-size:3em}
+.pm-cartaz .tx{padding:.6em .7em;display:flex;flex-direction:column;gap:.3em}
+.pm-cartaz .t1{font-weight:900;font-size:1.05em;color:#1f4e8c}
+.pm-cartaz .t2{font-size:.62em;color:#3d4659}
+.pm-cartaz .cta{align-self:flex-start;background:#f28c28;color:#1d2433;font-weight:900;font-size:.7em;padding:.2em .6em;border-radius:.3em}
+.pm-cartaz .cred{font-size:.45em;color:#5b6475;border-top:1px solid #dfe5ee;padding-top:.3em}
 
 .page a{color:#1f4e8c}
 nav.top a{color:#fff}
 #leitura p{overflow-wrap:anywhere}
 .btn-colab{color:#1d2433!important}
 </style></head><body><div class="page">
-<nav class="top"><a href="index.html">⬅ Site</a><a href="#inicio">🏠 Início</a><a href="#f1">Fase 1</a><a href="#armadilhas">Armadilhas</a><a href="#leitura">Leitura</a><a href="jogo.html">🏢 Jogo</a></nav>
+<nav class="top"><a href="index.html">⬅ Site</a><a href="#inicio">🏠 Início</a><a href="#f1">Fase 1</a><a href="#f2">Fase 2</a><a href="#f3">Fase 3</a><a href="#armadilhas">Armadilhas</a><a href="#leitura">Leitura</a><a href="jogo.html">🏢 Jogo</a></nav>
 
 <header class="capa" id="inicio">
   <div class="kick">Guia do Estagiário · Informática Empresarial · 2º ADM</div>
@@ -149,7 +179,7 @@ nav.top a{color:#fff}
   <p>Este guia prepara você para as aulas de design visual, slides institucionais e direitos autorais. Cada fase é uma aula. Leia <b>uma fase por vez</b>: dá uns 15 minutos cada.</p>
   <div class="balao" data-who="🎨"><b>Como usar:</b> antes de abrir uma resposta, tente responder de cabeça ou no papel. Errar aqui não tira ponto. É treino para o jogo.</div>
   <div class="box dica"><b>📱 Celular ou computador</b>Este guia e o jogo funcionam no celular. Para as atividades de montar slides, prefira um computador com <b>Google Chrome</b> ou <b>Firefox</b>.</div>
-  <h3>✅ Checklist da Fase 1</h3>
+  <h3>✅ Checklist de habilidades</h3>
   <p class="meta">Marque quando sentir que já sabe. Fica salvo neste navegador.</p>
   <ul class="check" id="check">
     <li><label><input type="checkbox" data-k="c1"><span>Sei explicar por que design visual é comunicação, e não só enfeite</span></label></li>
@@ -158,6 +188,11 @@ nav.top a{color:#fff}
     <li><label><input type="checkbox" data-k="c4"><span>Sei escolher fontes legíveis e usar poucas famílias</span></label></li>
     <li><label><input type="checkbox" data-k="c5"><span>Sei organizar uma peça por hierarquia: primeiro, depois, detalhes, ação</span></label></li>
     <li><label><input type="checkbox" data-k="c6"><span>Sei contar um caso real de design que deu errado e um que deu certo</span></label></li>
+    <li><label><input type="checkbox" data-k="c7"><span>Sei dizer quais elementos formam a identidade visual de uma empresa</span></label></li>
+    <li><label><input type="checkbox" data-k="c8"><span>Sei aplicar os 6 princípios de slide: hierarquia, contraste, alinhamento, proximidade, consistência e texto objetivo</span></label></li>
+    <li><label><input type="checkbox" data-k="c9"><span>Sei que imagem na internet não é automaticamente livre e o que a Lei 9.610/1998 exige</span></label></li>
+    <li><label><input type="checkbox" data-k="c10"><span>Sei a diferença entre CC BY, CC BY-NC e CC BY-ND e como dar crédito (TASL)</span></label></li>
+    <li><label><input type="checkbox" data-k="c11"><span>Sei o que é direito de imagem e quando preciso de autorização</span></label></li>
   </ul>
 </header>
 
@@ -249,6 +284,132 @@ nav.top a{color:#fff}
   </ol></div>
 </section>
 
+
+<!-- ================= FASE 2 ================= -->
+<section class="fase" id="f2">
+  <span class="fase-tag">FASE 2 · AULA 2</span>
+  <h2>Oficina: slides institucionais</h2>
+  <p class="meta">Você vai aprender: o que é identidade visual · os 6 princípios de um slide profissional · como montar 3 slides que apresentam uma empresa</p>
+
+  <h3>🎯 Eficácia antes de tudo</h3>
+  <p>Na administração se separa <b>eficácia</b> (atingir o objetivo) de <b>eficiência</b> (usar bem o tempo e os recursos). Uma apresentação institucional precisa ser eficaz: informar, passar credibilidade e representar a empresa. Slide bonito e confuso não cumpre essa função.</p>
+
+  <h3>🧩 O desafio da Conecta Jovem</h3>
+  <p>Mariana vai apresentar a <b>Conecta Jovem</b> (empresa fictícia) para possíveis parceiros. O primeiro slide tem letras pequenas, 5 cores, 3 fontes e imagens sem relação com os serviços. Metade da equipe quer mais animações; a outra quer reorganizar.</p>
+  <div class="quiz"><b>🧠 Teste rápido</b><ol>
+    <li>O que a Mariana deve fazer primeiro?
+      <details><summary>Ver resposta</summary><p>Definir o <b>objetivo e o público</b>. Depois: 2 ou 3 cores da marca, até 2 fontes, texto enxuto, imagens ligadas aos serviços, alinhamento e revisão em equipe. Animação não resolve letra pequena.</p></details></li>
+  </ol></div>
+
+  <h3>🪪 Identidade visual</h3>
+  <p>É o conjunto de elementos que <b>identifica e diferencia</b> uma organização:</p>
+  <table><tr><th>Elemento</th><th>O que é</th></tr>
+  <tr><td>Logotipo</td><td>O desenho do nome ou da marca</td></tr>
+  <tr><td>Paleta de cores</td><td>As cores que criam reconhecimento</td></tr>
+  <tr><td>Tipografia</td><td>As fontes escolhidas e como elas se combinam</td></tr>
+  <tr><td>Imagens e ícones</td><td>Recursos que apoiam a mensagem</td></tr>
+  <tr><td>Padrão visual</td><td>Os mesmos elementos repetidos em todos os slides</td></tr></table>
+  <div class="box alerta"><b>⚠️ Identidade não é logotipo em todo canto</b>É manter uma linguagem visual que o público reconhece. Uma organização ambiental, por exemplo, pode falar de sustentabilidade sem depender só da cor verde.</div>
+
+  <h3>📐 Os 6 princípios de um slide profissional</h3>
+  <table><tr><th>Princípio</th><th>Na prática</th></tr>
+  <tr><td>1. Hierarquia</td><td>Título, subtítulo e texto em níveis diferentes</td></tr>
+  <tr><td>2. Contraste</td><td>Texto bem diferente do fundo (mínimo 4,5:1)</td></tr>
+  <tr><td>3. Alinhamento</td><td>Elementos nas mesmas linhas e margens</td></tr>
+  <tr><td>4. Proximidade</td><td>O que é do mesmo assunto fica junto</td></tr>
+  <tr><td>5. Consistência</td><td>Mesmas cores, fontes e posições em todos os slides</td></tr>
+  <tr><td>6. Texto objetivo</td><td>Uma ideia central por slide, frases curtas</td></tr></table>
+  <p>Exemplo: em vez de um parágrafo sobre três serviços, use <b>três blocos</b> com nome, benefício e ícone.</p>
+  <div class="pm-wrap" style="--pm:13px"><div class="pm-col"><div class="pm pm-sl" role="img" aria-label="Slide com um parágrafo longo sobre três serviços"><div class="st">Nossos serviços</div><div class="par">A Conecta Jovem oferece mentoria para quem procura o primeiro emprego, com encontros semanais e acompanhamento, além de oficinas de currículo em que ensinamos a montar e revisar o documento, e também a preparação para entrevistas, com simulações e dicas de comunicação para que o candidato se sinta seguro no dia da seleção, tudo com uma equipe dedicada.</div></div><div class="pm-lbl">Antes: um parágrafo</div></div><div class="pm-col"><div class="pm pm-sl" role="img" aria-label="Slide com três blocos: nome, benefício e ícone de cada serviço"><div class="st">Nossos serviços</div><div class="blocos"><div class="bl"><i>🧭</i><b>Mentoria</b><span>Encontros semanais até o 1º emprego</span></div><div class="bl"><i>📄</i><b>Currículo</b><span>Montar e revisar com a equipe</span></div><div class="bl"><i>🎤</i><b>Entrevista</b><span>Simulações para chegar seguro</span></div></div></div><div class="pm-lbl">Depois: três blocos</div></div></div>
+  <p>PowerPoint, Google Apresentações e Canva ajudam com temas, modelos e trabalho em equipe. Mas <b>a ferramenta não substitui as decisões de comunicação</b>.</p>
+
+  <h3>📰 Dois casos reais</h3>
+  <div class="box erro"><b>❌ Deu errado: a Gap e o logotipo de uma semana (2010)</b>Em outubro de 2010, a marca de roupas Gap trocou o logotipo clássico por um novo. Os clientes reclamaram em massa nas redes sociais e, cerca de uma semana depois, a empresa voltou ao antigo, admitindo que não tinha feito a mudança do jeito certo. Lição: a identidade é o que o cliente reconhece; mudar exige cuidado.
+    <p style="margin:8px 0 0;font-size:15px">Fontes: <a href="https://money.cnn.com/2010/10/12/news/companies/gap_logo/index.htm" target="_blank" rel="noopener">CNNMoney (out. 2010)</a> · <a href="https://www.csmonitor.com/Business/new-economy/2010/1012/New-Gap-logo-withdrawn-The-blue-box-lives-on" target="_blank" rel="noopener">The Christian Science Monitor (12 out. 2010)</a></p></div>
+  <div class="box dica"><b>✅ Deu certo: o símbolo do metrô de Londres</b>O círculo cortado por uma barra com o nome da estação aparece nas plataformas desde <b>1908</b>. Mais de 100 anos depois, ainda identifica o transporte da cidade. Lição: repetir o padrão cria reconhecimento.
+    <p style="margin:8px 0 0;font-size:15px">Fontes: <a href="https://tfl.gov.uk/corporate/about-tfl/culture-and-heritage/art-and-design/the-roundel" target="_blank" rel="noopener">Transport for London</a> · <a href="https://www.ltmuseum.co.uk/collections/projects-partnerships/roundel" target="_blank" rel="noopener">London Transport Museum</a></p></div>
+
+  <div class="boss"><h3>🏆 Missão da fase: a cara de uma empresa</h3>
+    <div class="passo"><span class="n">1</span><div>Em grupo (3 a 5), escolham: cafeteria, loja sustentável, agência digital ou uma empresa inventada.</div></div>
+    <div class="passo"><span class="n">2</span><div>Definam nome, público, <b>2 ou 3 cores</b> e <b>até 2 fontes</b>.</div></div>
+    <div class="passo"><span class="n">3</span><div><b>Slide 1</b>: nome, símbolo e frase · <b>Slide 2</b>: produtos e benefícios · <b>Slide 3</b>: diferencial e contato fictício.</div></div>
+    <div class="passo"><span class="n">4</span><div>Revisem com os 6 princípios e a ortografia.</div></div>
+    <div class="passo"><span class="n">5</span><div>Expliquem uma escolha visual: ela ajuda o público a entender a empresa?</div></div>
+    <details><summary>Ver um exemplo possível</summary><div class="pm-wrap" style="--pm:12px;margin-top:10px"><div class="pm-col"><div class="pm pm-sl cafe"><div class="faixa"></div><div class="big">☕ Café Ponto</div><div class="sm">Café bom perto do seu trabalho</div></div><div class="pm-lbl">Slide 1 · nome, símbolo e frase</div></div><div class="pm-col"><div class="pm pm-sl cafe"><div class="st">O que servimos</div><div class="blocos"><div class="bl"><i>☕</i><b>Café coado</b><span>Pronto em 3 min</span></div><div class="bl"><i>🥪</i><b>Lanches</b><span>Feitos no dia</span></div><div class="bl"><i>📦</i><b>Delivery</b><span>Para escritórios</span></div></div></div><div class="pm-lbl">Slide 2 · produtos e benefícios</div></div><div class="pm-col"><div class="pm pm-sl cafe"><div class="st">Por que o Café Ponto?</div><div class="sm">Grãos de produtores do Paraná · Cartão fidelidade</div><div class="big" style="font-size:.9em">contato@cafeponto.exemplo</div></div><div class="pm-lbl">Slide 3 · diferencial e contato</div></div></div></details>
+  </div>
+</section>
+
+<!-- ================= FASE 3 ================= -->
+<section class="fase" id="f3">
+  <span class="fase-tag">FASE 3 · AULA 3</span>
+  <h2>Ética e direitos autorais</h2>
+  <p class="meta">Você vai aprender: o que a lei diz sobre usar imagens e textos · a diferença entre crédito, licença e autorização · como funcionam as licenças Creative Commons · o que é direito de imagem</p>
+
+  <h3>📸 A publicação da Júlia</h3>
+  <p>Júlia divulgou a feira de empreendedorismo da escola. Para terminar rápido, copiou uma imagem de um site, usou um trecho de texto de outro autor e publicou uma foto de colegas <b>sem perguntar</b>. A publicação fez sucesso, até alguém avisar que a imagem tinha direitos autorais e um colega pedir para tirar a foto dele.</p>
+  <div class="quiz"><b>🧠 Teste rápido</b><ol>
+    <li>Júlia agiu certo?
+      <details><summary>Ver resposta</summary><p>Não, mesmo com boa intenção. Ela deveria verificar a origem e as licenças, dar o crédito, atender o pedido do colega e refazer a publicação com imagens próprias autorizadas ou com licença compatível.</p></details></li>
+  </ol></div>
+
+  <h3>⚖️ O que a lei diz</h3>
+  <p>No Brasil, os direitos autorais estão na <b>Lei nº 9.610/1998</b>:</p>
+  <table><tr><th>Artigo</th><th>O que diz (resumo)</th></tr>
+  <tr><td>Art. 7º</td><td>Fotografias, desenhos e ilustrações são obras protegidas</td></tr>
+  <tr><td>Art. 29</td><td>Reproduzir ou adaptar a obra depende de autorização prévia e expressa do autor</td></tr>
+  <tr><td>Art. 24</td><td>O autor tem direito de ter seu nome indicado</td></tr>
+  <tr><td>Art. 46</td><td>Exceções, como citar trechos para estudo ou crítica, com o nome do autor e a origem</td></tr></table>
+  <div class="box alerta"><b>⚠️ Mudar as cores não torna a foto sua</b>Adaptar também precisa de autorização. E estar na internet não quer dizer estar livre: o rodapé do site da Agência Brasil, por exemplo, diz "Todos os direitos reservados pela EBC".</div>
+
+  <h3>🔗 Autoria, crédito, licença e autorização</h3>
+  <table><tr><th>Palavra</th><th>Quer dizer</th></tr>
+  <tr><td>Autoria</td><td>Quem criou a obra</td></tr>
+  <tr><td>Crédito (referência)</td><td>Dizer quem fez e de onde veio. É obrigatório quando você pode usar, mas <b>não dá permissão</b></td></tr>
+  <tr><td>Licença</td><td>Regras que o autor publicou para todo mundo (ex.: Creative Commons)</td></tr>
+  <tr><td>Autorização</td><td>Permissão direta do autor ou dono dos direitos para aquele uso</td></tr></table>
+
+  <h3>📜 Licenças Creative Commons</h3>
+  <table><tr><th>Licença</th><th>Pode compartilhar?</th><th>Pode adaptar?</th><th>Uso comercial?</th></tr>
+  <tr><td><b>CC BY</b></td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+  <tr><td><b>CC BY-NC</b></td><td>Sim</td><td>Sim</td><td>Não</td></tr>
+  <tr><td><b>CC BY-ND</b></td><td>Sim</td><td>Não</td><td>Sim</td></tr></table>
+  <p>Todas exigem <b>crédito</b> (é o "BY"). Existem outras: BY-SA, BY-NC-SA e BY-NC-ND. O <b>CC0</b> não é licença: é domínio público.</p>
+  <h3>✍️ Crédito do jeito certo: TASL</h3>
+  <div class="flow">
+    <div class="st"><span class="k">T</span><div><b>Título</b> da obra (se tiver)</div></div>
+    <div class="st"><span class="k">A</span><div><b>Autor</b>: o nome que ele pediu</div></div>
+    <div class="st"><span class="k">S</span><div><b>Fonte</b> (<i>source</i>): o link original</div></div>
+    <div class="st"><span class="k">L</span><div><b>Licença</b>: qual é, com link</div></div>
+  </div>
+
+  <h3>🙋 Direito de imagem</h3>
+  <p>Quem <b>aparece</b> numa foto também tem direitos. A Constituição protege a imagem das pessoas (art. 5º, X), e o Código Civil permite proibir o uso da imagem para fins comerciais sem autorização (art. 20). Foto de colega, de cliente ou de funcionário: peça autorização antes de publicar.</p>
+
+  <h3>📰 Dois casos reais</h3>
+  <div class="box erro"><b>❌ Deu errado: imagem em campanha sem autorização</b>Uma editora usou a imagem de uma atriz numa campanha publicitária, em outdoors pelo país, sem autorização. Em 2012 o Superior Tribunal de Justiça (STJ) manteve a indenização. A regra do STJ (Súmula 403) diz que, no uso comercial sem autorização, não é preciso provar prejuízo para ter direito à indenização.
+    <p style="margin:8px 0 0;font-size:15px">Fontes: <a href="https://www.migalhas.com.br/quentes/168277/editora-indenizara-carolina-ferraz-por-uso-indevido-de-imagem" target="_blank" rel="noopener">Migalhas (26 nov. 2012)</a> · <a href="https://arquivocidadao.stj.jus.br/index.php/sumula-403" target="_blank" rel="noopener">STJ, Súmula 403</a></p></div>
+  <div class="box dica"><b>✅ Deu certo: um museu que liberou suas imagens</b>Em fevereiro de 2017, o Metropolitan Museum of Art, de Nova York, liberou mais de 375 mil imagens de obras em domínio público com a designação CC0. Qualquer pessoa pode usar, inclusive para fins comerciais.
+    <p style="margin:8px 0 0;font-size:15px">Fonte: <a href="https://www.metmuseum.org/press-releases/open-access-2017-news" target="_blank" rel="noopener">comunicado oficial do The Met (7 fev. 2017)</a></p></div>
+
+  <div class="boss"><h3>🏆 Missão da fase: Agência Digital Ética</h3>
+    <div class="passo"><span class="n">1</span><div>Em grupo, criem um <b>cartaz digital</b> para divulgar um produto ou serviço de uma empresa fictícia: título, texto, imagem e chamada para ação.</div></div>
+    <div class="passo"><span class="n">2</span><div><b>Antes</b> de pôr a imagem, preencham a ficha de verificação abaixo.</div></div>
+    <div class="passo"><span class="n">3</span><div>Se aparecer pessoa identificável, avaliem a autorização ou troquem a imagem.</div></div>
+    <div class="passo"><span class="n">4</span><div>Coloquem o crédito no formato TASL no rodapé.</div></div>
+    <div class="pm-wrap" style="--pm:14px;margin:12px 0"><div class="pm pm-ficha" role="img" aria-label="Ficha de verificação de imagem com autoria, fonte, licença, finalidade e pessoas identificáveis"><div class="ttl">📋 Ficha de verificação da imagem</div><table><tr><th>Item</th><th>O que anotar</th></tr><tr><td>Autoria</td><td>Quem criou? (nome ou "não identificado")</td></tr><tr><td>Fonte</td><td>Link de onde a imagem foi publicada originalmente</td></tr><tr><td>Licença</td><td>Qual? (ex.: CC BY) ou "todos os direitos reservados"</td></tr><tr><td>Finalidade</td><td>Escolar, pessoal, institucional ou comercial?</td></tr><tr><td>Pessoas e marcas</td><td>Aparece alguém identificável? Tem autorização?</td></tr><tr><td>Decisão</td><td>Posso usar? Se não, qual alternativa?</td></tr></table></div></div>
+    <details><summary>Ver um exemplo possível</summary><div class="pm-wrap" style="--pm:14px;margin-top:10px"><div class="pm-col"><div class="pm pm-cartaz" role="img" aria-label="Cartaz com imagem, título, texto, chamada e linha de crédito"><div class="img">🌱</div><div class="tx"><div class="t1">Feira Verde · sábado, 9h</div><div class="t2">Produtos orgânicos de produtores da região.</div><span class="cta">Venha conhecer!</span><div class="cred">Imagem: "Horta" · Autor: Ana Lima · Fonte: link original · Licença: CC BY 4.0</div></div></div><div class="pm-lbl">Cartaz com crédito no formato TASL (exemplo fictício)</div></div></div></details>
+  </div>
+
+  <div class="quiz"><b>🧠 Teste final da fase</b><ol>
+    <li>Dar o crédito ao autor resolve o uso de uma imagem que exigia autorização?
+      <details><summary>Ver resposta</summary><p><b>Não.</b> Crédito é importante, mas não substitui a autorização.</p></details></li>
+    <li>Uma loja pode usar uma foto CC BY-NC num anúncio?
+      <details><summary>Ver resposta</summary><p><b>Não.</b> NC quer dizer não comercial, e anúncio de loja é uso comercial.</p></details></li>
+    <li>Mudar as cores de uma foto faz ela ser sua?
+      <details><summary>Ver resposta</summary><p><b>Não.</b> Adaptar também depende de autorização (art. 29 da Lei 9.610/1998).</p></details></li>
+  </ol></div>
+</section>
+
 <!-- ================= ARMADILHAS ================= -->
 <section class="fase" id="armadilhas">
   <span class="fase-tag">ITENS DE CONSULTA</span>
@@ -260,16 +421,23 @@ nav.top a{color:#fff}
   <tr><td>Três ou mais fontes</td><td>Parece bagunça</td><td>No máximo 2 famílias</td></tr>
   <tr><td>Destaque só com cor</td><td>Quem não distingue a cor perde a informação</td><td>Use também tamanho, negrito ou posição</td></tr>
   <tr><td>Sem espaço entre as informações</td><td>O olho não sabe onde uma termina</td><td>Deixe respiro entre os blocos</td></tr>
-  <tr><td>A ação some no meio dos detalhes</td><td>A pessoa lê e não faz nada</td><td>Botão ou selo com a cor de destaque</td></tr></table>
-  <div class="box alerta"><b>📌 Avisos sobre o material da aula</b>O post do Gabriel, as amostras de contraste e os dois casos reais são complementos, feitos para esta aula. No slide de hierarquia visual, quem precisa perceber a ordem de leitura é o <b>público</b> (o material escreveu "o estudante").</div>
+  <tr><td>A ação some no meio dos detalhes</td><td>A pessoa lê e não faz nada</td><td>Botão ou selo com a cor de destaque</td></tr>
+  <tr><td>Cada slide com cores e fontes diferentes</td><td>A apresentação não parece de uma empresa só</td><td>Mesma paleta e mesmas fontes em todos</td></tr>
+  <tr><td>Parágrafo longo no slide</td><td>Ninguém lê durante a apresentação</td><td>Blocos curtos com nome, benefício e ícone</td></tr>
+  <tr><td>Imagem "tirada do Google"</td><td>Pode ter todos os direitos reservados</td><td>Ficha de verificação: autoria, fonte, licença</td></tr>
+  <tr><td>Crédito "Fonte: internet"</td><td>Não diz de onde veio</td><td>TASL com o link original</td></tr>
+  <tr><td>Foto de pessoas sem autorização</td><td>Viola o direito de imagem</td><td>Pedir autorização ou usar imagem sem pessoas</td></tr></table>
+  <div class="box alerta"><b>📌 Avisos sobre o material da aula</b>O post do Gabriel, as amostras de contraste, a ficha de verificação, o quadro "autoria, crédito, licença e autorização" e os casos reais são complementos, feitos para estas aulas. No slide de hierarquia visual, quem precisa perceber a ordem de leitura é o <b>público</b> (o material escreveu "o estudante"). O título "O cartaz da empresa Conecta Jovem" da Aula 3 conta, na verdade, a história da Júlia. A frase de Drucker entre aspas do material da Aula 2 não foi confirmada em fonte confiável; aqui ela aparece como ideia, sem aspas.</div>
 </section>
 
 <section class="fase" id="leitura">
   <span class="fase-tag">PARA IR ALÉM</span>
   <h2>📚 Sugestões de leitura</h2>
   <p>WILLIAMS, Robin. <i>Design para quem não é designer</i>: princípios de design e tipografia para iniciantes. 4. ed. [<i>S. l.</i>]: Callis, 2013.</p>
+  <p>BRASIL. Lei nº 9.610, de 19 de fevereiro de 1998. Altera, atualiza e consolida a legislação sobre direitos autorais e dá outras providências. Brasília, DF: Presidência da República, 1998. Disponível em: https://www.planalto.gov.br/ccivil_03/leis/l9610.htm. Acesso em: 20 out. 2026.</p>
+  <p>CREATIVE COMMONS. <i>Recommended practices for attribution</i>. [<i>S. l.</i>]: Creative Commons, [20--]. Disponível em: https://creativecommons.org/reusing-cc-licensed-content/. Acesso em: 20 out. 2026.</p>
   <p>W3C. <i>Understanding Success Criterion 1.4.3</i>: contrast (minimum). [<i>S. l.</i>]: W3C, [20--]. Disponível em: https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html. Acesso em: 20 out. 2026.</p>
-  <div class="balao" data-who="🏢">Quer treinar jogando? Abra o jogo <a href="jogo.html"><b>Agência Pixel</b></a>. O 1º andar, o <b>Estúdio de Design</b>, tem as mesmas coisas desta fase.</div>
+  <div class="balao" data-who="🏢">Quer treinar jogando? Abra o jogo <a href="jogo.html"><b>Agência Pixel</b></a>. Cada andar do prédio corresponde a uma fase deste guia, e o 4º andar mistura tudo.</div>
   <p class="fim">Guia do Estagiário · Agência Pixel · Informática Empresarial · 2º ADM · IEEL<br>Para imprimir: Ctrl + P (as respostas aparecem abertas na impressão).</p>
 </section>
 
