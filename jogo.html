@@ -434,6 +434,7 @@ function montarLinkFormulario(base, vals) {
 }
 
 const POR_ANDAR = 10;
+const NOTA_MAX = ANDARES.length * NOTA_POR_ESTRELAS[3];
 const KEY = 'agencia_pixel_2adm_v1', META = 'agencia_pixel_2adm_meta_v1';
 const HEROIS = [{e:'🎨',n:'Designer',d:'Olho bom para cor e fonte'},{e:'📋',n:'Gestora',d:'Organiza tudo'},{e:'📣',n:'Comunicador',d:'Fala com o cliente'}];
 const TIPO = {prever:'Preveja a saída',escolha:'Escolha a linha certa',valido:'Escolha o código válido',lacuna:'Complete o código',bug:'Caça ao bug',logica:'Bug de lógica',parsons:'Monte o código',conceito:'Pergunta',ordenar:'Ponha em ordem',trecho:'Ache o problema'};
@@ -523,7 +524,7 @@ function telaMapa() {
   <h1 style="font-size:32px">Mapa do prédio</h1><p class="sub">Toque no andar com borda amarela para jogar.</p>
   <div class="map">${ANDARES.map((a, i) => { const lock = a.id > save.lib, s = st[i], ativo = run && run.aid === a.id, nx = ativo || (!run && a.id === save.lib && !s), t = (save.andares[a.id] || {}).tent || 0;
     return `<button class="floor ${lock ? 'lock' : ''} ${nx ? 'next' : ''}" data-a="${a.id}" ${lock ? 'disabled' : ''}><span class="fi">${lock ? '🔒' : a.icone}</span><span class="ft"><b>${a.id}. ${a.nome}</b><small>${a.tema}${t ? ' · ' + t + (t > 1 ? ' tentativas' : ' tentativa') : ''}</small>${ativo ? `<br><span class="cta">▶ Continuar · ${'❤️'.repeat(run.vidas)}${'🖤'.repeat(3 - run.vidas)} · golpe ${Math.min(run.acertos + 1, run.total)}/${run.total}</span>` : nx ? '<br><span class="cta">👉 Jogar agora</span>' : ''}</span><span class="st">${'★'.repeat(s)}${'☆'.repeat(3 - s)}</span></button>`; }).join('')}</div>
-  <div class="notabox"><span>Nota sugerida até agora</span><b>${fmtNota(nota)} / 10</b></div>
+  <div class="notabox"><span>Nota sugerida até agora</span><b>${fmtNota(nota)} / ${fmtNota(NOTA_MAX)}</b></div>
   ${run ? '<button class="btn sec full" id="placar" disabled>📸 Placar: termine o andar em andamento</button>' : `<button class="btn ${save.fim ? '' : 'sec'} full" id="placar">📸 ${save.fim ? 'Ver e baixar meu placar final' : 'Baixar placar parcial'}</button>`}
   <p class="foot">Cada andar concluído vale até 2,5 pontos: ★ 1,5 · ★★ 2,0 · ★★★ 2,5.<br>Dá para rejogar um andar para melhorar as estrelas.</p>`;
   app.querySelectorAll('.floor:not([disabled])').forEach(b => b.onclick = () => {
@@ -648,7 +649,7 @@ function telaDerrota(a) {
 }
 
 /* ---------- placar em imagem ---------- */
-function rankDe(n) { return n >= 10 ? 'S' : n >= 8.5 ? 'A' : n >= 7 ? 'B' : n >= 5 ? 'C' : 'D'; }
+function rankDe(n) { n = n * 10 / NOTA_MAX; return n >= 10 ? 'S' : n >= 8.5 ? 'A' : n >= 7 ? 'B' : n >= 5 ? 'C' : 'D'; }
 function desenharPlacar() {
   const W = 1080, H = 1500, c = document.createElement('canvas'); c.width = W; c.height = H;
   const g = c.getContext('2d'), F = '"Segoe UI",Roboto,"Noto Sans",Ubuntu,Arial,sans-serif', M = '"Cascadia Mono",Consolas,"DejaVu Sans Mono",monospace';
@@ -668,7 +669,7 @@ function desenharPlacar() {
   card(60, 440, 460, 330);
   txt('NOTA SUGERIDA', 290, 500, 26, '#b9b0d4', 800, 'center');
   txt(fmtNota(nota), 290, 650, 150, '#f6a04d', 900, 'center');
-  txt('de 10', 290, 720, 34, '#e7e0fb', 600, 'center');
+  txt('de ' + fmtNota(NOTA_MAX), 290, 720, 34, '#e7e0fb', 600, 'center');
   card(560, 440, 460, 330);
   txt('RANK', 790, 500, 26, '#b9b0d4', 800, 'center');
   txt(rankDe(nota), 790, 650, 150, '#ffffff', 900, 'center');
